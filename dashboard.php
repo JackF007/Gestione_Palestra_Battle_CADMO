@@ -276,13 +276,14 @@
                                         <!-- button with a dropdown -->
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-                                            <div class="dropdown-menu" role="menu">
-                                                <a href="#" class="dropdown-item">Nuovo appuntamento</a>
-                                            </div>
+
                                         </div>
-                                        <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
+                                        <div class="btn-group">
+
+                                            <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
 
                                     </div>
                                     <!-- /. tools -->
@@ -350,7 +351,7 @@
                         <section class="col-lg-12 connectedSortable">
 
                             <!-- Calendar -->
-                            <div class="card bg-gradient-success">
+                            <div class="card ">
                                 <div class="card-header border-0">
 
                                     <h3 class="card-title">
@@ -361,13 +362,14 @@
                                         <!-- button with a dropdown -->
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-                                            <div class="dropdown-menu" role="menu">
-                                                <a href="#" class="dropdown-item">Nuovo appuntamento</a>
-                                            </div>
+
                                         </div>
-                                        <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
+                                        <div class="btn-group">
+
+                                            <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
 
                                     </div>
                                     <!-- /. tools -->
