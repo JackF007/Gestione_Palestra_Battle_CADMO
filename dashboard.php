@@ -15,7 +15,9 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    
+    <!-- custom css -->
+    <link rel="stylesheet" href="dist/css/custom.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -36,7 +38,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
-             
+
             </ul>
 
             <!-- Right navbar links -->
@@ -194,7 +196,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
+                    <!-- row -->
                     <div class="row">
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
@@ -257,75 +259,92 @@
                         </div>
                         <!-- ./col -->
                     </div>
-                    <!-- /.row -->
-                    <!-- Main row -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                <i class="ion ion-clipboard mr-1"></i>
-                                Appuntamenti Odierni
-                            </h3>
 
+                    <!--  row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-12 connectedSortable">
 
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
+                            <div class="card">
+                                <div class="card-header border-0">
 
-                            <table class="table table-striped projects">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 1%">
-                                            #
-                                        </th>
-                                        <th style="width: 20%">
-                                            Cliente
-                                        </th>
-                                        <th style="width: 30%">
-                                            Team Members
-                                        </th>
-                                        <th>
-                                            Fascia oraria
-                                        </th>
-                                        <th style="width: 8%" class="text-center">
-                                            Status
-                                        </th>
-                                        <th style="width: 20%">
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
+                                    <h3 class="card-title">
+                                        <i class="far fa-calendar-alt"></i> Appuntamenti Odierni
+                                    </h3>
+                                    <!-- tools card -->
+                                    <div class="card-tools">
+                                        <!-- button with a dropdown -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a href="#" class="dropdown-item">Nuovo appuntamento</a>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
 
-                                    $oggi = strtotime(date("Y-m-d"));
-                                      
-                                        include 'config.php';
-                                        $sql = "SELECT * FROM appuntamenti WHERE str_data=$oggi";
-                                        $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                                        if (mysqli_num_rows($result) > 0) {
-                                            while ($fetch = mysqli_fetch_array($result)) {
-                                                $id = stripslashes($fetch['id']);
-                                                $titolo = stripslashes($fetch['titolo']);
-                                                $testo = stripslashes($fetch['testo']);
-                                                $data = date("d-m-Y", $fetch['str_data']);
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
 
-                                                include 'element.php';
+                                    <table class="table table-striped projects">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 1%">
+                                                    #
+                                                </th>
+                                                <th style="width: 20%">
+                                                    Cliente
+                                                </th>
+                                                <th style="width: 30%">
+                                                    Team Members
+                                                </th>
+                                                <th>
+                                                    Fascia oraria
+                                                </th>
+                                                <th style="width: 8%" class="text-center">
+                                                    Status
+                                                </th>
+                                                <th style="width: 20%">
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+                                            $oggi = strtotime(date("Y-m-d"));
+
+                                            include 'config.php';
+                                            $sql = "SELECT * FROM appuntamenti WHERE str_data=$oggi";
+                                            $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while ($fetch = mysqli_fetch_array($result)) {
+                                                    $id = stripslashes($fetch['id']);
+                                                    $titolo = stripslashes($fetch['titolo']);
+                                                    $testo = stripslashes($fetch['testo']);
+                                                    $data = date("d-m-Y", $fetch['str_data']);
+
+                                                    include 'element.php';
+                                                }
                                             }
-                                        }
-                                    
-                                    ?>
+
+                                            ?>
 
 
-                                </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
 
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-                        </div>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer clearfix">
+                                    <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                                </div>
+                            </div>
                     </div>
-
-
+                    <!--  row -->
                     <div class="row">
                         <!-- Left col -->
                         <section class="col-lg-12 connectedSortable">
@@ -341,14 +360,9 @@
                                     <div class="card-tools">
                                         <!-- button with a dropdown -->
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                                <i class="fas fa-bars"></i>
-                                            </button>
+                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a href="#" class="dropdown-item">Add new event</a>
-                                                <a href="#" class="dropdown-item">Clear events</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a href="#" class="dropdown-item">View calendar</a>
+                                                <a href="#" class="dropdown-item">Nuovo appuntamento</a>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
@@ -438,7 +452,13 @@
                                                     while ($fetch = mysqli_fetch_array($result)) {
                                                         $str_data = $fetch['str_data'];
                                                         if ($str_data == $data) {
-                                                            $day = "<a href=\"appuntamenti.php?day=$str_data\">$day</a>";
+                                                            $sql2 = "SELECT str_data FROM appuntamenti where str_data = $str_data";
+                                                            $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
+                                                            if (mysqli_num_rows($result2) == 8) {
+                                                                $day = "<span class=\"linkmax \"><a href=\"appuntamenti.php?day=$str_data\">$day</a></span>";
+                                                            } else {
+                                                                $day = "<a href=\"appuntamenti.php?day=$str_data\">$day</a>";
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -469,28 +489,25 @@
                         </section>
                         <!-- right col -->
                     </div>
-                    <!-- /.row (main row) -->
-                </div>
-                <!-- /.container-fluid -->
+
             </section>
-            <!-- /.content -->
-
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0.0
-            </div>
-            <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
-        </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -502,7 +519,7 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
+
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>

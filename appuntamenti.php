@@ -227,6 +227,22 @@
                                 <?php
                                 if (isset($_GET['day']) && is_numeric($_GET['day'])) {
                                     $day = $_GET['day'];
+                                    echo $day;
+                                    include 'config.php';
+                                    $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
+                                    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($fetch = mysqli_fetch_array($result)) {
+                                            $id = stripslashes($fetch['id']);
+                                            $titolo = stripslashes($fetch['titolo']);
+                                            $testo = stripslashes($fetch['testo']);
+                                            $data = date("d-m-Y", $fetch['str_data']);
+
+                                            include 'element.php';
+                                        }
+                                    }
+                                }else{
+                                    $day = strtotime(date("Y-m-d"));
                                     include 'config.php';
                                     $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
