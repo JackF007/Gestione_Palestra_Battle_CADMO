@@ -39,7 +39,7 @@ if (isset($_POST['register'])) {
             $e= "'".$email."'";
             $nu= "'".$numero."'";
             $p= "'".$password_hash."'";
-            $sql = "INSERT INTO utenti (nome,cognome,via,citta,email,telefono,password) VALUES ($no,$co,$v,$ci,$e,$nu,$p)";
+            $sql = "INSERT INTO utenti (idutente,nome,cognome,via,citta,email,telefono,password,login_idlogin) VALUES (null,$no,$co,$v,$ci,$e,$nu,$p,null)";
 
             if (mysqli_query($mysqli, $sql)) {
             echo "Record caricato"."<br>"; $msg = 'Registrazione eseguita con successo';
