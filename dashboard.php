@@ -5,29 +5,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sportgym | Dashboard</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="dist/css/custom.css">
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        <!-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>
-
+        </div> -->
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -38,9 +33,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
-
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
@@ -64,7 +57,6 @@
                         </form>
                     </div>
                 </li>
-
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -163,12 +155,10 @@
             </ul>
         </nav>
         <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
         <?php
         include 'sidebar.php';
         ?>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -192,7 +182,6 @@
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -203,7 +192,6 @@
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>150</h3>
-
                                     <p>New Orders</p>
                                 </div>
                                 <div class="icon">
@@ -218,7 +206,6 @@
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>53<sup style="font-size: 20px">%</sup></h3>
-
                                     <p>Bounce Rate</p>
                                 </div>
                                 <div class="icon">
@@ -233,7 +220,6 @@
                             <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>44</h3>
-
                                     <p>User Registrations</p>
                                 </div>
                                 <div class="icon">
@@ -248,7 +234,6 @@
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3>65</h3>
-
                                     <p>Unique Visitors</p>
                                 </div>
                                 <div class="icon">
@@ -259,15 +244,185 @@
                         </div>
                         <!-- ./col -->
                     </div>
-
                     <!--  row -->
                     <div class="row">
                         <!-- Left col -->
                         <section class="col-lg-12 connectedSortable">
+                            <!-- Calendar -->
+                            <div class="card ">
+                                <div class="card-header border-0">
+                                    <h3 class="card-title">
+                                        <i class="far fa-calendar-alt"></i> Calendario Appuntamenti
+                                    </h3>
+                                    <!-- tools card -->
+                                    <div class="card-tools">
+                                        <!-- button with a dropdown -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body" id="switchCalendar">
+                                    <?php
+                                    function ShowCalendar($m, $y)
+                                    {
+                                        if ((!isset($_GET['d'])) || ($_GET['d'] == "")) {
+                                            /* data di oggi */
+                                            $m = date('n');
+                                            $y = date('Y');
+                                        } else {
 
+                                            /* data m y da url number */
+                                            $m = intval(date("m", (int)$_GET['d']));
+                                            $y = intval(date("Y", (int)$_GET['d']));
+                                            $m = $m;
+                                            $y = $y;
+                                        }
+
+
+                                        $precedente = mktime(0, 0, 0, $m - 1, 1, $y);
+                                        $successivo = mktime(0, 0, 0, $m + 1, 1, $y);
+                                        $nomi_mesi = array(
+                                            "Gen",
+                                            "Feb",
+                                            "Mar",
+                                            "Apr",
+                                            "Mag",
+                                            "Giu",
+                                            "Lug",
+                                            "Ago",
+                                            "Set",
+                                            "Ott",
+                                            "Nov",
+                                            "Dic"
+                                        );
+                                        $nomi_giorni = array(
+                                            "Lun",
+                                            "Mar",
+                                            "Mer",
+                                            "Gio",
+                                            "Ven",
+                                            "Sab",
+                                            "Dom"
+                                        );
+                                        $cols = 7;
+                                        $days = date("t", mktime(0, 0, 0, $m, 1, $y));
+                                        $lunedi = date("w", mktime(0, 0, 0, $m, 1, $y));
+                                        if ($lunedi == 0) $lunedi = 7;
+                                        $tb = "<table class=" . "'" . "table table-bordered >\n" . "'";
+                                        echo $tb;
+                                        echo "<tr>\n
+                                        <td colspan=\"" . $cols . "\">
+                                        <a href=\"?d=" . $precedente . "\#switchCalendar\">&lt;&lt;</a>
+                                        " . $nomi_mesi[$m - 1] . " " . $y . " 
+                                        <a href=\"?d=" . $successivo . "\#switchCalendar\">&gt;&gt;</a></td></tr>";
+                                        foreach ($nomi_giorni as $v) {
+                                            echo "<td style=width: 10px><b>" . $v . "</b></td>\n";
+                                        }
+                                        echo "</tr>";
+                                        for ($j = 1; $j < $days + $lunedi; $j++) {
+                                            if ($j % $cols + 1 == 0) {
+                                                echo "<tr>\n"; //apro una riga calendario
+                                            }
+                                            if ($j < $lunedi) {
+                                                echo "<td> </td>\n"; //righe vuote
+
+                                            } else {
+
+                                                $day = $j - ($lunedi - 1); // cicla ogni gg
+                                               
+                                                
+                                                $data = strtotime(date($y . "-" . $m . "-" . $day)); // cicla ogni data numerica
+                                                $oggi = strtotime(date("Y-m-d"));
+                                                $kont = 0;
+                                                
+                                                $trov = False;
+
+                                                include 'config.php';
+
+                                                $sql = "SELECT str_data FROM appuntamenti where month(dataAppuntamento)=$m and year(dataAppuntamento)=$y";
+                                                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                                     
+                                                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                                                       if ($row[0] == (string)$data) {
+
+                                                        $trov = True;
+                                                        
+                                                        break;
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                mysqli_free_result($result);
+
+                                                if ($trov == True) {
+                                                    include 'config.php';
+
+                                                    $sql = "SELECT str_data FROM appuntamenti where month(dataAppuntamento)=$m and year(dataAppuntamento)=$y";
+                                                    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                                                    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                                                        if ($row[0] == $data) $kont++;
+                                                        }
+
+                                                    if ($kont == 8) {
+
+                                                        $day = "<span class=\"linkmax\"><a href=\"appuntamenti.php?day=$data\">$day</a></span>";
+                                                    } else {
+
+                                                        $day = "<a style=\"color:green\" href=\"appuntamenti.php?day=$data\">$day</a></span>";
+                                                    }
+                                                } else {
+                                                    $day = "<a href=\"appuntamenti.php?day=$data\">$day</a>";
+                                                }
+
+
+
+
+                                                if ($data != $oggi) {
+                                                    echo "<td>" . $day . "</td>";
+                                                } else {
+                                                    echo "<td><b>" . $day . "</b></td>";
+                                                }
+
+
+
+                                                /* fine ciclo mese */
+                                            }
+                                            if ($j % $cols == 0) {
+                                                echo "</tr>";
+                                            }
+                                        }
+                                        echo "<tr></tr>";
+                                        echo "</table>";
+                                       
+                                    }
+                                 
+                                    ShowCalendar(date("m"), date("Y"));
+                                    ?>
+                                    <!-- Main content -->
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </section>
+                        <!-- right col -->
+                    </div>
+                    <!--  row -->
+                    <div class="row">
+                        <!-- Left col -->
+                        <section class="col-lg-12 connectedSortable">
                             <div class="card">
                                 <div class="card-header border-0">
-
                                     <h3 class="card-title">
                                         <i class="far fa-calendar-alt"></i> Appuntamenti Odierni
                                     </h3>
@@ -276,21 +431,17 @@
                                         <!-- button with a dropdown -->
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-
                                         </div>
                                         <div class="btn-group">
-
-                                            <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                                 <i class="fas fa-minus"></i>
                                             </button>
                                         </div>
-
                                     </div>
                                     <!-- /. tools -->
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-
                                     <table class="table table-striped projects">
                                         <thead>
                                             <tr>
@@ -315,9 +466,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-
                                             $oggi = strtotime(date("Y-m-d"));
-
                                             include 'config.php';
                                             $sql = "SELECT * FROM appuntamenti WHERE str_data=$oggi";
                                             $result = mysqli_query($con, $sql) or die(mysqli_error($con));
@@ -327,17 +476,13 @@
                                                     $titolo = stripslashes($fetch['titolo']);
                                                     $testo = stripslashes($fetch['testo']);
                                                     $data = date("d-m-Y", $fetch['str_data']);
-
                                                     include 'element.php';
                                                 }
                                             }
-
                                             ?>
-
 
                                         </tbody>
                                     </table>
-
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer clearfix">
@@ -345,156 +490,9 @@
                                 </div>
                             </div>
                     </div>
-                    <!--  row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-12 connectedSortable">
-
-                            <!-- Calendar -->
-                            <div class="card ">
-                                <div class="card-header border-0">
-
-                                    <h3 class="card-title">
-                                        <i class="far fa-calendar-alt"></i> Calendario Appuntamenti
-                                    </h3>
-                                    <!-- tools card -->
-                                    <div class="card-tools">
-                                        <!-- button with a dropdown -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-
-                                        </div>
-                                        <div class="btn-group">
-
-                                            <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                    <!-- /. tools -->
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <?php
-                                    function ShowCalendar($m, $y)
-                                    {
-
-                                        if ((!isset($_GET['d'])) || ($_GET['d'] == "")) {
-                                            /* data di oggi */
-                                            $m = date('n');
-                                            $y = date('Y');
-                                        } else {
-                                            /* data m y da url number */
-                                            $m = intval(date("m", (int)$_GET['d']));
-                                            $y = intval(date("y", (int)$_GET['d']));
-                                            $m = $m;
-                                            $y = $y;
-                                        }
-
-                                        $precedente = mktime(0, 0, 0, $m - 1, 1, $y);
-                                        $successivo = mktime(0, 0, 0, $m + 1, 1, $y);
-
-                                        $nomi_mesi = array(
-                                            "Gen",
-                                            "Feb",
-                                            "Mar",
-                                            "Apr",
-                                            "Mag",
-                                            "Giu",
-                                            "Lug",
-                                            "Ago",
-                                            "Set",
-                                            "Ott",
-                                            "Nov",
-                                            "Dic"
-                                        );
-                                        $nomi_giorni = array(
-                                            "Lun",
-                                            "Mar",
-                                            "Mer",
-                                            "Gio",
-                                            "Ven",
-                                            "Sab",
-                                            "Dom"
-                                        );
-
-                                        $cols = 7;
-                                        $days = date("t", mktime(0, 0, 0, $m, 1, $y));
-                                        $lunedi = date("w", mktime(0, 0, 0, $m, 1, $y));
-                                        if ($lunedi == 0) $lunedi = 7;
-                                        $tb = "<table class=" . "'" . "table table-bordered >\n" . "'";
-                                        echo $tb;
-                                        echo "<tr>\n
-                                        <td colspan=\"" . $cols . "\">
-                                        <a href=\"?d=" . $precedente . "\">&lt;&lt;</a>
-                                        " . $nomi_mesi[$m - 1] . " " . $y . " 
-                                        <a href=\"?d=" . $successivo . "\">&gt;&gt;</a></td></tr>";
-
-                                        foreach ($nomi_giorni as $v) {
-                                            echo "<td style=width: 10px><b>" . $v . "</b></td>\n";
-                                        }
-                                        echo "</tr>";
-
-                                        for ($j = 1; $j < $days + $lunedi; $j++) {
-                                            if ($j % $cols + 1 == 0) {
-                                                echo "<tr>\n";
-                                            }
-
-                                            if ($j < $lunedi) {
-                                                echo "<td> </td>\n";
-                                            } else {
-                                                $day = $j - ($lunedi - 1);
-                                                $data = strtotime(date($y . "-" . $m . "-" . $day));
-                                                $oggi = strtotime(date("Y-m-d"));
-                                                include 'config.php';
-                                                $sql = "SELECT str_data FROM appuntamenti";
-                                                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    while ($fetch = mysqli_fetch_array($result)) {
-                                                        $str_data = $fetch['str_data'];
-                                                        if ($str_data == $data) {
-                                                            $sql2 = "SELECT str_data FROM appuntamenti where str_data = $str_data";
-                                                            $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
-                                                            if (mysqli_num_rows($result2) == 8) {
-                                                                $day = "<span class=\"linkmax \"><a href=\"appuntamenti.php?day=$str_data\">$day</a></span>";
-                                                            } else {
-                                                                $day = "<a href=\"appuntamenti.php?day=$str_data\">$day</a>";
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                if ($data != $oggi) {
-                                                    echo "<td>" . $day . "</td>";
-                                                } else {
-                                                    echo "<td><b>" . $day . "</b></td>";
-                                                }
-                                            }
-
-                                            if ($j % $cols == 0) {
-                                                echo "</tr>";
-                                            }
-                                        }
-                                        echo "<tr></tr>";
-                                        echo "</table>";
-                                    }
-                                    ShowCalendar(date("m"), date("Y"));
-                                    ?>
-                                    <!-- Main content -->
-
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </section>
-                        <!-- right col -->
-                    </div>
 
             </section>
         </div>
-
 
     </div>
     <!-- /.content-wrapper -->
@@ -504,12 +502,10 @@
         </div>
         <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
-
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -521,7 +517,6 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>

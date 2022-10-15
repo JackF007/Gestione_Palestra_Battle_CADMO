@@ -1,3 +1,7 @@
 span.linkmax a {
     color: red;
 }
+
+span.linkNomax a {
+    color: green;
+}

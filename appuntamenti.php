@@ -194,10 +194,16 @@
                     <div class="card-header">
                         <h3 class="card-title">Appuntamenti</h3>
 
+
                         <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+
+                            <div class="btn-group">
+
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -225,9 +231,11 @@
                             </thead>
                             <tbody>
                                 <?php
+                                $k=0;
+                               $fascia = array();
+                     
                                 if (isset($_GET['day']) && is_numeric($_GET['day'])) {
                                     $day = $_GET['day'];
-                                    echo $day;
                                     include 'config.php';
                                     $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
@@ -237,11 +245,11 @@
                                             $titolo = stripslashes($fetch['titolo']);
                                             $testo = stripslashes($fetch['testo']);
                                             $data = date("d-m-Y", $fetch['str_data']);
-
+                                            $k++;
                                             include 'element.php';
                                         }
                                     }
-                                }else{
+                                } else {
                                     $day = strtotime(date("Y-m-d"));
                                     include 'config.php';
                                     $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
@@ -252,7 +260,7 @@
                                             $titolo = stripslashes($fetch['titolo']);
                                             $testo = stripslashes($fetch['testo']);
                                             $data = date("d-m-Y", $fetch['str_data']);
-
+                                            $k++;
                                             include 'element.php';
                                         }
                                     }
@@ -262,7 +270,10 @@
 
                             </tbody>
                         </table>
-                    </div>
+                      <?php  
+                      if ($k<8){include 'btn-appuntamento.php';}
+                      ?>
+                                        </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -295,7 +306,7 @@
     <script src="./plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
- 
+
     <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
