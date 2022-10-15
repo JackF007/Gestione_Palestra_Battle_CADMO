@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Ott 14, 2022 alle 19:56
+-- Creato il: Ott 15, 2022 alle 11:02
 -- Versione del server: 8.0.30
 -- Versione PHP: 7.4.30
 
@@ -80,6 +80,7 @@ CREATE TABLE `utenti` (
   `citta` char(255) NOT NULL,
   `email` char(255) NOT NULL,
   `telefono` char(255) NOT NULL,
+  `password` char(255) NOT NULL,
   `login_idlogin` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
