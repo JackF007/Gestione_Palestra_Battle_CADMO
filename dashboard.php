@@ -252,13 +252,13 @@
                             <div class="card ">
                                 <div class="card-header border-0">
                                     <h3 class="card-title">
-                                        <i class="far fa-calendar-alt"></i> Calendario Appuntamenti
+                                        <i class="far fa-calendar-alt"></i> Calendario Prenotazioni
                                     </h3>
                                     <!-- tools card -->
                                     <div class="card-tools">
                                         <!-- button with a dropdown -->
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
+                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Nuova Prenotazione</button>
                                         </div>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -337,12 +337,12 @@
                                             } else {
 
                                                 $day = $j - ($lunedi - 1); // cicla ogni gg
-                                               
-                                                
+
+
                                                 $data = strtotime(date($y . "-" . $m . "-" . $day)); // cicla ogni data numerica
                                                 $oggi = strtotime(date("Y-m-d"));
                                                 $kont = 0;
-                                                
+
                                                 $trov = False;
 
                                                 include 'config.php';
@@ -350,16 +350,14 @@
                                                 $sql = "SELECT str_data FROM appuntamenti where month(dataAppuntamento)=$m and year(dataAppuntamento)=$y";
                                                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
-                                     
+
                                                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                                                       if ($row[0] == (string)$data) {
+                                                    if ($row[0] == (string)$data) {
 
                                                         $trov = True;
-                                                        
+
                                                         break;
-                                                        
                                                     }
-                                                    
                                                 }
                                                 mysqli_free_result($result);
 
@@ -371,17 +369,17 @@
 
                                                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                                                         if ($row[0] == $data) $kont++;
-                                                        }
+                                                    }
 
                                                     if ($kont == 8) {
 
-                                                        $day = "<span class=\"linkmax\"><a href=\"appuntamenti.php?day=$data\">$day</a></span>";
+                                                        $day = "<span class=\"linkmax\"><a href=\"prenotazioni.php?day=$data\">$day</a></span>";
                                                     } else {
 
-                                                        $day = "<a style=\"color:green\" href=\"appuntamenti.php?day=$data\">$day</a></span>";
+                                                        $day = "<a style=\"color:green\" href=\"prenotazioni.php?day=$data\">$day</a></span>";
                                                     }
                                                 } else {
-                                                    $day = "<a href=\"appuntamenti.php?day=$data\">$day</a>";
+                                                    $day = "<a href=\"prenotazioni.php?day=$data\">$day</a>";
                                                 }
 
 
@@ -403,9 +401,8 @@
                                         }
                                         echo "<tr></tr>";
                                         echo "</table>";
-                                       
                                     }
-                                 
+
                                     ShowCalendar(date("m"), date("Y"));
                                     ?>
                                     <!-- Main content -->
@@ -424,14 +421,10 @@
                             <div class="card">
                                 <div class="card-header border-0">
                                     <h3 class="card-title">
-                                        <i class="far fa-calendar-alt"></i> Appuntamenti Odierni
+                                        <i class="far fa-calendar-alt"></i> Prenotazioni Odierne
                                     </h3>
                                     <!-- tools card -->
                                     <div class="card-tools">
-                                        <!-- button with a dropdown -->
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-                                        </div>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                                 <i class="fas fa-minus"></i>
@@ -484,13 +477,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer clearfix">
-                                    <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add item</button>
-                                </div>
+                                
                             </div>
+                        </section>
                     </div>
-
+                </div>
             </section>
         </div>
 

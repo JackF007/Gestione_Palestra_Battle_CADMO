@@ -1,6 +1,6 @@
      <tr>
          <td>
-             <?php echo "Appuntamenti del <b>$data</b><br>" ?>
+             <?php echo " Prenotazioni del <b>$data</b><br>" ?>
          </td>
          <td>
              <a>
