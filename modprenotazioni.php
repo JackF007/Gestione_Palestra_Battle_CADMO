@@ -1,51 +1,39 @@
-<?php
-
-use Http\Message\Authentication\Header;
-
-if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
-    header("location:dashboard.php");
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sportgym | Prenotazioni</title>
-
+    <title>Sportgym | Prenotazioni | Modifica</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-
-    <!-- DataTables -->
-    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./dist/css/custom.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <!-- Site wrapper -->
+<body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
+        <!-- Preloader -->
+        <!-- <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div> -->
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="dashboard.php" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
@@ -69,7 +57,6 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                         </form>
                     </div>
                 </li>
-
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -80,7 +67,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="./dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Brad Diesel
@@ -96,7 +83,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="./dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         John Pierce
@@ -112,7 +99,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="./dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
                                         Nora Silvester
@@ -168,145 +155,73 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
             </ul>
         </nav>
         <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
-
         <?php
         include 'sidebar.php';
         ?>
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <section class="content-header">
+            <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Prenotazioni</h1>
+                            <h1 class="m-0">Modifica</h1>
                         </div>
+                        <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="./dashboard.php">Home</a></li>
                                 <li class="breadcrumb-item active">Prenotazioni</li>
+                                <li class="breadcrumb-item active">Modifica</li>
                             </ol>
                         </div>
+                        <!-- /.col -->
                     </div>
+                    <!-- /.row -->
                 </div>
                 <!-- /.container-fluid -->
-            </section>
-
+            </div>
+            <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
-
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Prenotazioni</h3>
-
-
-                        <div class="card-tools">
-
-                            <div class="btn-group">
-
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th style="width: 1%">
-                                        #
-                                    </th>
-                                    <th style="width: 20%">
-                                        Cliente
-                                    </th>
-                                    <th style="width: 30%">
-                                        Team Members
-                                    </th>
-                                    <th>
-                                        Fascia oraria
-                                    </th>
-                                    <th style="width: 8%" class="text-center">
-                                        Status
-                                    </th>
-                                    <th style="width: 20%">
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $k = 0;
-                                $fascia = array();
-                                if (isset($_GET['day']) && is_numeric($_GET['day'])) {
-                                    $day = $_GET['day'];
-                                    include 'config.php';
-                                    $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
-                                    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($fetch = mysqli_fetch_array($result)) {
-                                            $id = stripslashes($fetch['id']);
-                                            $titolo = stripslashes($fetch['titolo']);
-                                            $testo = stripslashes($fetch['testo']);
-                                            $data = date("d-m-Y", $fetch['str_data']);
-                                            $k++;
-                                            include 'element.php';
-                                        }
-                                    }
-                                } 
-                                ?>
-
-
-                            </tbody>
-                        </table>
-                        <?php
-                        if ($k < 8) {
-                            include 'btn-appuntamento.php';
-                        }
-                        ?>
-                    </div>
-                    <!-- /.card-body -->
+                <div class="container-fluid">
+                    <!-- row -->
+                   
                 </div>
-                <!-- /.card -->
-
             </section>
-            <!-- /.content -->
-
         </div>
-        <!-- /.content-wrapper -->
 
-        <footer class=" main-footer ">
-            <div class=" float-right d-none d-sm-block ">
-                <b>Version</b> 1.0.0
-            </div>
-            <strong>Copyright &copy; 2014-2021 SportGym .</strong> All rights reserved.
-        </footer>
-
-        <!-- Control Sidebar -->
-        <aside class=" control-sidebar control-sidebar-dark ">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
     </div>
-    <!-- ./wrapper -->
-
-
-
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
+    </footer>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
 
     <!-- jQuery -->
     <script src="./plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
     <!-- Bootstrap 4 -->
     <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- AdminLTE App -->
-    <script src="./dist/js/adminlte.min.js"></script>
+    <script src="./dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./dist/js/demo.js"></script>
-
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="./dist/js/pages/dashboard.js"></script>
 </body>
 
 </html>

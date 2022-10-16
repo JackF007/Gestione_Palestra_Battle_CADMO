@@ -34,12 +34,11 @@
                  <i class="fas fa-folder">
                  </i> View
              </a>
-             <a class="btn btn-info btn-sm" href="#">
-                 <i class="fas fa-pencil-alt">
-                 </i> Edit
+             <a class="btn btn-info btn-sm" href="<?php echo "./modprenotazioni.php?id=$id" ?>">
+                 <i class="fas fa-pencil-alt"> </i> Modifica
              </a>
-             <a class="btn btn-danger btn-sm" href=" <?php echo "\cancella.php?id=$id" ?> ">
-                                            <i class=" fas fa-trash">
+             <a class="btn btn-danger btn-sm" href=" <?php echo "./delprenotazioni.php?id=$id" ?> ">
+                 <i class=" fas fa-trash">
                  </i> Delete
              </a>
          </td>

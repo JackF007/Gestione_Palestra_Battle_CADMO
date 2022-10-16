@@ -1,5 +1,4 @@
             <!-- button with a dropdown -->
             <div class="btn-group w-100">
-                <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Nuova Prenotazione</button>
-
+              <?php echo "<a href=\".\addprenotazione.php?day=$day\" class=\"btn btn-primary btn-lg active\" role=\"button\" aria-pressed=\"true\"><i class=\"fas fa-plus\"></i> Nuova Prenotazione</a>"?>
             </div>
