@@ -200,7 +200,7 @@
 
                 <form action="./upload_data.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nome" name="nome">
+                        <input type="text" class="form-control" placeholder="Nome" name="nome" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Cognome" name="cognome">
+                        <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Via" name="via">
+                        <input type="text" class="form-control" placeholder="Via" name="via" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -224,7 +224,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Città" name="citta">
+                        <input type="text" class="form-control" placeholder="Città" name="citta" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -232,15 +232,16 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="email" name="email">
+                        <input type="email" class="form-control" placeholder="email" name="email" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="input-group mb-3">
-                    <input placeholder="Telefono" type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask name="numero">
+                    <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
@@ -248,7 +249,7 @@
                     </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="password" name="password">
+                        <input type="password" class="form-control" placeholder="password" name="password" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -256,7 +257,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Ripeti password" name="ripetiPassword">
+                        <input type="password" class="form-control" placeholder="Ripeti password" name="ripetiPassword" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -266,7 +267,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
                                 <label for="agreeTerms">
                                 Accetto i <a href="#">termini</a>
                                 </label>

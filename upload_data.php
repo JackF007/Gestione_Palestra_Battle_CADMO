@@ -10,28 +10,25 @@ if (isset($_POST['register'])) {
     $numero = $_POST['numero'] ?? '';
     $password = $_POST['password'] ?? '';
     $ripetiPassword = $_POST['ripetiPassword'] ?? '';
-    //$isUsernameValid = filter_var($username,FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[a-z\d_]{3,20}$/i"]]);
+
     $pwdLenght = mb_strlen($password);
-    
+    //per sicurezza,non si sa mai
     if (empty($email) || empty($password)) {
         echo  'Metti almeno email e password';
-    // } elseif (false === $isUsernameValid) {
-    //     echo 'Lo username non è valido. Sono ammessi solamente caratteri 
-    //             alfanumerici e l\'underscore. Lunghezza minina 3 caratteri.
-    //             Lunghezza massima 20 caratteri';
-    // } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
+
         echo 'Lunghezza minima password 8 caratteri.
                 Lunghezza massima 20 caratteri';
     } else {
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $risultato = $mysqli->query("SELECT * FROM utenti where email='$email'");
+        $risultato = $mysqli->query("SELECT * FROM utenti where email='$email'");// per verificare che non ci siano 2 email uguali
 
         $user=mysqli_fetch_array($risultato);
         
         if (isset($user)) {
             $msg = 'Email già in uso: '.$email;
         } else {
+            //query su login
             $no= "'".$nome."'";
             $co= "'".$cognome."'";
             $v= "'".$via."'";
@@ -39,20 +36,29 @@ if (isset($_POST['register'])) {
             $e= "'".$email."'";
             $nu= "'".$numero."'";
             $p= "'".$password_hash."'";
-            $sql = "INSERT INTO utenti (idutente,nome,cognome,via,citta,email,telefono,password,login_idlogin) VALUES (null,$no,$co,$v,$ci,$e,$nu,$p,null)";
-
-            if (mysqli_query($mysqli, $sql)) {
-            echo "Record caricato"."<br>"; $msg = 'Registrazione eseguita con successo';
-            } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($mysqli);
-            $msg = 'Problemi con l\'inserimento dei dati %s';
-            }
-
-            mysqli_close($mysqli);        
-        } 
-        echo $msg."<br>";
-        echo '<a href="./register.html">torna indietro</a>';
-    }
     
-  
+          /*   $sql = "INSERT INTO login (idlogin,username,password,ruolo,stato) VALUES (NULL,$no,$p,'Utente',1);
+                SET @last_id =26;
+                INSERT into utenti (idutente,nome,cognome,citta,via,email,telefono,login_idlogin) VALUES(NULL,$no,$co,$ci,$v,$e,$nu,@last_id)";
+                //da modificare dopo la scelta del ruolo */
+                $sql = "INSERT INTO login (idlogin,username,password,ruolo,stato) VALUES (null,$no,$co,'Utente',1)";
+               
+                //da modificare dopo la scelta del ruolo
+                echo "ok<br>";
+                
+            if ($mysqli->query($sql) === TRUE) {
+                $last_id = $mysqli->insert_id;// insert_id è UNA FUNZIONE accorciata,uno dei tanti modi per fare una cossessione al database
+                $sql="INSERT into utenti (idutente,nome,cognome,citta,via,email,telefono,login_idlogin) VALUES(NULL,$no,$co,$ci,$v,$e,$nu,$last_id)";  
+                if ($mysqli->query($sql) === TRUE) {
+                    echo "Inserimento riuscito";
+                }
+                else{
+                    echo "Inserimento non riuscito";
+                }
+            }
+        }
+    }
+        echo '<br><a href="./register.php">torna indietro</a>';
 }
+    
+?>
