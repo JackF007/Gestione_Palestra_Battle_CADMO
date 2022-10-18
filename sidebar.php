@@ -7,8 +7,10 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="dashboard.php" class="brand-link">
-          <img src="./dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <img src="./dist/img/logo.png" alt="Logo" class="brand-image " style="opacity: .8;margin-top: 6px;">
+
           <span class="brand-text font-weight-light">Sportgym</span>
+
       </a>
 
       <!-- Sidebar -->
@@ -47,42 +49,32 @@
                         echo " <li class=\"nav-item  menu-is-opening menu-open\">";
                     } else echo " <li class=\"nav-item\">";
                     ?>
-                      <a href="#" class="nav-link">
-                          <i class="nav-icon far fa-envelope"></i>
-                          <p>
-                              Clienti
-                              <i class="fas fa-angle-left right"></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <?php if ($tmp == "clienti.php") {
-                                    echo "<a href=\"clienti.php\" class=\"nav-link active\">";
-                                } else echo "<a href=\"clienti.php\" class=\"nav-link\">";
-                                ?>
-                              <i class="far fa-circle nav-icon"></i>
-                              <p>Ricerca Cliente</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="mailbox/compose.html" class="nav-link">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Aggiungi Cliente</p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item">
-                      <?php if ($tmp == "addprenotazione.php") {
-                            echo "<a href=\"addprenotazione.php\" class=\"nav-link active\">";
-                        } else echo "<a href=\"addprenotazione.php\" class=\"nav-link\">";
-                        ?>
-                      <i class="nav-icon far fa-calendar-alt"></i>
+                  <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-duotone fa-user nav-icon"></i>
                       <p>
-                          Nuova Prenotazione
+                          Utenti
+                          <i class="fas fa-angle-left right"></i>
                       </p>
-                      </a>
+                  </a>
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <?php if ($tmp == "clienti.php") {
+                                echo "<a href=\"utenti.php\" class=\"nav-link active\">";
+                            } else echo "<a href=\"utenti.php\" class=\"nav-link\">";
+                            ?>
+                          <i class="far fa-sharp fa-solid fa-magnifying-glass nav-icon"></i>
+                          <p>Ricerca Utente</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="mailbox/compose.html" class="nav-link">
+                              <i class="far fa-solid fa-magnifying-glass-plus nav-icon"></i>
+                              <p>Aggiungi Utente</p>
+                          </a>
+                      </li>
+                  </ul>
                   </li>
+
                   <li class="nav-item">
                       <a href="dashboard.php" class="nav-link">
                           <i class="nav-icon far fa-calendar-alt"></i>
