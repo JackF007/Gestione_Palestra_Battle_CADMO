@@ -4,30 +4,31 @@
          </td>
          <td>
              <a>
-                 <?php echo "<b>$titolo</b><br>" ?>
+                 <?php echo " n° <b>" . $idprenot . "</b><br>" ?>
              </a>
-             <br />
-             <small>
-                 Created 01.01.2019
-             </small>
          </td>
          <td>
              <ul class="list-inline">
                  <li class="list-inline-item">
                      <img alt="Avatar" class="table-avatar" src="./dist/img/avatar.png">
                  </li>
+                 <li> 
+                     <?php echo "$utenteN</b><br>" ?>
+                     <?php echo "$utenteC</b>" ?>
+                     
+                 </li>
              </ul>
          </td>
          <td class="project_progress">
-             <div class="progress progress-sm">
-                 <?php echo "<b>$testo</b><br>" ?>
-             </div>
+             
+                 <?php echo "fascia <b>$fascia</b><br>" ?>
+             
              <small>
-                 57% Complete
+                 <?php echo "attività <b>$attivita</b><br>" ?>
              </small>
          </td>
          <td class="project-state">
-             <span class="badge badge-success">Success</span>
+             <span class="badge badge-success">prenotato</span>
          </td>
          <td class="project-actions text-right">
              <a class="btn btn-primary btn-sm" href="#">

@@ -1,8 +1,15 @@
 
-<?php
-
-
-////////
+ <?php
+echo "ok";
+    if (isset($_POST['invia-prenotazione'])) { //vengo da controllo
+        var_dump($_POST);
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+ 
+    }
+?> 
+<!-- ////////
 if (isset($_POST['invia-prenotazione'])) { //vengo da controllo
 
     echo '<pre>';
@@ -26,8 +33,8 @@ if (isset($_POST['invia-prenotazione'])) { //vengo da controllo
         }
     }
 } 
+ -->
 
-?>
 
 
 

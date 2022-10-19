@@ -45,7 +45,7 @@
                       </p>
                       </a>
                   </li>
-                  <?php if ($tmp == "clienti.php") {
+                  <?php if ($tmp == "clienti.php"|| $tmp == "register.php") {
                         echo " <li class=\"nav-item  menu-is-opening menu-open\">";
                     } else echo " <li class=\"nav-item\">";
                     ?>
@@ -67,7 +67,11 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="mailbox/compose.html" class="nav-link">
+                          <?php if ($tmp == "register.php") {
+                                echo "<a href=\"register.php\" class=\"nav-link active\">";
+                            } else echo "<a href=\"register.php\" class=\"nav-link\">";
+                            ?>
+                          
                               <i class="far fa-solid fa-magnifying-glass-plus nav-icon"></i>
                               <p>Aggiungi Utente</p>
                           </a>

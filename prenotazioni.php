@@ -140,22 +140,22 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                         <table class="table table-striped projects">
                             <thead>
                                 <tr>
-                                    <th style="width: 1%">
-                                        #
-                                    </th>
                                     <th style="width: 20%">
+                                        Prenotazione
+                                    </th>
+                                    <th style="width: 10%">
+                                        #ID
+                                    </th>
+                                    <th style="width: 15%">
                                         Cliente
                                     </th>
-                                    <th style="width: 30%">
-                                        Team Members
-                                    </th>
-                                    <th>
+                                    <th style="width: 20%">
                                         Fascia oraria
                                     </th>
-                                    <th style="width: 8%" class="text-center">
-                                        Status
+                                    <th style="width: 5%" class="text-center">
+                                            Status
                                     </th>
-                                    <th style="width: 20%">
+                                    <th style="width: 30%">
                                     </th>
                                 </tr>
                             </thead>
@@ -167,14 +167,21 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                     $day = $_GET['day'];
 
                                     include 'config.php';
-                                    $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
+                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and stato_prenotazione='intatta'";
+
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($fetch = mysqli_fetch_array($result)) {
-                                            $id = stripslashes($fetch['id']);
-                                            $titolo = stripslashes($fetch['titolo']);
-                                            $testo = stripslashes($fetch['testo']);
+
+
+                                            $idprenot = stripslashes($fetch['id_prenotazione']);
                                             $data = date("d-m-Y", $fetch['str_data']);
+                                            $fascia = stripslashes($fetch['fascia_oraria']);
+                                            $attivita = stripslashes($fetch['nome_attivita']);
+                                            $utenteid = stripslashes($fetch['id_utente_prenotazione']);
+                                            $utenteN = stripslashes($fetch['nome']);
+                                            $utenteC = stripslashes($fetch['cognome']);
+
                                             $k++;
                                             include 'element.php';
                                         }

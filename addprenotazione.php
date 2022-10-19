@@ -3,7 +3,7 @@
         if (!(isset($_POST['ricerca'])) && (isset($_GET['day']) && is_numeric($_GET['day']))) { // passaggio valori automatici
             $day = $_GET['day'];
             include 'config.php';
-            $sql = "SELECT COUNT(*) FROM appuntamenti WHERE str_data=$day"; //count su
+            $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day"; //count su
             $result = mysqli_query($con, $sql) or die(mysqli_error($con));
             while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 
@@ -146,14 +146,14 @@
                                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                         </div>
 
-                                                        <input type="text" class="form-control" placeholder="<?php echo $d . "/" . $m . "/" . $y ?>" disabled>
+                                                        <input type="text" name"data" class="form-control" placeholder="<?php echo $d . "/" . $m . "/" . $y ?>" disabled>
                                                     </div>
                                                     <!-- /.input group -->
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Seleziona Fascia oraria</label>
-                                                    <select class="form-control select2" style="width: 100%;" required>
+                                                    <select class="form-control select2" name"fascia" style="width: 100%;" required>
                                                         <option>Alabama</option>
                                                         <option>Alaska</option>
                                                         <option>California</option>
@@ -177,7 +177,7 @@
                                                                     <th>Browser</th>
                                                                     <th>Platform(s)</th>
                                                                     <th>Engine version</th>
-                                                                    <th>CSS grade</th>
+                                                                    <th>seleziona</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -187,81 +187,14 @@
                                                                         Explorer 4.0
                                                                     </td>
                                                                     <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 5.0
+                                                                    <td> <input name="titolo" type="hidden" value"id" placeholder="cccc"></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                                                                            Launch Primary Modal
+                                                                        </button>
                                                                     </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 4.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 5.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 4.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 5.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 4.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 5.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 4.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
+
                                                                 <tr>
                                                                     <td>Trident</td>
                                                                     <td>Internet
@@ -269,8 +202,12 @@
                                                                     </td>
                                                                     <td>franco
                                                                     </td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
+                                                                    <td><input name="titolo" type="text" value"ciao"></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                                                                            Launch Primary Modal
+                                                                        </button>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Trident</td>
@@ -278,8 +215,12 @@
                                                                         Explorer 4.0
                                                                     </td>
                                                                     <td>francesco</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
+                                                                    <td> <input type="text" name="titolo" class="form-control" value="<?php echo $d . "/" . $m . "/" . $y ?>" disabled></td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                                                                            Launch Primary Modal
+                                                                        </button>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>Trident</td>
@@ -287,50 +228,46 @@
                                                                         Explorer 5.0
                                                                     </td>
                                                                     <td>marco</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
+                                                                    <td><input type="text" name="titolo" class="form-control" value="<?php echo $d . "/" . $m . "/" . $y ?>" disabled></td>
+                                                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                                                                            Launch Primary Modal
+                                                                        </button></td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 4.0
-                                                                    </td>
-                                                                    <td>Win 95+</td>
-                                                                    <td> 4</td>
-                                                                    <td>X</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Trident</td>
-                                                                    <td>Internet
-                                                                        Explorer 5.0
-                                                                    </td>
-                                                                    <td>danilo</td>
-                                                                    <td>5</td>
-                                                                    <td>C</td>
-                                                                </tr>
+
                                                             </tbody>
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <th>Rendering engine</th>
-                                                                    <th>Browser</th>
-                                                                    <th>Platform(s)</th>
-                                                                    <th>Engine version</th>
-                                                                    <th>CSS grade</th>
-                                                                </tr>
-                                                            </tfoot>
+
                                                         </table>
                                                     </div>
                                                     <!-- /.card-body -->
                                                 </div>
 
+                                                <div class="modal fade" id="modal-primary">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content bg-primary">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Conferma Prenotazione</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
 
-                                                <button name="invia-prenotazione" type="submit" class="btn btn-primary w-100">Registra Prenotazione</button>
+                                                            <div class="modal-footer justify-content-between">
+
+                                                                <button name="invia-prenotazione" type="submit" class="btn btn-outline-light  w-100" value="invia">Registra Prenotazione</button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.card -->
                             </div>
+
                         </div>
                     </section>
                 </div>
@@ -363,7 +300,7 @@
             <!-- DataTables  & Plugins -->
             <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
             <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-
+            <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
             <!-- Bootstrap4 Duallistbox -->
             <script src="./plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
             <!-- InputMask -->
@@ -373,7 +310,7 @@
             <script src="./plugins/daterangepicker/daterangepicker.js"></script>
             <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 
-            <script src="./plugins/inputmask/jquery.inputmask.min.js"></script>
+
 
             <script src="./dist/js/adminlte.min.js"></script>
 
