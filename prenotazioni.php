@@ -161,6 +161,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                             </thead>
                             <tbody>
                                 <?php
+                                 $orari = array();
                                 $k = 0;
                                 $fascia = array();
                                 if (isset($_GET['day']) && is_numeric($_GET['day'])) {
@@ -173,7 +174,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($fetch = mysqli_fetch_array($result)) {
 
-
+                                     
                                             $idprenot = stripslashes($fetch['id_prenotazione']);
                                             $data = date("d-m-Y", $fetch['str_data']);
                                             $fascia = stripslashes($fetch['fascia_oraria']);
@@ -183,9 +184,16 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                             $utenteC = stripslashes($fetch['cognome']);
 
                                             $k++;
+                                          
+                                            array_push($orari,  $fascia );
                                             include 'element.php';
                                         }
                                     }
+                                   
+                                   
+                                    $orari = serialize($orari);
+                                    $orari = urlencode($orari);
+                                  
                                 }
                                 ?>
 
