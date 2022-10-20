@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Ott 19, 2022 alle 21:03
+-- Creato il: Ott 20, 2022 alle 15:28
 -- Versione del server: 8.0.29
 -- Versione PHP: 7.4.29
 
@@ -58,7 +58,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`login_id`, `email`, `password`, `ruolo`, `stato`) VALUES
-(1, 'danilocaruso87@gmail.com', '$2y$10$6lVGpu1rxKQnGzqjBL7hOuvLGysulf4t0TT4I5.K9Xdg7m3LUEra2', 'amministrazione', 1);
+(1, 'danilocaruso87@gmail.com', '$2y$10$6lVGpu1rxKQnGzqjBL7hOuvLGysulf4t0TT4I5.K9Xdg7m3LUEra2', 'amministrazione', 1),
+(2, 'menninti@gmail.com', '$2y$10$aQ.1Vc8e1INWtmAqHnPzYOq2Swa6CiBAiUCBALPcH6JgQ3/pAbACu', 'cliente', 1),
+(3, 'admin@admin.com', '$2y$10$GZdH.QbYpUVCgYKrQyWbiupCpZ1zMABr4ayguPsETFE.ACnIXXidW', 'amministrazione', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +109,9 @@ CREATE TABLE `utenti` (
 --
 
 INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `login_id`, `numero_telefono`, `data_nascita`, `CF`) VALUES
-(3, 'danilo', 'caruso', 1, '3924042830', '2001-11-14', 'ccccgggggdddd444');
+(3, 'danilo', 'caruso', 1, '3924042830', '2001-11-14', 'ccccgggggdddd444'),
+(4, 'vincenzo', 'menniti', 2, '1234567', '2002-11-11', 'ccccgggggdddd444'),
+(5, 'Nadmin', 'Cadmin', 3, '3298461894', '2002-11-11', 'ccccgggggdddd333');
 
 --
 -- Indici per le tabelle scaricate
@@ -157,7 +161,7 @@ ALTER TABLE `attivita`
 -- AUTO_INCREMENT per la tabella `login`
 --
 ALTER TABLE `login`
-  MODIFY `login_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `login_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `prenotazioni`
@@ -169,7 +173,7 @@ ALTER TABLE `prenotazioni`
 -- AUTO_INCREMENT per la tabella `utenti`
 --
 ALTER TABLE `utenti`
-  MODIFY `id_utente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_utente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Limiti per le tabelle scaricate
