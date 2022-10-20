@@ -1,3 +1,12 @@
-span.linkmax a {
+span.linkmax a, span.span_red {
     color: red;
 }
+
+span.linkNomax, span.span_green {
+    color: green;
+}
+
+span.span_blue{
+    color: #007bff;
+}
+
