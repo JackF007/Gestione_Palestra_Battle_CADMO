@@ -4,28 +4,30 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sportgym | Utenti </title>
-
+    <title>Sportgym | Utenti | Cerca </title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
+    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./dist/css/custom.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/logo.png" alt="Logo" >
-        </div>
-
+        <!-- <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div> -->
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
@@ -36,91 +38,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="dashboard.php" class="nav-link">Home</a>
                 </li>
-
             </ul>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -153,20 +73,13 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
             </ul>
         </nav>
-        <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
         <?php
         include 'sidebar.php';
-        ?>
 
+        ?>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -174,13 +87,15 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Utenti</h1>
+                            <h1 class="m-0">Cerca Utenti</h1>
                         </div>
+
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item"><a href="./dashboard.php">Home</a></li>
                                 <li class="breadcrumb-item active">Utenti</li>
+                                <li class="breadcrumb-item active">Cerca</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -191,142 +106,158 @@
             </div>
             <!-- /.content-header -->
 
+
+
             <!-- Main content -->
             <section class="content">
+
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- controllo -->
-
-                                            <?php
-                                            if (isset($_GET['day']) && is_numeric($_GET['day'])) {
-                                                $day = $_GET['day'];
-                                                include 'config.php';
-                                                $sql = "SELECT * FROM appuntamenti WHERE str_data=$day";
-                                                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                                                if (mysqli_num_rows($result) > 0) {
-                                                    while ($fetch = mysqli_fetch_array($result)) {
-                                                        $id = stripslashes($fetch['id']);
-                                                        $titolo = stripslashes($fetch['titolo']);
-                                                        $testo = stripslashes($fetch['testo']);
-                                                        $data = date("d-m-Y", $fetch['str_data']);
-                                                        $btns = '
-                                                        <a class="btn btn-primary btn-sm" href="\cancella.php?id=' . $id . '"><i class="fas fa-folder">
-                                                        </i> View
-                                                         </a>
-                                                         <a class="btn btn-info btn-sm" href="\cancella.php?id=' . $id . '"><i class="fas fa-pencil-alt">
-                                                        </i> Edit
-                                                         </a>
-                                                         <a class="btn btn-danger btn-sm" href="\cancella.php?id=' . $id . '"><i class=" fas fa-trash">
-                                                        </i> Delete
-                                                         </a>';
-
-                                                        echo " <tr>";
-                                                        echo " <td> $id</td>";
-                                                        echo "  <td>$titolo</td>";
-                                                        echo "  <td>$testo</td>";
-                                                        echo "  <td>$data</td>";
-                                                        echo '  <td class="project-actions text-right">' . $btns . '</td>';
-                                                        echo " </tr>";
-                                                    }
-                                                }
-                                            }
-                                            ?>
-                                            <tr>
-                                                <td> id</td>
-                                                <td>All others</td>
-                                                <td>-</td>
-                                                <td>-</td>
-                                                <td>U</td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Rendering engine</th>
-                                                <th>Browser</th>
-                                                <th>Platform(s)</th>
-                                                <th>Engine version</th>
-                                                <th>CSS grade</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
+                    <!-- row -->
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Utenti</h3>
                             </div>
-                            <!-- /.card -->
+                            <div class="card-body">
+
+                                <div class="card">
+
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Utente</th>
+                                                    <th>Contatto</th>
+                                                    <th>Data nascita</th>
+                                                    <th>CF</th>
+                                                    <th>Mail</th>
+                                                    <th>Ruolo</th>
+                                                    <th></th>
+                                                </tr>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                include 'config.php';
+                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo FROM utenti as u join login as l on l.login_id = u.login_id");
+
+                                                while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
+
+                                                    echo "<tr>";
+                                                    echo "<td><ul class=\"list-inline\"><li>$row[1]</li><li>$row[2]</li></td>";
+                                                    echo "<td> $row[3]</td>";
+                                                    echo "<td> $row[4]</td>";
+                                                    echo "<td> $row[5]</td>";
+                                                    echo "<td> $row[6]</td>";
+                                                    echo "<td> $row[7]</td>";
+                                                    echo "<td class=\"project-actions text-right\">
+                                                            <a class=\"btn btn-primary btn-sm\" href=\"#\">
+                                                             <i class=\"fas fa-folder\">
+                                                             </i> View</a>
+                                                            <a class=\"btn btn-info btn-sm\" href=\"./modprenotazioni.php?id=$row[0]\">
+                                                             <i class=\"fas fa-pencil-alt\"> </i> Modifica</a>
+                                                            <a class=\"btn btn-danger btn-sm\" href=\"./delprenotazioni.php?id=$row[0]\">
+                                                             <i class=\" fas fa-trash\">
+                                                             </i> Delete</a></td>";
+                                                    echo " </tr>";
+                                                }
+
+                                                ?>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+
+                                <div class="modal fade" id="modal-primary">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content bg-primary">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Cerca Utenti</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+
+
+                            </div>
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.container-fluid -->
-            </section>
 
         </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0.0
-            </div>
-            <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
-        </footer>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        </section>
     </div>
-    <!-- ./wrapper -->
+
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
+    </footer>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
 
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
+    <script src="./plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-
+    <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="./plugins/jszip/jszip.min.js"></script>
+    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
+    <script src="./dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
+    <script src="./dist/js/demo.js"></script>
+    <!-- Page specific script -->
+
+
+
+
+    <script src="./dist/js/adminlte.min.js"></script>
+
+    <!-- Page specific script -->
     <script>
         $(function() {
             $("#example1").DataTable({
+
+                "zeroRecords": "No records to display",
                 "responsive": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
 
         });
     </script>
+
 </body>
 
 </html>

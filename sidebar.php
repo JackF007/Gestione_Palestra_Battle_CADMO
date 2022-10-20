@@ -45,7 +45,7 @@
                       </p>
                       </a>
                   </li>
-                  <?php if ($tmp == "clienti.php"|| $tmp == "register.php") {
+                  <?php if ($tmp == "clienti.php"|| $tmp == "register.php"|| $tmp == "utenti.php") {
                         echo " <li class=\"nav-item  menu-is-opening menu-open\">";
                     } else echo " <li class=\"nav-item\">";
                     ?>
@@ -58,7 +58,7 @@
                   </a>
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
-                          <?php if ($tmp == "clienti.php") {
+                          <?php if ($tmp == "utenti.php") {
                                 echo "<a href=\"utenti.php\" class=\"nav-link active\">";
                             } else echo "<a href=\"utenti.php\" class=\"nav-link\">";
                             ?>

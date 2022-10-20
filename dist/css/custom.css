@@ -9,4 +9,10 @@ span.linkNomax, span.span_green {
 span.span_blue{
     color: #007bff;
 }
+#register > div > div.content-wrapper > div > div > form > div:nth-child(4) > input{
+ border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid #ced4da;
+}
+
 
