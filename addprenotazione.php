@@ -119,7 +119,7 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
                 $fascia = $_POST['fascia'];
                 $fascia = unserialize(urldecode($fascia));
                 include 'config.php';
-                $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day"; //count su
+                $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day and stato_prenotazione='intatta'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 
