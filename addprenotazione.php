@@ -310,6 +310,11 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
 
 
     <script>
+        function logout() {
+            window.location = "./logout.php";
+
+        };
+
         $(function() {
             $("#example1").DataTable({
                 "zeroRecords": "No records to display",

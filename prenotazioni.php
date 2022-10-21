@@ -1,10 +1,11 @@
 <?php
 
-use Http\Message\Authentication\Header;
 
 if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
     header("location:dashboard.php");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -153,7 +154,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                         Fascia oraria
                                     </th>
                                     <th style="width: 5%" class="text-center">
-                                            Status
+                                        Status
                                     </th>
                                     <th style="width: 30%">
                                     </th>
@@ -161,7 +162,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                             </thead>
                             <tbody>
                                 <?php
-                                 $orari = array();
+                                $orari = array();
                                 $k = 0;
                                 $fascia = array();
                                 if (isset($_GET['day']) && is_numeric($_GET['day'])) {
@@ -174,7 +175,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($fetch = mysqli_fetch_array($result)) {
 
-                                     
+
                                             $idprenot = stripslashes($fetch['id_prenotazione']);
                                             $data = date("d-m-Y", $fetch['str_data']);
                                             $fascia = stripslashes($fetch['fascia_oraria']);
@@ -184,16 +185,15 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                             $utenteC = stripslashes($fetch['cognome']);
 
                                             $k++;
-                                          
-                                            array_push($orari,  $fascia );
+
+                                            array_push($orari,  $fascia);
                                             include 'element.php';
                                         }
                                     }
-                                   
-                                   
+
+
                                     $orari = serialize($orari);
                                     $orari = urlencode($orari);
-                                  
                                 }
                                 ?>
 
@@ -213,6 +213,31 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
             </section>
             <!-- /.content -->
 
+
+
+
+            <div class="modal fade" id="modal-danger">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-danger">
+
+                        <form action="./deleteprenotazione.php" method="post">
+                            <input type="hidden" id="id_canc-prenotazione" name="id_canc_prenotazione" value="">
+                            <input type="hidden" id="data_prnotazione" name="data_prnotazione" value="<?php echo $_GET['day'] ?>">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Conferma Cancellazione</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button name="invia-cancellazione" type="submit" class="btn btn-outline-light  w-100" value="invia-prenotazione">Registra Cancellazione</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
         </div>
         <!-- /.content-wrapper -->
 
@@ -243,7 +268,56 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
     <script src="./dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./dist/js/demo.js"></script>
+    <script>
+        function logout() {
+            window.location = "./logout.php";
 
+        };
+
+
+        function deleteprnotazione() {
+            var target = window.event.target;
+            let idcancellazione = target.value || target.value;
+            console.log(idcancellazione);
+
+            document.getElementById("id_canc-prenotazione").value = idcancellazione;
+
+        }
+
+        function successCancellazione() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Cancellato',
+                subtitle: '',
+                body: 'Cancellazione effettuata con successo'
+            })
+        };
+
+        function notSuccessCancellazione() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Cancellato',
+                subtitle: '',
+                body: 'Cancellazione non andata a buon fine'
+            })
+        };
+    </script>
+    <?php
+    if (isset($_GET['cancellato'])) {
+
+        $cancellato = htmlspecialchars($_GET['cancellato']);
+    if
+    ($cancellato == 1) {
+        echo "<script>successCancellazione();</script>";
+    } else if
+    ($cancellato == 0) {
+        echo "<script>notSuccessCancellazione();</script>";
+    }
+}
+    
+    
+
+    ?>
 </body>
 
 </html>

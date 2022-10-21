@@ -7,13 +7,13 @@ if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
     header("Location: ./login.php?timeout=1");
 }
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
-if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amministrazione" != $session_ruolo)) {
-    /*   $session_user = htmlspecialchars($_SESSION['session_user'], ENT_QUOTES, 'UTF-8'); */
-    /*   $session_id = htmlspecialchars($_SESSION['session_id']); */
+
+
+if (!(isset($_SESSION['session_id']))) {
     header("location:login.php");
+} else if ( "amministrazione" != $session_ruolo){
+    header("location:profile.php");
 }
-
-
 
 
 ?>
@@ -299,7 +299,7 @@ if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amm
 
                                                 include 'config.php';
 
-                                                $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y";
+                                                $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta'";
                                                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
 
@@ -316,7 +316,7 @@ if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amm
                                                 if ($trov == True) {
                                                     include 'config.php';
 
-                                                    $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y";
+                                                    $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta' ";
                                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
                                                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
@@ -390,23 +390,22 @@ if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amm
                                     <table class="table table-striped projects">
                                         <thead>
                                             <tr>
-                                                <th style="width: 20%">
+                                                <th style="width: 30%">
                                                     Prenotazione
                                                 </th>
                                                 <th style="width: 10%">
                                                     #ID
                                                 </th>
-                                                <th style="width: 15%">
+                                                <th style="width: 25%">
                                                     Cliente
                                                 </th>
-                                                <th style="width: 20%">
+                                                <th style="width: 25%">
                                                     Fascia oraria
                                                 </th>
-                                                <th style="width: 5%" class="text-center">
+                                                <th style="width: 10%" class="text-center">
                                                     Status
                                                 </th>
-                                                <th style="width: 30%">
-                                                </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -499,6 +498,8 @@ if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amm
     } else if (isset($_REQUEST["nonprenotato"])) {
         echo "<script>notSuccessPrenozazione();</script>";
     }
+    
+    
     ?>
 </body>
 

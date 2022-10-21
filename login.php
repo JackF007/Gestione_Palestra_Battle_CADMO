@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+$_SESSION = array();
+session_destroy();
+
+?>
 <html lang="en">
 
 <head>
@@ -25,15 +31,15 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Accedi per avviare la tua sessione</p>
                 <form action="./accedi.php" method="post">
-                <?php
-                    if(isset($_REQUEST["errpass"])|| isset($_REQUEST["errmail"]))
-                    echo('<p style="color:red;">Email o password errata</p>');
+                    <?php
+                    if (isset($_REQUEST["errpass"]) || isset($_REQUEST["errmail"]))
+                        echo ('<p style="color:red;">Email o password errata</p>');
 
-                    if(isset($_REQUEST["timeout"]))
-                echo ('<p style="color:red;">Sessione scaduta</p>');
+                    if (isset($_REQUEST["timeout"]))
+                        echo ('<p style="color:red;">Sessione scaduta</p>');
 
                     ?>
-   
+
                     <div class="input-group mb-3">
                         <input type="email" id="mail" name="mail" class="form-control" placeholder="Email">
                         <div class="input-group-append">
