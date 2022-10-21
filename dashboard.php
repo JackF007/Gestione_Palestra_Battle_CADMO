@@ -1,17 +1,20 @@
-
 <?php
 session_start();
+
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
     $_SESSION = array();
     session_destroy();
     header("Location: ./login.php?timeout=1");
 }
-  $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
-if (!(isset($_SESSION['session_id']))||(isset($_SESSION['session_id']) &&"amministrazione"!= $session_ruolo)) {
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+if (!(isset($_SESSION['session_id'])) || (isset($_SESSION['session_id']) && "amministrazione" != $session_ruolo)) {
     /*   $session_user = htmlspecialchars($_SESSION['session_user'], ENT_QUOTES, 'UTF-8'); */
     /*   $session_id = htmlspecialchars($_SESSION['session_id']); */
     header("location:login.php");
-} 
+}
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -437,29 +440,7 @@ if (!(isset($_SESSION['session_id']))||(isset($_SESSION['session_id']) &&"ammini
                 </div>
             </section>
 
-            <div class="card card-info card-outline">
 
-                <div class="card-body">
-                    <button type="button" class="btn btn-success toastsDefaultSuccess">
-                        Launch Success Toast
-                    </button>
-                    <button type="button" class="btn btn-info toastsDefaultInfo">
-                        Launch Info Toast
-                    </button>
-                    <button type="button" class="btn btn-warning toastsDefaultWarning">
-                        Launch Warning Toast
-                    </button>
-                    <button type="button" class="btn btn-danger toastsDefaultDanger">
-                        Launch Danger Toast
-                    </button>
-                    <button type="button" class="btn btn-default bg-maroon toastsDefaultMaroon">
-                        Launch Maroon Toast
-                    </button>
-                    <div class="text-muted mt-3">
-
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -490,59 +471,35 @@ if (!(isset($_SESSION['session_id']))||(isset($_SESSION['session_id']) &&"ammini
     <script src="./dist/js/adminlte.min.js"></script>
 
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
+        function logout() {
+            window.location = "./logout.php";
 
+        };
 
+        function successPrenozazione() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Prenotato',
+                subtitle: '',
+                body: 'Prenotazione effettuata con successo'
+            })
+        };
 
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultInfo').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-info',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultWarning').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-warning',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultDanger').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultMaroon').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-maroon',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-        });
+        function notSuccessPrenozazione() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Prenotato',
+                subtitle: '',
+                body: 'Prenotazione non andata a buon fine'
+            })
+        };
     </script>
-
+    <?php if (isset($_REQUEST["prenotato"])) {
+        echo "<script>successPrenozazione();</script>";
+    } else if (isset($_REQUEST["nonprenotato"])) {
+        echo "<script>notSuccessPrenozazione();</script>";
+    }
+    ?>
 </body>
 
 </html>

@@ -14,9 +14,9 @@ if (isset($_SESSION['session_id'])) {
 }
 
 if (isset($_POST['login'])) { // login è il nome del bottone
-        
+
     $ip = $_SERVER['REMOTE_ADDR'];
-     $nomesessione = "loginIp";
+    $nomesessione = "loginIp";
     $email = $_POST['mail'];
     $password = $_POST['pass'];
 
@@ -46,7 +46,7 @@ if (isset($_POST['login'])) { // login è il nome del bottone
                 $_SESSION['session_email'] = $email;
                 $_SESSION['session_ruolo'] = $ruolo;
                 $_SESSION['data'] = time();
-                 $_SESSION['ip']= $_SERVER['REMOTE_ADDR'];
+                $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 
                 if ($ruolo == "amministrazione") {
                     header('Location: dashboard.php');
@@ -59,11 +59,6 @@ if (isset($_POST['login'])) { // login è il nome del bottone
             header('Location: ./login.php?errmail=1'); //REINDIRIZZA COME SE FOSSE UN LINK
         }
     }
-} else{
+} else {
     header('Location: login.php');
 }
-
-
-
-
-

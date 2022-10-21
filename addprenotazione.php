@@ -240,6 +240,8 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
                                                         <input type="hidden" id="data_prenotazioneForm" name="data_prenotazione" value="">
                                                         <input type="hidden" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="">
                                                         <input type="hidden" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="">
+                                                        <input type="hidden" id="str_data" name="str_data" value="<?php echo $day ?>">
+
                                                         <input type="hidden" id="id_clienteForm" name="id_cliente" value="">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Conferma Prenotazione</h4>
@@ -306,7 +308,7 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
     <script src="./dist/js/demo.js"></script>
     <!-- Page specific script -->
 
-    
+
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -322,7 +324,7 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
         let m = <?php echo json_encode($m); ?>;
         let y = <?php echo json_encode($y); ?>;
         let d = <?php echo json_encode($d); ?>;
-        let dataPrenotazione = d + "/" + m + "/" + y;
+        let dataPrenotazione = y + "-" + m + "-" + d;
         let selectattivita = document.getElementById("selectattivita");
 
         function setform() {
@@ -331,7 +333,7 @@ if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
 
             var target = window.event.target;
             let id_cli = target.value || target.value;
-          
+
             document.getElementById('fascia_prenotazioneForm').value = inSelectedFascia;
             document.getElementById('data_prenotazioneForm').value = dataPrenotazione;
             document.getElementById('attivita_prenotazioneForm').value = inSelectedattivita;
