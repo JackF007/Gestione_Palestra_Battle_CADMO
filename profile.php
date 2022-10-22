@@ -931,8 +931,8 @@
                                 <div class="card-header p-2">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Calendar</a></li>
+                                       
                                     </ul>
                                 </div>
                                 <!-- /.card-header -->
@@ -1047,94 +1047,196 @@
                                         </div>
                                         <!-- /.tab-pane -->
                                         <div class="tab-pane" id="timeline">
-                                            <!-- The timeline -->
-                                            <div class="timeline timeline-inverse">
-                                                <!-- timeline time label -->
-                                                <div class="time-label">
-                                                    <span class="bg-danger">
-                          10 Feb. 2014
-                        </span>
-                                                </div>
-                                                <!-- /.timeline-label -->
-                                                <!-- timeline item -->
-                                                <div>
-                                                    <i class="fas fa-envelope bg-primary"></i>
-
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                                        <div class="timeline-body">
-                                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle quora plaxo ideeli hulu weebly balihoo...
-                                                        </div>
-                                                        <div class="timeline-footer">
-                                                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- END timeline item -->
-                                                <!-- timeline item -->
-                                                <div>
-                                                    <i class="fas fa-user bg-info"></i>
-
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                                        <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                                <!-- END timeline item -->
-                                                <!-- timeline item -->
-                                                <div>
-                                                    <i class="fas fa-comments bg-warning"></i>
-
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                                        <div class="timeline-body">
-                                                            Take me to your leader! Switzerland is small and neutral! We are more like Germany, ambitious and misunderstood!
-                                                        </div>
-                                                        <div class="timeline-footer">
-                                                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- END timeline item -->
-                                                <!-- timeline time label -->
-                                                <div class="time-label">
-                                                    <span class="bg-success">
-                          3 Jan. 2014
-                        </span>
-                                                </div>
-                                                <!-- /.timeline-label -->
-                                                <!-- timeline item -->
-                                                <div>
-                                                    <i class="fas fa-camera bg-purple"></i>
-
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                                        <div class="timeline-body">
-                                                            <img src="https://placehold.it/150x100" alt="...">
-                                                            <img src="https://placehold.it/150x100" alt="...">
-                                                            <img src="https://placehold.it/150x100" alt="...">
-                                                            <img src="https://placehold.it/150x100" alt="...">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- END timeline item -->
+                                         
                                                 <div>
                                                     <i class="far fa-clock bg-gray"></i>
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <section class="col-lg-12 connectedSortable">
+                            <!-- Calendar -->
+                            <div class="card ">
+                                <div class="card-header border-0">
+                                    <h3 class="card-title">
+                                        <i class="far fa-calendar-alt"></i> Calendario Prenotazioni
+                                    </h3>
+
+                                    <!-- tools card -->
+                                    <div class="card-tools">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body" id="switchCalendar">
+                                    <div>
+                                        <h3 class="card-title mr-5">
+                                            <span class="span_blue">
+                                                ●</span> EMPTY
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        <h3 class="card-title mr-5 ">
+                                            <span class="span_green">
+                                                ●</span> NOT EMPTY
+                                        </h3>
+                                    </div>
+                                    <div>
+                                        <h3 class="card-title mr-5">
+                                            <span class="span_red">
+                                                ●</span>FULL
+                                        </h3>
+                                    </div>
+                                    <?php
+                                    function ShowCalendar($m, $y)
+                                    {
+                                        if ((!isset($_GET['d'])) || ($_GET['d'] == "")) {
+                                            /* data di oggi */
+                                            $m = date('n');
+                                            $y = date('Y');
+                                        } else {
+
+                                            /* data m y da url number */
+                                            $m = intval(date("m", (int)$_GET['d']));
+                                            $y = intval(date("Y", (int)$_GET['d']));
+                                            $m = $m;
+                                            $y = $y;
+                                        }
+
+
+                                        $precedente = mktime(0, 0, 0, $m - 1, 1, $y);
+                                        $successivo = mktime(0, 0, 0, $m + 1, 1, $y);
+                                        $nomi_mesi = array(
+                                            "Gen",
+                                            "Feb",
+                                            "Mar",
+                                            "Apr",
+                                            "Mag",
+                                            "Giu",
+                                            "Lug",
+                                            "Ago",
+                                            "Set",
+                                            "Ott",
+                                            "Nov",
+                                            "Dic"
+                                        );
+                                        $nomi_giorni = array(
+                                            "Lun",
+                                            "Mar",
+                                            "Mer",
+                                            "Gio",
+                                            "Ven",
+                                            "Sab",
+                                            "Dom"
+                                        );
+                                        $cols = 7;
+                                        $days = date("t", mktime(0, 0, 0, $m, 1, $y));
+                                        $lunedi = date("w", mktime(0, 0, 0, $m, 1, $y));
+                                        if ($lunedi == 0) $lunedi = 7;
+                                        $tb = "<table class=" . "'" . "table table-bordered >\n" . "'";
+                                        echo $tb;
+                                        echo "<tr>\n
+                                        <td colspan=\"" . $cols . "\">
+                                        <a href=\"?d=" . $precedente . "\#switchCalendar\">&lt;&lt;</a>
+                                        " . $nomi_mesi[$m - 1] . " " . $y . " 
+                                        <a href=\"?d=" . $successivo . "\#switchCalendar\">&gt;&gt;</a></td></tr>";
+                                        foreach ($nomi_giorni as $v) {
+                                            echo "<td style=width: 10px><b>" . $v . "</b></td>\n";
+                                        }
+                                        echo "</tr>";
+                                        for ($j = 1; $j < $days + $lunedi; $j++) {
+                                            if ($j % $cols + 1 == 0) {
+                                                echo "<tr>\n"; //apro una riga calendario
+                                            }
+                                            if ($j < $lunedi) {
+                                                echo "<td> </td>\n"; //righe vuote
+
+                                            } else {
+
+                                                $day = $j - ($lunedi - 1); // cicla ogni gg
+
+
+                                                $data = strtotime(date($y . "-" . $m . "-" . $day)); // cicla ogni data numerica
+                                                $oggi = strtotime(date("Y-m-d"));
+                                                $kont = 0;
+
+                                                $trov = False;
+
+                                                include 'config.php';
+
+                                                $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta'";
+                                                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+
+                                                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                                                    if ($row[0] == (string)$data) {
+
+                                                        $trov = True;
+
+                                                        break;
+                                                    }
+                                                }
+                                                mysqli_free_result($result);
+
+                                                if ($trov == True) {
+                                                    include 'config.php';
+
+                                                    $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta' ";
+                                                    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                                                    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                                                        if ($row[0] == $data) $kont++;
+                                                    }
+
+                                                    if ($kont == 8) {
+
+                                                        $day = "<span class=\"linkmax\"><a href=\"prenotazioni.php?day=$data\">$day</a></span>";
+                                                    } else {
+
+                                                        $day = "<a style=\"color:green\" href=\"prenotazioni.php?day=$data\">$day</a></span>";
+                                                    }
+                                                } else {
+                                                    $day = "<a href=\"prenotazioni.php?day=$data\">$day</a>";
+                                                }
+
+
+
+
+                                                if ($data != $oggi) {
+                                                    echo "<td>" . $day . "</td>";
+                                                } else {
+                                                    echo "<td><b>" . $day . "</b></td>";
+                                                }
+
+
+
+                                                /* fine ciclo mese */
+                                            }
+                                            if ($j % $cols == 0) {
+                                                echo "</tr>";
+                                            }
+                                        }
+                                        echo "<tr></tr>";
+                                        echo "</table>";
+                                    }
+
+                                    ShowCalendar(date("m"), date("Y"));
+                                    ?>
+                                    <!-- Main content -->
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </section>
+                        <!-- right col -->
+                    </div>
                                         <!-- /.tab-pane -->
 
                                         <div class="tab-pane" id="settings">

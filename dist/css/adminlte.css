@@ -13175,7 +13175,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   overflow-x: none;
   overflow-y: initial;
   padding-bottom: 0;
-  padding-left: 0.5rem;
+  padding-left: 0.15rem;
   padding-right: 0.5rem;
   padding-top: 0;
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -13334,6 +13334,11 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
+
+
+
+
 
 #sidebar-overlay {
   background-color: rgba(0, 0, 0, 0.1);
