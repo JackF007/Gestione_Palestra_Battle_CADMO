@@ -15,7 +15,7 @@ if (!(isset($_SESSION['session_id']))) {
     header("location:profile.php");
 }
 
-
+$mail_log= $_SESSION['session_email'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
