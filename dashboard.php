@@ -15,7 +15,7 @@ if (!(isset($_SESSION['session_id']))) {
     header("location:profile.php");
 }
 
-$mail_log= $_SESSION['session_email'];
+$mail_log = $_SESSION['session_email'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,39 +40,11 @@ $mail_log= $_SESSION['session_email'];
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <!-- <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div> -->
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="dashboard.php" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="dashboard.php" class="nav-link">Home</a>
-                </li>
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item">
-                    <button type="button" onclick=logout() class="btn btn-outline-primary btn-block"><i class="fa fa-arrow-left"></i> Logout</button>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-        <!-- Main Sidebar Container -->
         <?php
-        include 'sidebar.php';
+        include 'dashbase.php';
         ?>
+
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -276,7 +248,7 @@ $mail_log= $_SESSION['session_email'];
 
                                                 include 'config.php';
 
-                                                $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta'";
+                                                $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and ( stato_prenotazione='intatta'or stato_prenotazione='modificata')";
                                                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
 
@@ -293,7 +265,7 @@ $mail_log= $_SESSION['session_email'];
                                                 if ($trov == True) {
                                                     include 'config.php';
 
-                                                    $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and stato_prenotazione='intatta' ";
+                                                    $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and ( stato_prenotazione='intatta'or stato_prenotazione='modificata' )";
                                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
                                                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
@@ -389,7 +361,7 @@ $mail_log= $_SESSION['session_email'];
                                             <?php
                                             $oggi = strtotime(date("Y-m-d"));
                                             include 'config.php';
-                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$oggi and stato_prenotazione='intatta'";
+                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$oggi and ( stato_prenotazione='intatta'or stato_prenotazione='modificata')";
                                             $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($fetch = mysqli_fetch_array($result)) {
@@ -452,32 +424,8 @@ $mail_log= $_SESSION['session_email'];
 
         };
 
-        function successPrenozazione() {
-            $(document).Toasts('create', {
-                class: 'bg-success',
-                title: 'Prenotato',
-                subtitle: '',
-                body: 'Prenotazione effettuata con successo'
-            })
-        };
-
-        function notSuccessPrenozazione() {
-            $(document).Toasts('create', {
-                class: 'bg-danger', //bg-info bg-warning
-                title: 'NON Prenotato',
-                subtitle: '',
-                body: 'Prenotazione non andata a buon fine'
-            })
-        };
     </script>
-    <?php if (isset($_REQUEST["prenotato"])) {
-        echo "<script>successPrenozazione();</script>";
-    } else if (isset($_REQUEST["nonprenotato"])) {
-        echo "<script>notSuccessPrenozazione();</script>";
-    }
-
-
-    ?>
+   
 </body>
 
 </html>

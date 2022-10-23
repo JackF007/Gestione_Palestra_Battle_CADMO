@@ -1,3 +1,26 @@
+<?php
+
+
+session_start();
+
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ./login.php?timeout=1");
+}
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+
+
+if (!(isset($_SESSION['session_id']))) {
+    header("location:login.php");
+} else if ("amministrazione" != $session_ruolo) {
+    header("location:profile.php");
+}
+
+$mail_log = $_SESSION['session_email'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +34,11 @@
     <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- custom css -->
@@ -19,146 +47,11 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <!-- <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div> -->
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="dashboard.php" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="dashboard.php" class="nav-link">Home</a>
-                </li>
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-        <!-- Main Sidebar Container -->
         <?php
-        include 'sidebar.php';
+        include 'dashbase.php';
         ?>
+
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -166,8 +59,9 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Modifica</h1>
+                            <h1 class="m-0">Modifica Prenotazione</h1>
                         </div>
+
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -183,11 +77,179 @@
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
+
+            <?php
+            $orari = array();
+            $k = 0;
+            if ((isset($_GET['id'])) && (is_numeric($_GET['id']))) {
+                $id_prenotazione = ($_GET['id']);
+
+                include 'config.php';
+                $sql = "SELECT p.str_data, p.data_appuntamento, p.fascia_oraria, p.id_utente_prenotazione, a.nome_attivita FROM prenotazioni as p join attivita as a on p.tipo_attivita = a.id_attivita WHERE id_prenotazione=$id_prenotazione "; //count su
+                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+
+                    $str_data = $row[0];
+                    $data_appuntamento = $row[1];
+                    $fascia_oraria = $row[2];
+                    $id_utente_prenotazione = $row[3];
+                    $nome_attivita = $row[4];
+                }
+
+                $m = (date("m", (int)$str_data));
+                $y = (date("Y", (int)$str_data));
+                $d  = (date("d", (int)$str_data));
+
+
+                $sql = "SELECT  p.fascia_oraria FROM prenotazioni as p WHERE str_data=$str_data and stato_prenotazione='intatta'"; //count su
+                $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+
+                    $k++;
+
+                    array_push($orari,  $row[0]);
+                }
+            }
+            ?>
+
             <!-- Main content -->
             <section class="content">
+
                 <div class="container-fluid">
                     <!-- row -->
-                   
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Modulo di Prenotazione</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <form action="./verifyprenotazione.php" method="post">
+                                        <label>Data Selezionata</label>
+                                        <!-- Date mm/dd/yyyy -->
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                </div>
+
+                                                <input type="text" name"data" class="form-control" placeholder="<?php echo $d . "/" . $m . "/" . $y ?>" disabled>
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Seleziona Fascia oraria</label>
+                                            <select id="selectform" class="form-control select2" name"fascia" style="width: 100%;">
+
+                                                <?php
+
+                                                $defaultFascia = array("08-09", "09-10", "10-11", "11-12", "12-13", "15-16", "16-17", "17-18");
+                                                echo "<b><option>$fascia_oraria</option></b>";
+                                                echo "<optgroup label=\"Orari prenotabili\">";
+
+
+                                                foreach ($defaultFascia as $f) {
+                                                    if (!(in_array($f, $orari))) {
+                                                        echo "<option>$f</option> ";
+                                                    }
+                                                }
+                                                echo "</optgroup>";
+                                                $con->close();
+                                                ?>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Seleziona Attività</label>
+                                            <select id="selectattivita" class="form-control select2" name"attivita" style="width: 100%;">
+                                                <option>Sauna</option>
+
+
+                                            </select>
+                                        </div>
+
+                                        <!-- /.form group -->
+                                        <label>Seleziona Cliente</label>
+                                        <div class="card">
+
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <table id="example1" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nome</th>
+                                                            <th>Cognome</th>
+                                                            <th>Data Nascita</th>
+                                                            <th>Email</th>
+                                                            <th>Ruolo</th>
+                                                            <th>#</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        include 'config.php';
+                                                        $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.data_nascita,  l.email , l.ruolo  FROM utenti as u join login as l on l.login_id = u.login_id ");
+
+                                                        while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
+
+                                                            echo "<tr>";
+
+                                                            echo "<td> $row[1]</td>";
+                                                            echo "<td> $row[2]</td>";
+                                                            echo "<td> $row[3]</td>";
+                                                            echo "<td> $row[4]</td>";
+                                                            echo "<td> $row[5]</td>";
+                                                            echo "<td><button id=\"$row[0]_button\" onclick =\"setform()\" value = \"$row[0]\" type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#modal-primary\">
+                                                                    Modifica
+                                                                </button></td></tr>";
+                                                        }
+                                                        $con->close();
+                                                        ?>
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+
+                                        <div class="modal fade" id="modal-primary">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content bg-primary">
+                                                    <form action="/verifyprenotazione.php" method="post">
+
+                                                        <input type="hidden" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="">
+                                                        <input type="hidden" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="">
+                                                        <input type="hidden" id="id_clienteForm" name="id_cliente" value="">
+                                                        <input type="hidden" id="str_data" name="str_data" value="<?php echo $str_data ?>">
+                                                        <input type="hidden" id="id_prenotazioneForm" name="id_prenotazioneForm" value="<?php echo $id_prenotazione ?>">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Conferma Modifica</h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-footer justify-content-between">
+
+                                                            <button name="mod-prenotazione" type="submit" class="btn btn-outline-light  w-100" value="mod-prenotazione">Registra Prenotazione</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
                 </div>
             </section>
         </div>
@@ -207,21 +269,62 @@
 
     <!-- jQuery -->
     <script src="./plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
     <!-- Bootstrap 4 -->
     <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <!-- DataTables  & Plugins -->
+    <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="./plugins/jszip/jszip.min.js"></script>
+    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="./dist/js/adminlte.js"></script>
+    <script src="./dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="./dist/js/pages/dashboard.js"></script>
+    <!-- Page specific script -->
+
+
+    <script>
+        function logout() {
+            window.location = "./logout.php";
+
+        };
+
+        $(function() {
+            $("#example1").DataTable({
+                "zeroRecords": "No records to display",
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "pageLength": 1,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+
+        let formSelect = document.getElementById("selectform");
+
+        let selectattivita = document.getElementById("selectattivita");
+
+        function setform() {
+            var inSelectedFascia = formSelect.options[formSelect.selectedIndex].text;
+            var inSelectedattivita = selectattivita.options[selectattivita.selectedIndex].text;
+
+            var target = window.event.target;
+            let id_cli = target.value || target.value;
+
+            document.getElementById('fascia_prenotazioneForm').value = inSelectedFascia;
+
+            document.getElementById('attivita_prenotazioneForm').value = inSelectedattivita;
+            document.getElementById('id_clienteForm').value = id_cli;
+        }
+    </script>
+
 </body>
 
 </html>

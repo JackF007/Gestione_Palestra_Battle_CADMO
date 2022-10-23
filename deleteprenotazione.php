@@ -1,8 +1,5 @@
 <?php
-var_dump($_POST);
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
+
 
 if (!(isset($_POST['id_canc_prenotazione']))) {
     header("location:dashboard.php");
@@ -26,15 +23,17 @@ if (!(isset($_SESSION['session_id']))) {
     require_once('config.php');
     $id_canc_prenotazione = intval($_POST['id_canc_prenotazione']);
 
-    $sql = "UPDATE prenotazioni SET stato_prenotazione = 'cancellata' WHERE id_prenotazione = $id_canc_prenotazione";
+    $sql = "UPDATE prenotazioni SET stato_prenotazione = 'cancellata' WHERE id_prenotazione = '$id_canc_prenotazione'";
 
     if ($con->query($sql) === TRUE) {
-        $data = $_POST['data_prnotazione'];
+        $con->close();
+        $data = $_POST['data_prenotazione'];
         $url = "Location: prenotazioni.php?day=$data&cancellato=1";
         $url2 = "Location: prenotazioni.php?day=$data&cancellato=0";
         header($url);
     } else {
-        header($url2);;
+        $con->close();
+        header($url2);
     }
 }
 

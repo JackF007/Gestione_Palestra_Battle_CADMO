@@ -7,6 +7,26 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
 
 
 ?>
+<?php
+session_start();
+
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ./login.php?timeout=1");
+}
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+
+
+if (!(isset($_SESSION['session_id']))) {
+    header("location:login.php");
+} else if ("amministrazione" != $session_ruolo) {
+    header("location:profile.php");
+}
+
+$mail_log = $_SESSION['session_email'];
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,60 +52,12 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
 <body class="hold-transition sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="dashboard.php" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="dashboard.php" class="nav-link">Home</a>
-                </li>
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-
-        <!-- Main Sidebar Container -->
 
         <?php
-        include 'sidebar.php';
+        include 'dashbase.php';
         ?>
+
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -169,7 +141,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                                     $day = $_GET['day'];
 
                                     include 'config.php';
-                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and stato_prenotazione='intatta'";
+                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and (stato_prenotazione='intatta'or stato_prenotazione='modificata')";
 
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                     if (mysqli_num_rows($result) > 0) {
@@ -222,7 +194,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
 
                         <form action="./deleteprenotazione.php" method="post">
                             <input type="hidden" id="id_canc-prenotazione" name="id_canc_prenotazione" value="">
-                            <input type="hidden" id="data_prnotazione" name="data_prnotazione" value="<?php echo $_GET['day'] ?>">
+                            <input type="hidden" id="data_prenotazione" name="data_prenotazione" value="<?php echo $_GET['day'] ?>">
                             <div class="modal-header">
                                 <h4 class="modal-title">Conferma Cancellazione</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -278,7 +250,7 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
         function deleteprnotazione() {
             var target = window.event.target;
             let idcancellazione = target.value || target.value;
-            console.log(idcancellazione);
+           
 
             document.getElementById("id_canc-prenotazione").value = idcancellazione;
 
@@ -301,21 +273,75 @@ if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
                 body: 'Cancellazione non andata a buon fine'
             })
         };
+
+        function successMod() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Modificato',
+                subtitle: '',
+                body: 'Modifica effettuata con successo'
+            })
+        };
+
+        function notSuccessMod() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Modificato',
+                subtitle: '',
+                body: 'Modifica non andata a buon fine'
+            })
+        };
+
+      
+        function successPrenozazione() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Prenotato',
+                subtitle: '',
+                body: 'Prenotazione effettuata con successo'
+            })
+        };
+
+        function notSuccessPrenozazione() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Prenotato',
+                subtitle: '',
+                body: 'Prenotazione non andata a buon fine'
+            })
+        };
     </script>
     <?php
     if (isset($_GET['cancellato'])) {
 
         $cancellato = htmlspecialchars($_GET['cancellato']);
-    if
-    ($cancellato == 1) {
-        echo "<script>successCancellazione();</script>";
-    } else if
-    ($cancellato == 0) {
-        echo "<script>notSuccessCancellazione();</script>";
+        if ($cancellato == 1) {
+            echo "<script>successCancellazione();</script>";
+        } else if ($cancellato == 0) {
+            echo "<script>notSuccessCancellazione();</script>";
+        }
     }
-}
-    
-    
+    if (isset($_GET['modificato'])) {
+
+        $modificato = htmlspecialchars($_GET['modificato']);
+        if ($modificato == 1) {
+            echo "<script>successMod();</script>";
+        } else if ($modificato == 0) {
+            echo "<script>notSuccessMod();</script>";
+        }
+    }
+    if (isset($_GET['prenotato'])) {
+
+        $prenotato = htmlspecialchars($_GET['prenotato']);
+        if ($prenotato == 1) {
+            echo "<script>successPrenozazione();</script>";
+        } else if ($prenotato == 0) {
+            echo "<script>notSuccessPrenozazione();</script>";
+        }
+    }
+ 
+
+
 
     ?>
 </body>
