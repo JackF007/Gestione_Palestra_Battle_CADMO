@@ -10,9 +10,96 @@ span.span_blue{
     color: #007bff;
 }
 #register > div > div.content-wrapper > div > div > form > div:nth-child(4) > input{
- border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-right: 1px solid #ced4da;
 }
 
+.toggle{
+    
+    --width: 20px;
+    --height: calc(var(--width));
+    --border-radius: calc(var(--height)/2);
+  
+    display: block;
+    cursor: pointer;
+    
+  }
+  
+  .toggle__input {
+    display:none;
+  }
+  
+  .toggle__fill{
+    position: relative;
+    width: var (--width);
+    height: var(--height);
+    border-radius:var(--border-radius);
+    background: #dddddd;
+    transition: background 0.2;
+    
+  }
+  
+  .toggle__input:checked ~ .toggle__fill{
+    background: #138ada;
+  }
+  
+  .toggle__fill::after {
+    content:'';
+    position:absolute;
+    top : 0;
+    left : 0;
+    height : var(--height);
+    width:var(--height);
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.25);
+    border-radius:var(--border-radius);
+    transition: transform 0.2s;
+  }
+  
+  #comandoN1{
+    max-width: 40px;
+     height: 20px;
+     margin-top:20px;
+  }
 
+  .toggle__input:checked ~ .toggle__fill::after{
+    transform: translateX(var(--height));
+  }
+
+.comandoN2 {
+    display:inline-flex;
+    overflow:hidden;
+    border-radius:15px;
+    box-shadow: 0 0 5px rgba(0, 0 , 0 , 0.25);
+    margin-top: 20px;
+    max-width: 230px;
+    
+    
+}
+
+.radio__input {
+    display:none;
+}
+
+.radio__label {
+    padding: 10px 14px 5px;
+    font-size:14px;
+    font-family: sans-serif;
+    color:#ff0000;
+    background:#d6c5be;
+    cursor:pointer;
+    transition:background 0.1s;
+}
+
+.radio__label:not(:last-of-type){
+    border-right: 1px solid #006856;
+}
+
+.radio__input:checked + .radio__label {
+    background: #dde004;
+}
+
+#definizioneMargine {
+    
+}

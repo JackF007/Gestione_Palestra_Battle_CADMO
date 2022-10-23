@@ -4,6 +4,8 @@
     $tmp = str_replace($radice, '', $t); // pagina
 
     ?>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="./dist/css/custom.css">
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
       <div style="max-height:100%; margin-bottom:-50px;">
@@ -23,7 +25,6 @@
                       <a href="#" class="d-block">Alexander Pierce</a>
                   </div>
               </div>
-
 
 
               <!-- Sidebar Menu -->
@@ -85,14 +86,32 @@
                                   Domotica
                               </p>
                           </a>
-                      </li>
-
-
+                          </li>         
+                   
                   </ul>
+                    
+                  <div id="comandoN1">
+                          <label class="toggle" for="myToggle">
+                            <input class="toggle__input" type="checkbox" id="myToggle">
+                            <div class="toggle__fill"></div>        
+                        </label> 
+                    </div>
+                   
+                    <div class="comandoN2">
+                        <input class="radio__input" type="radio" value="option1" name="radio" id="radio1">
+                        <label class="radio__label" for="radio1">X</label>
+                        <input class="radio__input" type="radio" value="option2" name="radio" id="radio2">
+                        <label class="radio__label" for="radio2">Y</label>
+                        <input class="radio__input" type="radio" value="option3" name="radio" id="radio3">
+                        <label class="radio__label" for="radio3">Z</label>
+                      </div>
+                      
               </nav>
+            
               <!-- /.sidebar-menu -->
-
-
+              
+              
+            
           </div>
           <!-- /.sidebar -->
 
