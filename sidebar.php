@@ -45,7 +45,7 @@
                       </p>
                       </a>
                   </li>
-                  <?php if ($tmp == "clienti.php" || $tmp == "register.php" || $tmp == "utenti.php") {
+                  <?php if ($tmp == "clienti.php" || $tmp == "register.php" || $tmp == "utenti.php" ) {
                         echo " <li class=\"nav-item  menu-is-opening menu-open\">";
                     } else echo " <li class=\"nav-item\">";
                     ?>

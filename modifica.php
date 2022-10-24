@@ -14,9 +14,35 @@ if (!(isset($_SESSION['session_id']))) {
 } else if ("amministrazione" != $session_ruolo) {
     header("location:profile.php");
 }
+$radice = "/ProgettoFinale_Palestra_Battle_CADMO/";
+$t = $_SERVER['REQUEST_URI'];
+$tmp = str_replace($radice, '', $t); // pagina
 
 $mail_log = $_SESSION['session_email'];
+
+if ($tmp == "modifica.php") {
+    header("location:dashboard.php");
+}
+
+require_once('config.php');
+
+$id_utente = $_GET["id"];
+
+$mysqli = $con->query("SELECT *  FROM utenti where id_utente='$id_utente'"); //cerca soltanto il email utente per poi controllare la password
+$result = mysqli_fetch_assoc($mysqli);
+
+$id_login = $result["login_id"];
+$nome = $result["nome"];
+$cognome = $result["cognome"];
+$cf = $result["CF"];
+$telefono = $result["numero_telefono"];
+$data = $result["data_nascita"];
+
+$risultato = $con->query("SELECT * FROM login where login_id='$id_login'"); //cerca soltanto il email utente per poi controllare la password
+$risultato_bello = mysqli_fetch_assoc($risultato);
+$email = $risultato_bello["email"];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +87,7 @@ $mail_log = $_SESSION['session_email'];
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Utenti</li>
+                                <li class="breadcrumb-item active"><a href="./utenti.php"> Utenti</a></li>
                                 <li class="breadcrumb-item active">Modifica</li>
                             </ol>
                         </div>
@@ -76,7 +102,7 @@ $mail_log = $_SESSION['session_email'];
                     <div class="card-header">
                         <h3 class="card-title">
                             <i class="fas fa-edit"></i>
-                            Modifica Dati Utente
+                            Scheda Utente <b><?php echo $nome." ".$cognome?></b>
                         </h3>
                     </div>
                     <div class="card-body">
@@ -97,26 +123,6 @@ $mail_log = $_SESSION['session_email'];
                                     <div class="card">
                                         <div class="card-body register-card-body">
 
-
-                                            <?php
-                                            require_once('config.php');
-
-                                            $id_utente = $_GET["id"];
-
-                                            $mysqli = $con->query("SELECT *  FROM utenti where id_utente='$id_utente'"); //cerca soltanto il email utente per poi controllare la password
-                                            $result = mysqli_fetch_assoc($mysqli);
-
-                                            $id_login = $result["login_id"];
-                                            $nome = $result["nome"];
-                                            $cognome = $result["cognome"];
-                                            $cf = $result["CF"];
-                                            $telefono = $result["numero_telefono"];
-                                            $data = $result["data_nascita"];
-
-                                            $risultato = $con->query("SELECT * FROM login where login_id='$id_login'"); //cerca soltanto il email utente per poi controllare la password
-                                            $risultato_bello = mysqli_fetch_assoc($risultato);
-                                            $email = $risultato_bello["email"];
-                                            ?>
                                             <form action="./upload_data.php" method="post">
                                                 <div class="input-group mb-3">
                                                     <input type="text" class="form-control" placeholder="Nome" name="nome" required value=<?php echo ("$nome"); ?>>
@@ -261,11 +267,6 @@ $mail_log = $_SESSION['session_email'];
             echo "<script>notsuccessinserimento();</script>";
         }
     }
-
-
-
-
-
 
     ?>
 </body>
