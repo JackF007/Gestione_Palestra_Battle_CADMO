@@ -73,14 +73,18 @@ $mail_log = $_SESSION['session_email'];
             <!-- /.content-header -->
 
 
-            <!-- Content Wrapper. Contains page content -->
             <section class="content">
-                <!-- Content Header (Page header) -->
-                <div class="card">
-                    <div class="card-body register-card-body">
-                        <p class="login-box-msg">Registra un nuovo membro</p>
+                <div class="card card-primary ">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-edit"></i>
+                            Registra Dati Nuovo Utente
+                        </h3>
+                    </div>
+                    <div class="card-body">
 
                         <form action="./upload_data.php" method="post">
+                            <label for="ruolo">Ruolo</label>
                             <div class="input-group mb-3">
                                 <input type="radio" id="cliente" name="ruolo" value="cliente" required>
                                 <label for="age1" class="mr-2">Cliente</label>
@@ -88,6 +92,8 @@ $mail_log = $_SESSION['session_email'];
                                 <label for="age2">Amministrazione</label>
 
                             </div>
+                            <hr>
+                            <label for="nome">Nome Utente</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Nome" name="nome" required>
                                 <div class="input-group-append">
@@ -96,6 +102,7 @@ $mail_log = $_SESSION['session_email'];
                                     </div>
                                 </div>
                             </div>
+                            <label for="cognome">Cognome Utente</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
                                 <div class="input-group-append">
@@ -104,12 +111,14 @@ $mail_log = $_SESSION['session_email'];
                                     </div>
                                 </div>
                             </div>
+                            <label for="data_nascita">Data di nascita</label>
                             <div class="input-group mb-3">
                                 <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
                                 <div class="input-group-append">
 
                                 </div>
                             </div>
+                            <label for="CF">Codice Fiscale</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Codice Fiscale" name="CF" required>
                                 <div class="input-group-append">
@@ -118,6 +127,17 @@ $mail_log = $_SESSION['session_email'];
                                     </div>
                                 </div>
                             </div>
+                            <label for="numero">Numero telefono</label>
+                            <div class="input-group mb-3">
+                                <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label for="email">Email Utente</label>
                             <div class="input-group mb-3">
                                 <input type="email" class="form-control" placeholder="email" name="email" required>
                                 <div class="input-group-append">
@@ -127,14 +147,7 @@ $mail_log = $_SESSION['session_email'];
                                 </div>
                             </div>
 
-                            <div class="input-group mb-3">
-                                <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-phone"></span>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="password">Password Utente</label>
                             <div class="input-group mb-3">
                                 <input type="password" class="form-control" placeholder="password" name="password" required>
                                 <div class="input-group-append">
@@ -143,27 +156,13 @@ $mail_log = $_SESSION['session_email'];
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-group mb-3">
-                                <input type="password" class="form-control" placeholder="Ripeti password" name="ripetiPassword" required>
-                                <div class="input-group-append">
-                                    <div class="input-group-text">
-                                        <span class="fas fa-lock"></span>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="row">
-                                <div class="col-8">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
-                                        <label for="agreeTerms">
-                                            Accetto i <a href="#">termini</a>
-                                        </label>
-                                    </div>
-                                </div>
+
                                 <!-- /.col -->
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block" name="register">Registra</button>
-                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block w-100" name="register">Registra</button>
+
                                 <!-- /.col -->
                             </div>
                         </form>
@@ -202,44 +201,43 @@ $mail_log = $_SESSION['session_email'];
     <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="./dist/js/adminlte.min.js"></script>
 
-    <script>    
+    <script>
+        function successinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Inserito',
+                subtitle: '',
+                body: 'Inserimento effettuato con successo'
+            })
+        };
 
-                    function successinserimento() {
-                        $(document).Toasts('create', {
-                            class: 'bg-success',
-                            title: 'Inserito',
-                            subtitle: '',
-                            body: 'Inserimento effettuato con successo'
-                        })
-                    };
 
+        function notsuccessinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Inserito',
+                subtitle: '',
+                body: 'Inserimento non andato a buon fine'
+            })
+        };
 
-                    function notsuccessinserimento() {
-                        $(document).Toasts('create', {
-                            class: 'bg-danger', //bg-info bg-warning
-                            title: 'NON Inserito',
-                            subtitle: '',
-                            body: 'Inserimento non andato a buon fine'
-                        })
-                    };
+        function empty() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'Mail o Password vuoti ',
+                subtitle: '',
+                body: 'Inserimento non andato a buon fine'
+            })
+        };
 
-                    function empty() {
-                        $(document).Toasts('create', {
-                            class: 'bg-danger', //bg-info bg-warning
-                            title: 'Mail o Password vuoti ',
-                            subtitle: '',
-                            body: 'Inserimento non andato a buon fine'
-                        })
-                    };
-
-                    function exist() {
-                        $(document).Toasts('create', {
-                            class: 'bg-danger', //bg-info bg-warning
-                            title: 'Mail già in uso',
-                            subtitle: '',
-                            body: 'Inserimento non andato a buon fine'
-                        })
-                    };
+        function exist() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'Mail già in uso',
+                subtitle: '',
+                body: 'Inserimento non andato a buon fine'
+            })
+        };
     </script>
     <?php
 

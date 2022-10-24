@@ -14,9 +14,22 @@ if (isset($_POST['modificay'])) {
     $numero = $_POST['numero'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $risultato = $con->query("update utenti set nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' where id_utente='$id'"); //
+    $sql = $con->query("update utenti set nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' where id_utente='$id'"); //
     //fare join
-//
+    //
+
+        if ($con->query($sql) === TRUE) {
+
+            $con->close();
+            $url = "Location: modifica.php?id=$id&inserito=1";
+            header($url);
+        } else {
+
+            $con->close();
+            $url = "Location: modifica.php?id=$id&inserito=0";
+            header($url);
+        }
+    
 }
 
 if (isset($_POST['register'])) {

@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ./login.php?timeout=1");
+}
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+
+
+if (!(isset($_SESSION['session_id']))) {
+    header("location:login.php");
+} else if ("amministrazione" != $session_ruolo) {
+    header("location:profile.php");
+}
+
+$mail_log = $_SESSION['session_email'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,162 +41,167 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <!-- <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div> -->
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="dashboard.php" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="dashboard.php" class="nav-link">Home</a>
-                </li>
-            </ul>
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- /.navbar -->
-        <!-- Main Sidebar Container -->
         <?php
-        include 'sidebar.php';
+        include 'dashbase.php';
         ?>
+
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
             <!-- Content Header (Page header) -->
-            <div class="card">
-                <div class="card-body register-card-body">
-                    <p class="login-box-msg">Modifica i tuoi dati</p>
-                    <?php 
-                    require_once('config.php');
+            <div class="content-header">
 
-                    $id_utente=$_GET["id"];
-
-                    $mysqli = $con->query("SELECT *  FROM utenti where id_utente='$id_utente'"); //cerca soltanto il email utente per poi controllare la password
-                    $result = mysqli_fetch_assoc($mysqli);
-
-                    $id_login=$result["login_id"];
-                    $nome=$result["nome"];
-                    $cognome=$result["cognome"];
-                    $cf=$result["CF"];
-                    $telefono=$result["numero_telefono"];
-                    $data=$result["data_nascita"];
-                    
-                    $risultato = $con->query("SELECT * FROM login where login_id='$id_login'"); //cerca soltanto il email utente per poi controllare la password
-                    $risultato_bello = mysqli_fetch_assoc($risultato);
-                    $email=$risultato_bello["email"];
-                    ?>
-                    <form action="./upload_data.php" method="post">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Nome" name="nome" required value=<?php echo("$nome"); ?>>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Modifica Utente</h1>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Cognome" name="cognome" required value=<?php echo("$cognome"); ?>>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Utenti</li>
+                                <li class="breadcrumb-item active">Modifica</li>
+                            </ol>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required value=<?php echo("$data"); ?>>
-                            <div class="input-group-append">
-
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Codice Fiscale" name="CF" required value=<?php echo("$cf"); ?>>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="email" name="email" required value=<?php echo("$email"); ?>>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required value=<?php echo("$telefono"); ?>>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="password" name="password" >
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div> 
-                        <div class="input-group mb-3">
-                            <input type="hidden"  class="form-control" placeholder="id_utente" name="id_utente" value ="<?php echo $id_utente?>" required>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="hidden"  class="form-control" placeholder="id_login" name="id_login" value ="<?php echo $id_login?>" required>
-                        </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block" name="modificay">Modifica</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.form-box -->
+                <!-- /.container-fluid -->
             </div>
+            <section class="content">
+                <div class="card card-primary ">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-edit"></i>
+                            Modifica Dati Utente
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="./upload_data.php" method="post">
 
 
+                            <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Anagrafici</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Login</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content" id="custom-content-below-tabContent">
+                                <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
+                                    <div class="card">
+                                        <div class="card-body register-card-body">
+
+
+                                            <?php
+                                            require_once('config.php');
+
+                                            $id_utente = $_GET["id"];
+
+                                            $mysqli = $con->query("SELECT *  FROM utenti where id_utente='$id_utente'"); //cerca soltanto il email utente per poi controllare la password
+                                            $result = mysqli_fetch_assoc($mysqli);
+
+                                            $id_login = $result["login_id"];
+                                            $nome = $result["nome"];
+                                            $cognome = $result["cognome"];
+                                            $cf = $result["CF"];
+                                            $telefono = $result["numero_telefono"];
+                                            $data = $result["data_nascita"];
+
+                                            $risultato = $con->query("SELECT * FROM login where login_id='$id_login'"); //cerca soltanto il email utente per poi controllare la password
+                                            $risultato_bello = mysqli_fetch_assoc($risultato);
+                                            $email = $risultato_bello["email"];
+                                            ?>
+                                            <form action="./upload_data.php" method="post">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Nome" name="nome" required value=<?php echo ("$nome"); ?>>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Cognome" name="cognome" required value=<?php echo ("$cognome"); ?>>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-user"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required value=<?php echo ("$data"); ?>>
+                                                    <div class="input-group-append">
+
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="Codice Fiscale" name="CF" required value=<?php echo ("$cf"); ?>>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-envelope"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="input-group mb-3">
+                                                    <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required value=<?php echo ("$telefono"); ?>>
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-phone"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                    <input type="hidden" class="form-control" placeholder="id_utente" name="id_utente" value="<?php echo $id_utente ?>" required>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <input type="hidden" class="form-control" placeholder="id_login" name="id_login" value="<?php echo $id_login ?>" required>
+                                                </div>
+                                                <!-- /.col -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
+                                    <div class="input-group mb-3">
+                                        <input type="email" class="form-control" placeholder="email" name="email" required value=<?php echo ("$email"); ?>>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-envelope"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" placeholder="password" name="password">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">
+                                                <span class="fas fa-lock"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100">
+                                    <button type="submit" class="btn btn-primary btn-block" name="modificay">Modifica</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </div>
+
+    </div>
+
+
+    </div>
 
     </div>
     <!-- /.content-wrapper -->
@@ -206,59 +231,43 @@
     <script src="./dist/js/adminlte.min.js"></script>
 
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
+        function successinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Modificato',
+                subtitle: '',
+                body: 'Inserimento effettuato con successo'
+            })
+        };
 
 
-
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultInfo').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-info',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultWarning').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-warning',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultDanger').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultMaroon').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-maroon',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-        });
+        function notsuccessinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON MOdificato',
+                subtitle: '',
+                body: 'Inserimento non andato a buon fine'
+            })
+        };
     </script>
+    <?php
 
+    if (isset($_GET['inserito'])) {
+
+        $inserito = htmlspecialchars($_GET['inserito']);
+        if ($inserito == 1) {
+            echo "<script>successinserimento();</script>";
+        } else if ($inserito == 0) {
+            echo "<script>notsuccessinserimento();</script>";
+        }
+    }
+
+
+
+
+
+
+    ?>
 </body>
 
 </html>
