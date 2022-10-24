@@ -141,7 +141,7 @@ $mail_log = $_SESSION['session_email'];
                                     $day = $_GET['day'];
 
                                     include 'config.php';
-                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and (stato_prenotazione='intatta'or stato_prenotazione='modificata')";
+                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and (stato_prenotazione='intatta'or stato_prenotazione='modificata') order by fascia_oraria ";
 
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                     if (mysqli_num_rows($result) > 0) {

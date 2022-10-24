@@ -121,12 +121,12 @@ $mail_log = $_SESSION['session_email'];
                                                     echo "<td> $row[6]</td>";
                                                     echo "<td> $row[7]</td>";
                                                     echo "<td class=\"project-actions text-right\">
-                                                            <a class=\"btn btn-primary btn-sm\" href=\"#\">
+                                                            <a class=\"btn btn-primary btn-sm\" href=\"./profile.php?id=$row[0]\">
                                                              <i class=\"fas fa-folder\">
                                                              </i> View</a>
-                                                            <a class=\"btn btn-info btn-sm\" href=\"./modprenotazioni.php?id=$row[0]\">
+                                                            <a class=\"btn btn-info btn-sm\" href=\"./modifica.php?id=$row[0]\">
                                                              <i class=\"fas fa-pencil-alt\"> </i> Modifica</a>
-                                                            <a class=\"btn btn-danger btn-sm\" href=\"./delprenotazioni.php?id=$row[0]\">
+                                                            <a class=\"btn btn-danger btn-sm\" href=\"./upload_data.php?id=$row[0]\">
                                                              <i class=\" fas fa-trash\">
                                                              </i> Delete</a></td>";
                                                     echo " </tr>";
@@ -164,7 +164,7 @@ $mail_log = $_SESSION['session_email'];
                     <!-- /.card -->
                 </div>
 
-        </div>
+       
         </section>
     </div>
 

@@ -49,105 +49,133 @@ $mail_log = $_SESSION['session_email'];
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <div class="card">
-                <div class="card-body register-card-body">
-                    <p class="login-box-msg">Registra un nuovo membro</p>
-
-                    <form action="./upload_data.php" method="post">
-                        <div class="input-group mb-3">
-                            <input type="radio" id="cliente" name="ruolo" value="cliente" required>
-                            <label for="age1" class="mr-2">Cliente</label>
-                            <input type="radio" id="amministrazione" name="ruolo" value="amministrazione" required>
-                            <label for="age2">Amministrazione</label>
-
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Nome" name="nome" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-user"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
-                            <div class="input-group-append">
-
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Codice Fiscale" name="CF" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="email" name="email" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Registra Utente</h1>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
-                                </div>
-                            </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="./dashboard.php">Home</a></li>
+                                <li class="breadcrumb-item active">Utenti</li>
+                                <li class="breadcrumb-item active">Registra</li>
+                            </ol>
                         </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="password" name="password" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Ripeti password" name="ripetiPassword" required>
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
-                                    <label for="agreeTerms">
-                                        Accetto i <a href="#">termini</a>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block" name="register">Registra</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
                 </div>
-                <!-- /.form-box -->
+                <!-- /.container-fluid -->
             </div>
+            <!-- /.content-header -->
 
 
+            <!-- Content Wrapper. Contains page content -->
+            <section class="content">
+                <!-- Content Header (Page header) -->
+                <div class="card">
+                    <div class="card-body register-card-body">
+                        <p class="login-box-msg">Registra un nuovo membro</p>
+
+                        <form action="./upload_data.php" method="post">
+                            <div class="input-group mb-3">
+                                <input type="radio" id="cliente" name="ruolo" value="cliente" required>
+                                <label for="age1" class="mr-2">Cliente</label>
+                                <input type="radio" id="amministrazione" name="ruolo" value="amministrazione" required>
+                                <label for="age2">Amministrazione</label>
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Nome" name="nome" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Cognome" name="cognome" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
+                                <div class="input-group-append">
+
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Codice Fiscale" name="CF" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="email" name="email" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-envelope"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input placeholder="Telefono" type="number" class="form-control" data-mask name="numero" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-phone"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" placeholder="password" name="password" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="password" class="form-control" placeholder="Ripeti password" name="ripetiPassword" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="icheck-primary">
+                                        <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                                        <label for="agreeTerms">
+                                            Accetto i <a href="#">termini</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-primary btn-block" name="register">Registra</button>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.form-box -->
+                </div>
+
+            </section>
         </div>
 
     </div>
+
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
@@ -174,59 +202,76 @@ $mail_log = $_SESSION['session_email'];
     <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
     <script src="./dist/js/adminlte.min.js"></script>
 
-    <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
+    <script>    
+
+                    function successinserimento() {
+                        $(document).Toasts('create', {
+                            class: 'bg-success',
+                            title: 'Inserito',
+                            subtitle: '',
+                            body: 'Inserimento effettuato con successo'
+                        })
+                    };
 
 
+                    function notsuccessinserimento() {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger', //bg-info bg-warning
+                            title: 'NON Inserito',
+                            subtitle: '',
+                            body: 'Inserimento non andato a buon fine'
+                        })
+                    };
 
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultInfo').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-info',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultWarning').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-warning',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultDanger').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultMaroon').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-maroon',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-        });
+                    function empty() {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger', //bg-info bg-warning
+                            title: 'Mail o Password vuoti ',
+                            subtitle: '',
+                            body: 'Inserimento non andato a buon fine'
+                        })
+                    };
+
+                    function exist() {
+                        $(document).Toasts('create', {
+                            class: 'bg-danger', //bg-info bg-warning
+                            title: 'Mail già in uso',
+                            subtitle: '',
+                            body: 'Inserimento non andato a buon fine'
+                        })
+                    };
     </script>
+    <?php
+
+    if (isset($_GET['inserito'])) {
+
+        $inserito = htmlspecialchars($_GET['inserito']);
+        if ($inserito == 1) {
+            echo "<script>successinserimento();</script>";
+        } else if ($inserito == 0) {
+            echo "<script>notsuccessinserimento();</script>";
+        }
+    }
+    if (isset($_GET['empty'])) {
+
+        $empty = htmlspecialchars($_GET['empty']);
+        if ($empty == 1) {
+            echo "<script>empty();</script>";
+        }
+    }
+    if (isset($_GET['exist'])) {
+
+        $exist = htmlspecialchars($_GET['exist']);
+        if ($exist == 1) {
+            echo "<script>exist();</script>";
+        }
+    }
+
+
+
+
+
+    ?>
 
 </body>
 
