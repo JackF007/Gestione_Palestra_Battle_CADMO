@@ -1,10 +1,8 @@
+<!DOCTYPE html>
 <?php
 if (!(isset($_POST['day']) || isset($_POST['fascia']))) {
     header("location:dashboard.php");
 }
-?>
-
-<?php
 session_start();
 
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
@@ -23,9 +21,6 @@ if (!(isset($_SESSION['session_id']))) {
 
 $mail_log = $_SESSION['session_email'];
 ?>
-
-
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -281,6 +276,10 @@ $mail_log = $_SESSION['session_email'];
 
 
     <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
         function logout() {
             window.location = "./logout.php";
 

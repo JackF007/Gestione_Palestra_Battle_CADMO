@@ -322,6 +322,9 @@ $mail_log = $_SESSION['session_email'];
 
             document.getElementById('attivita_prenotazioneForm').value = inSelectedattivita;
             document.getElementById('id_clienteForm').value = id_cli;
+            let t=document.getElementById('example1_filter')[0];
+            console.log(t);
+
         }
     </script>
 

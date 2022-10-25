@@ -16,6 +16,191 @@ if (!(isset($_SESSION['session_id']))) {
 }
 
 $mail_log = $_SESSION['session_email'];
+$k8_9 = 0;
+$k9_10 = 0;
+$k10_11 = 0;
+$k11_12 = 0;
+$k12_13 = 0;
+$k15_16 = 0;
+$k16_17 = 0;
+$k17_18 = 0;
+include 'config.php';
+$sql = "SELECT fascia_oraria FROM prenotazioni  where data_appuntamento = CURRENT_DATE() and (stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata')";
+$result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+$kont_gg = 0; //numero prenotazioni today
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    $kont_gg++;
+    if ($row[0] == "08-09") {
+        $k8_9++;
+    } else if ($row[0] == "09-10") {
+        $k9_10++;
+    } else if ($row[0] == "10-11") {
+        $k10_11++;
+    } else if ($row[0] == "11-12") {
+        $k11_12++;
+    } else if ($row[0] == "12-13") {
+        $k12_13++;
+    } else if ($row[0] == "15-16") {
+        $k15_16++;
+    } else if ($row[0] == "16-17") {
+        $k16_17++;
+    } else if ($row[0] == "17-18") {
+        $k17_18++;
+    }
+}
+mysqli_free_result($result);
+
+///////////////////
+
+$S8_9 = 0;
+$S9_10 = 0;
+$S10_11 = 0;
+$S11_12 = 0;
+$S12_13 = 0;
+$S15_16 = 0;
+$S16_17 = 0;
+$S17_18 = 0;
+$timestamp = strtotime("now");
+
+$m = intval(date("m", (int)$timestamp));
+$y = intval(date("Y", (int)$timestamp));
+$g = intval(date("d", (int)$timestamp));
+
+$timestamp = date('d-m-Y', $timestamp);
+
+function giornoData($g, $m, $a)
+{
+    $gShort = array('Dom', 'Lun', 'Mart', 'Merc', 'Giov', 'Ven', 'Sab');
+    $ts = mktime(0, 0, 0, $m, $g, $a);
+    $gd = getdate($ts);
+    return $gd['wday'];
+}
+$ggoftoday = giornoData($g, $m, $y) - 1;
+
+$addtime = strtotime("-" . $ggoftoday . " day", strtotime("now"));
+
+$timestamp = date('Y-m-d', $addtime); //data inizio settimana da corrente
+
+$sql = "SELECT fascia_oraria FROM prenotazioni  where data_appuntamento >= '$timestamp' and data_appuntamento <= CURRENT_DATE() and (stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata')";
+$result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+$kont_sett = 0; //numero prenotazioni today
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    $kont_sett++;
+    if ($row[0] == "08-09") {
+        $S8_9++;
+    } else if ($row[0] == "09-10") {
+        $S9_10++;
+    } else if ($row[0] == "10-11") {
+        $S10_11++;
+    } else if ($row[0] == "11-12") {
+        $S11_12++;
+    } else if ($row[0] == "12-13") {
+        $S12_13++;
+    } else if ($row[0] == "15-16") {
+        $S15_16++;
+    } else if ($row[0] == "16-17") {
+        $S16_17++;
+    } else if ($row[0] == "17-18") {
+        $S17_18++;
+    }
+}
+mysqli_free_result($result);
+
+
+
+/////////////////////////
+$M8_9 = 0;
+$M9_10 = 0;
+$M10_11 = 0;
+$M11_12 = 0;
+$M12_13 = 0;
+$M15_16 = 0;
+$M16_17 = 0;
+$M17_18 = 0;
+$timestamp = strtotime("now");
+
+$m = intval(date("m", (int)$timestamp));
+$y = intval(date("Y", (int)$timestamp));
+$g = intval(date("d", (int)$timestamp));
+$stringaInitMese = $y . "-" . $m . "-01";
+
+$sql = "SELECT fascia_oraria FROM prenotazioni  where data_appuntamento >= '$stringaInitMese' and data_appuntamento <= CURRENT_DATE() and (stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata')";
+$result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+$kont_mm = 0; //numero prenotazioni today
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    $kont_mm++;
+    if ($row[0] == "08-09") {
+        $M8_9++;
+    } else if ($row[0] == "09-10") {
+        $M9_10++;
+    } else if ($row[0] == "10-11") {
+        $M10_11++;
+    } else if ($row[0] == "11-12") {
+        $M11_12++;
+    } else if ($row[0] == "12-13") {
+        $M12_13++;
+    } else if ($row[0] == "15-16") {
+        $M15_16++;
+    } else if ($row[0] == "16-17") {
+        $M16_17++;
+    } else if ($row[0] == "17-18") {
+        $M17_18++;
+    }
+}
+mysqli_free_result($result);
+
+
+/////////////////////////
+$A8_9 = 0;
+$A9_10 = 0;
+$A10_11 = 0;
+$A11_12 = 0;
+$A12_13 = 0;
+$A15_16 = 0;
+$A16_17 = 0;
+$A17_18 = 0;
+$timestamp = strtotime("now");
+
+$m = intval(date("m", (int)$timestamp));
+$y = intval(date("Y", (int)$timestamp));
+$g = intval(date("d", (int)$timestamp));
+$stringaInitanno = $y . "-01-01"; //da inizio anno
+
+$sql = "SELECT fascia_oraria FROM prenotazioni  where data_appuntamento >= '$stringaInitanno' and data_appuntamento <= CURRENT_DATE()  and (stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata')";
+$result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+$kont_aa = 0; //numero prenotazioni today
+while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+    $kont_aa++;
+    if ($row[0] == "08-09") {
+        $A8_9++;
+    } else if ($row[0] == "09-10") {
+        $A9_10++;
+    } else if ($row[0] == "10-11") {
+        $A10_11++;
+    } else if ($row[0] == "11-12") {
+        $A11_12++;
+    } else if ($row[0] == "12-13") {
+        $A12_13++;
+    } else if ($row[0] == "15-16") {
+        $A15_16++;
+    } else if ($row[0] == "16-17") {
+        $A16_17++;
+    } else if ($row[0] == "17-18") {
+        $A17_18++;
+    }
+}
+mysqli_free_result($result);
+
+$con->close();
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,57 +260,194 @@ $mail_log = $_SESSION['session_email'];
                     <div class="row">
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-info">
+                            <div class="small-box bg-info mb-0">
                                 <div class="inner">
-                                    <h3>150</h3>
-                                    <p>New Orders</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-lg-3 col-6">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                                    <p>Bounce Rate</p>
+                                    <h3><?php echo $kont_gg ?></h3>
+                                    <p>Prenotazioni Odierne</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
+                            </div>
+                            <div class="w-100">
+                                <div class="card">
+
+                                    <div id="accordion">
+                                        <div class="card card-info">
+                                            <div class="card-header">
+                                                <h4 class="card-title w-100">
+                                                    <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false">
+                                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
+                                                <div class="card-body">
+                                                    <ul>
+                                                        <li><?php echo $k8_9 . " x fascia oraria 8-9" ?></li>
+                                                        <li><?php echo $k9_10 . "x fascia oraria 9-10" ?></li>
+                                                        <li><?php echo $k10_11 . "x fascia oraria 10-11" ?></li>
+                                                        <li><?php echo $k11_12 . "x fascia oraria 11-12" ?></li>
+                                                        <li><?php echo $k12_13 . "x fascia oraria 12-13" ?></li>
+                                                        <li><?php echo $k15_16 . "x fascia oraria 15-16" ?></li>
+                                                        <li><?php echo $k16_17 . "x fascia oraria 16-17" ?></li>
+                                                        <li><?php echo $k17_18 . "x fascia oraria 17-18" ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-warning">
+                            <div class="small-box bg-success mb-0">
                                 <div class="inner">
-                                    <h3>44</h3>
-                                    <p>User Registrations</p>
+                                    <h3><?php echo $kont_sett ?></h3>
+                                    <p>Prenotazioni Settimanali</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-person-add"></i>
+                                    <i class="ion ion-stats-bars"></i>
+
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
+                            </div>
+                            <div class="w-100">
+                                <div class="card">
+
+                                    <div id="accordion">
+                                        <div class="card card-success">
+                                            <div class="card-header">
+                                                <h4 class="card-title w-100">
+                                                    <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapsetwo" aria-expanded="false">
+                                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapsetwo" class="collapse" data-parent="#accordion" style="">
+                                                <div class="card-body">
+                                                    <ul>
+                                                        <li><?php echo $S8_9 . " x fascia oraria 8-9" ?></li>
+                                                        <li><?php echo $S9_10 . "x fascia oraria 9-10" ?></li>
+                                                        <li><?php echo $S10_11 . "x fascia oraria 10-11" ?></li>
+                                                        <li><?php echo $S11_12 . "x fascia oraria 11-12" ?></li>
+                                                        <li><?php echo $S12_13 . "x fascia oraria 12-13" ?></li>
+                                                        <li><?php echo $S15_16 . "x fascia oraria 15-16" ?></li>
+                                                        <li><?php echo $S16_17 . "x fascia oraria 16-17" ?></li>
+                                                        <li><?php echo $S17_18 . "x fascia oraria 17-18" ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
                             </div>
                         </div>
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-warning mb-0">
                                 <div class="inner">
-                                    <h3>65</h3>
-                                    <p>Unique Visitors</p>
+                                    <h3><?php echo $kont_mm ?></h3>
+                                    <p>Prenotazioni Mensili</p>
                                 </div>
                                 <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
+                                    <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                            <div class="w-100">
+                                <div class="card">
+
+                                    <div id="accordion">
+                                        <div class="card card-warning">
+                                            <div class="card-header">
+                                                <h4 class="card-title w-100">
+                                                    <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapsetree" aria-expanded="false">
+                                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapsetree" class="collapse" data-parent="#accordion" style="">
+                                                <div class="card-body">
+                                                    <ul>
+                                                        <li><?php echo $M8_9 . " x fascia oraria 8-9" ?></li>
+                                                        <li><?php echo $M9_10 . "x fascia oraria 9-10" ?></li>
+                                                        <li><?php echo $M10_11 . "x fascia oraria 10-11" ?></li>
+                                                        <li><?php echo $M11_12 . "x fascia oraria 11-12" ?></li>
+                                                        <li><?php echo $M12_13 . "x fascia oraria 12-13" ?></li>
+                                                        <li><?php echo $M15_16 . "x fascia oraria 15-16" ?></li>
+                                                        <li><?php echo $M16_17 . "x fascia oraria 16-17" ?></li>
+                                                        <li><?php echo $M17_18 . "x fascia oraria 17-18" ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger mb-0">
+                                <div class="inner">
+                                    <h3><?php echo $kont_aa ?></h3>
+                                    <p>Prenotazioni Totali Annue</p>
+                                </div>
+
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars"></i>
+                                </div>
+
+                            </div>
+                            <div class="w-100">
+                                <div class="card">
+
+                                    <div id="accordion">
+                                        <div class="card card-danger">
+                                            <div class="card-header">
+                                                <h4 class="card-title w-100">
+                                                    <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapsequattro" aria-expanded="false">
+                                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapsequattro" class="collapse" data-parent="#accordion" style="">
+                                                <div class="card-body">
+                                                    <ul>
+                                                        <li><?php echo $A8_9 . " x fascia oraria 8-9" ?></li>
+                                                        <li><?php echo $A9_10 . "x fascia oraria 9-10" ?></li>
+                                                        <li><?php echo $A10_11 . "x fascia oraria 10-11" ?></li>
+                                                        <li><?php echo $A11_12 . "x fascia oraria 11-12" ?></li>
+                                                        <li><?php echo $A12_13 . "x fascia oraria 12-13" ?></li>
+                                                        <li><?php echo $A15_16 . "x fascia oraria 15-16" ?></li>
+                                                        <li><?php echo $A16_17 . "x fascia oraria 16-17" ?></li>
+                                                        <li><?php echo $A17_18 . "x fascia oraria 17-18" ?></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
                             </div>
                         </div>
                         <!-- ./col -->
@@ -334,6 +656,8 @@ $mail_log = $_SESSION['session_email'];
                                     </div>
                                     <!-- /. tools -->
                                 </div>
+
+
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table class="table table-striped projects">
@@ -423,9 +747,8 @@ $mail_log = $_SESSION['session_email'];
             window.location = "./logout.php";
 
         };
-
     </script>
-   
+
 </body>
 
 </html>
