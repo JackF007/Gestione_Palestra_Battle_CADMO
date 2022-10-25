@@ -100,6 +100,11 @@ span.span_blue{
     background: #dde004;
 }
 
-#definizioneMargine {
     
-}
+            
+            #collapseOne > div > ul > li,#collapsetwo > div > ul > li,#collapsetree > div > ul > li
+          ,#collapsequattro > div > ul > li{
+          
+             list-style: none;
+            
+            }

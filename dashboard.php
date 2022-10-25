@@ -283,18 +283,65 @@ $con->close();
                                                 </h4>
                                             </div>
                                             <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><?php echo $k8_9 . " x fascia oraria 8-9" ?></li>
-                                                        <li><?php echo $k9_10 . "x fascia oraria 9-10" ?></li>
-                                                        <li><?php echo $k10_11 . "x fascia oraria 10-11" ?></li>
-                                                        <li><?php echo $k11_12 . "x fascia oraria 11-12" ?></li>
-                                                        <li><?php echo $k12_13 . "x fascia oraria 12-13" ?></li>
-                                                        <li><?php echo $k15_16 . "x fascia oraria 15-16" ?></li>
-                                                        <li><?php echo $k16_17 . "x fascia oraria 16-17" ?></li>
-                                                        <li><?php echo $k17_18 . "x fascia oraria 17-18" ?></li>
-                                                    </ul>
+                                                <div class="card">
+                                                  
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body p-0">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Fascia oraria</th>
+                                                                    <th style="width: 40px">totale</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1.</td>
+                                                                    <td>fascia oraria 8-9</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k8_9 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.</td>
+                                                                    <td>fascia oraria 9-10</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k9_10 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.</td>
+                                                                    <td>fascia oraria 10-11</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k10_11 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4.</td>
+                                                                    <td>fascia oraria 11-12</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k11_12 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5.</td>
+                                                                    <td>fascia oraria 12-13</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k12_13 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6.</td>
+                                                                    <td>fascia oraria 15-16</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k15_16 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7.</td>
+                                                                    <td>fascia oraria 16-17</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k16_17 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.</td>
+                                                                    <td>fascia oraria 17-18</td>
+                                                                    <td><span class="badge bg-info"><?php echo $k17_18 ?></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.card-body -->
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -322,7 +369,7 @@ $con->close();
                             <div class="w-100">
                                 <div class="card">
 
-                                    <div id="accordion">
+                                    <div id="accordion2">
                                         <div class="card card-success">
                                             <div class="card-header">
                                                 <h4 class="card-title w-100">
@@ -331,19 +378,66 @@ $con->close();
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapsetwo" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><?php echo $S8_9 . " x fascia oraria 8-9" ?></li>
-                                                        <li><?php echo $S9_10 . "x fascia oraria 9-10" ?></li>
-                                                        <li><?php echo $S10_11 . "x fascia oraria 10-11" ?></li>
-                                                        <li><?php echo $S11_12 . "x fascia oraria 11-12" ?></li>
-                                                        <li><?php echo $S12_13 . "x fascia oraria 12-13" ?></li>
-                                                        <li><?php echo $S15_16 . "x fascia oraria 15-16" ?></li>
-                                                        <li><?php echo $S16_17 . "x fascia oraria 16-17" ?></li>
-                                                        <li><?php echo $S17_18 . "x fascia oraria 17-18" ?></li>
-                                                    </ul>
+                                            <div id="collapsetwo" class="collapse" data-parent="#accordion2" style="">
+                                                <div class="card">
+                                                   
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body p-0">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Fascia oraria</th>
+                                                                    <th style="width: 40px">totale</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1.</td>
+                                                                    <td>fascia oraria 8-9</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S8_9 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.</td>
+                                                                    <td>fascia oraria 9-10</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S9_10 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.</td>
+                                                                    <td>fascia oraria 10-11</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S10_11 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4.</td>
+                                                                    <td>fascia oraria 11-12</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S11_12 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5.</td>
+                                                                    <td>fascia oraria 12-13</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S12_13 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6.</td>
+                                                                    <td>fascia oraria 15-16</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S15_16 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7.</td>
+                                                                    <td>fascia oraria 16-17</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S16_17 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.</td>
+                                                                    <td>fascia oraria 17-18</td>
+                                                                    <td><span class="badge bg-success"><?php echo $S17_18 ?></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.card-body -->
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -369,7 +463,7 @@ $con->close();
                             <div class="w-100">
                                 <div class="card">
 
-                                    <div id="accordion">
+                                    <div id="accordion3">
                                         <div class="card card-warning">
                                             <div class="card-header">
                                                 <h4 class="card-title w-100">
@@ -378,19 +472,66 @@ $con->close();
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapsetree" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><?php echo $M8_9 . " x fascia oraria 8-9" ?></li>
-                                                        <li><?php echo $M9_10 . "x fascia oraria 9-10" ?></li>
-                                                        <li><?php echo $M10_11 . "x fascia oraria 10-11" ?></li>
-                                                        <li><?php echo $M11_12 . "x fascia oraria 11-12" ?></li>
-                                                        <li><?php echo $M12_13 . "x fascia oraria 12-13" ?></li>
-                                                        <li><?php echo $M15_16 . "x fascia oraria 15-16" ?></li>
-                                                        <li><?php echo $M16_17 . "x fascia oraria 16-17" ?></li>
-                                                        <li><?php echo $M17_18 . "x fascia oraria 17-18" ?></li>
-                                                    </ul>
+                                            <div id="collapsetree" class="collapse" data-parent="#accordion3" style="">
+                                                <div class="card">
+                                                   
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body p-0">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Fascia oraria</th>
+                                                                    <th style="width: 40px">totale</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1.</td>
+                                                                    <td>fascia oraria 8-9</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M8_9 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.</td>
+                                                                    <td>fascia oraria 9-10</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M9_10 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.</td>
+                                                                    <td>fascia oraria 10-11</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M10_11 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4.</td>
+                                                                    <td>fascia oraria 11-12</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M11_12 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5.</td>
+                                                                    <td>fascia oraria 12-13</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M12_13 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6.</td>
+                                                                    <td>fascia oraria 15-16</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M15_16 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7.</td>
+                                                                    <td>fascia oraria 16-17</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M16_17 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.</td>
+                                                                    <td>fascia oraria 17-18</td>
+                                                                    <td><span class="badge bg-warning"><?php echo $M17_18 ?></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.card-body -->
                                                 </div>
+
                                             </div>
                                         </div>
 
@@ -418,7 +559,7 @@ $con->close();
                             <div class="w-100">
                                 <div class="card">
 
-                                    <div id="accordion">
+                                    <div id="accordion4">
                                         <div class="card card-danger">
                                             <div class="card-header">
                                                 <h4 class="card-title w-100">
@@ -427,19 +568,66 @@ $con->close();
                                                     </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapsequattro" class="collapse" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><?php echo $A8_9 . " x fascia oraria 8-9" ?></li>
-                                                        <li><?php echo $A9_10 . "x fascia oraria 9-10" ?></li>
-                                                        <li><?php echo $A10_11 . "x fascia oraria 10-11" ?></li>
-                                                        <li><?php echo $A11_12 . "x fascia oraria 11-12" ?></li>
-                                                        <li><?php echo $A12_13 . "x fascia oraria 12-13" ?></li>
-                                                        <li><?php echo $A15_16 . "x fascia oraria 15-16" ?></li>
-                                                        <li><?php echo $A16_17 . "x fascia oraria 16-17" ?></li>
-                                                        <li><?php echo $A17_18 . "x fascia oraria 17-18" ?></li>
-                                                    </ul>
+                                            <div id="collapsequattro" class="collapse" data-parent="#accordion4" style="">
+                                                <div class="card">
+                                                    
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body p-0">
+                                                        <table class="table table-sm">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 10px">#</th>
+                                                                    <th>Fascia oraria</th>
+                                                                    <th style="width: 40px">totale</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1.</td>
+                                                                    <td>fascia oraria 8-9</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A8_9 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2.</td>
+                                                                    <td>fascia oraria 9-10</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A9_10 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3.</td>
+                                                                    <td>fascia oraria 10-11</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A10_11 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4.</td>
+                                                                    <td>fascia oraria 11-12</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A11_12 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5.</td>
+                                                                    <td>fascia oraria 12-13</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A12_13 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6.</td>
+                                                                    <td>fascia oraria 15-16</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A15_16 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7.</td>
+                                                                    <td>fascia oraria 16-17</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A16_17 ?></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8.</td>
+                                                                    <td>fascia oraria 17-18</td>
+                                                                    <td><span class="badge bg-danger"><?php echo $A17_18 ?></span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.card-body -->
                                                 </div>
+
                                             </div>
                                         </div>
 
