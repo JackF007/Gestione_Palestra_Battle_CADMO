@@ -13,7 +13,7 @@ $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8
 if (!(isset($_SESSION['session_id']))) {
     header("location:login.php");
 } else if ("amministrazione" != $session_ruolo) {
-    header("location:profile.php");
+    header("location:profiloutente.php");
 }
 
 $mail_log = $_SESSION['session_email'];
@@ -22,7 +22,7 @@ require_once('config.php');
 
 
 if (isset($_POST['modificay'])) {
-    print_r($_POST);
+
     $id = $_POST['id_utente'] ?? '';
     $id_login = $_POST['id_login'] ?? '';
     $nome = $_POST['nome'] ?? '';
@@ -33,11 +33,22 @@ if (isset($_POST['modificay'])) {
     $numero = $_POST['numero'] ?? '';
     $password = $_POST['password'] ?? '';
 
+    $sql = "UPDATE utenti SET nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' WHERE id_utente ='$id'"; //
 
-    $sql = $con->query("update utenti set nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' where id_utente='$id'"); //
 
+    /// da cancellare
+   if ($con->query($sql) === TRUE) {
+        $url = "Location: schedautente.php?id=$id&inserito=1";
+        header($url);
+       
+    } else {
+       
+        $url = "Location: schedautente.php?id=$id&inserito=0";
+        header($url);
+    } 
+}
 // fare passw hash da passare
-    /* if ($con->query($sql) === TRUE) {
+/* if ($con->query($sql) === TRUE) {
 
         if ($password != "") { //mod mail e pass
             $sql = $con->query("update login set email='$email', password='$password' where login_id='$id_login'"); //
@@ -46,15 +57,15 @@ if (isset($_POST['modificay'])) {
         }
         if ($con->query($sql) === TRUE) { //
             $con->close();
-            $url = "Location: modifica.php?id=$id&inserito=1";
+            $url = "Location: schedautente.php?id=$id&inserito=1";
             header($url);
         } else {
             $con->close();
-            $url = "Location: modifica.php?id=$id&inserito=0";
+            $url = "Location: schedautente.php?id=$id&inserito=0";
             header($url);
         }
     } */
-}
+
 
 
 ///////////////////

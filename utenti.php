@@ -12,7 +12,7 @@ $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8
 if (!(isset($_SESSION['session_id']))) {
     header("location:login.php");
 } else if ("amministrazione" != $session_ruolo) {
-    header("location:profile.php");
+    header("location:profiloutente.php");
 }
 
 $mail_log = $_SESSION['session_email'];
@@ -121,11 +121,9 @@ $mail_log = $_SESSION['session_email'];
                                                     echo "<td> $row[6]</td>";
                                                     echo "<td> $row[7]</td>";
                                                     echo "<td class=\"project-actions text-right\">
-                                                            <a class=\"btn btn-primary btn-sm\" href=\"./profile.php?id=$row[0]\">
-                                                             <i class=\"fas fa-folder\">
-                                                             </i> View</a>
-                                                            <a class=\"btn btn-info btn-sm\" href=\"./modifica.php?id=$row[0]\">
-                                                             <i class=\"fas fa-pencil-alt\"> </i> Modifica</a>
+                                                
+                                                            <a class=\"btn btn-info btn-sm\" href=\"./schedautente.php?id=$row[0]\">
+                                                             <i class=\"fas fa-folder\"> </i> Apri Scheda</a>
                                                             <a class=\"btn btn-danger btn-sm\" href=\"./upload_data.php?id=$row[0]\">
                                                              <i class=\" fas fa-trash\">
                                                              </i> Delete</a></td>";
@@ -164,9 +162,9 @@ $mail_log = $_SESSION['session_email'];
                     <!-- /.card -->
                 </div>
 
-       
-        </section>
-    </div>
+
+            </section>
+        </div>
 
     </div>
     <!-- /.content-wrapper -->
@@ -206,9 +204,6 @@ $mail_log = $_SESSION['session_email'];
 
 
 
-
-    <script src="./dist/js/adminlte.min.js"></script>
-
     <!-- Page specific script -->
     <script>
         $(function() {
@@ -216,13 +211,9 @@ $mail_log = $_SESSION['session_email'];
 
                 "zeroRecords": "No records to display",
                 "responsive": true,
-                "lengthChange": true,
+                "lengthChange": false,
                 "autoWidth": false,
-
-
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-
 
         });
     </script>

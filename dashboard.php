@@ -12,7 +12,7 @@ $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8
 if (!(isset($_SESSION['session_id']))) {
     header("location:login.php");
 } else if ("amministrazione" != $session_ruolo) {
-    header("location:profile.php");
+    header("location:profiloutente.php");
 }
 
 $mail_log = $_SESSION['session_email'];
