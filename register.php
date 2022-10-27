@@ -202,6 +202,11 @@ $mail_log = $_SESSION['session_email'];
     <script src="./dist/js/adminlte.min.js"></script>
 
     <script>
+        function logout() {
+            window.location = "./logout.php";
+
+        };
+
         function successinserimento() {
             $(document).Toasts('create', {
                 class: 'bg-success',

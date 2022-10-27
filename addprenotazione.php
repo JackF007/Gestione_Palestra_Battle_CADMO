@@ -85,7 +85,7 @@ $mail_log = $_SESSION['session_email'];
                 $fascia = $_POST['fascia'];
                 $fascia = unserialize(urldecode($fascia));
                 include 'config.php';
-                $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day and stato_prenotazione='intatta'"; //count su
+                $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day and stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 

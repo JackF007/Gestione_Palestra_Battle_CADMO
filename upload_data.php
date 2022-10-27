@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-        
+var_dump($_POST);
 
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
     $_SESSION = array();
@@ -121,23 +121,27 @@ if (isset($_POST['register'])) {
     }
 }
 //disattivare
-if (!(isset($_GET['id']))) {
-    header("location:utenti.php");
-}
-else {
+if (isset($_POST['Delete'])) {
+   
+
     require_once('config.php');
-    $id_canc_utente = intval($_GET['id']);#per trasformare in numero il parametro dall'url
-
-    $sql = "UPDATE login SET stato = 0 WHERE login_id = '$id_canc_utente'";
-
-    if ($con->query($sql) === TRUE) {
+    $id_canc_utente = intval($_POST['id_delete']);
+    $sql = "SELECT login_id FROM palestra.utenti where id_utente='$id_canc_utente'";
+    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+        while ($fetch = mysqli_fetch_array($result)) {
+        $idcanclogin = intval($fetch['login_id']);
+    }
+    $sql2 = "UPDATE login SET stato = 0 WHERE login_id = '$idcanclogin'";
+    $url = "Location: utenti.php?cancellato=1";
+    $url2 = "Location: utenti.php?cancellato=0";
+    if ($con->query($sql2) === TRUE) {
         $con->close();
-        $data = $_POST['data_prenotazione'];
-        $url = "Location: prenotazioni.php?day=$data&cancellato=1";
-        $url2 = "Location: prenotazioni.php?day=$data&cancellato=0";
+       
         header($url);
     } else {
         $con->close();
         header($url2);
-    }
+    } 
 }
+ if (!(isset($_POST))) {
+    header("location:utenti.php"); }

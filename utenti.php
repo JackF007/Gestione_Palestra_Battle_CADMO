@@ -109,7 +109,7 @@ $mail_log = $_SESSION['session_email'];
                                             <tbody>
                                                 <?php
                                                 include 'config.php';
-                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo FROM utenti as u join login as l on l.login_id = u.login_id");
+                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo FROM utenti as u join login as l on l.login_id = u.login_id and l.stato = 1");
 
                                                 while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
 
@@ -124,9 +124,13 @@ $mail_log = $_SESSION['session_email'];
                                                 
                                                             <a class=\"btn btn-info btn-sm\" href=\"./schedautente.php?id=$row[0]\">
                                                              <i class=\"fas fa-folder\"> </i> Apri Scheda</a>
-                                                            <a class=\"btn btn-danger btn-sm\" href=\"./upload_data.php?id=$row[0]\">
-                                                             <i class=\" fas fa-trash\">
-                                                             </i> Delete</a></td>";
+                                                            
+                                                             <form id=\"delete_$row[0]\" action=\"./upload_data.php\" method=\"post\">
+                                                    <input type=\"hidden\" id=\"id_delete\" name=\"id_delete\" value=\"$row[0]\">
+                                                    <button  class=\"btn btn-danger btn-sm\" type=\"submit\" value=\"Delete\" name=\"Delete\"><i class=\" fas fa-trash\"></i> Delete </button>
+                                                             
+                                                </form>
+                                                             </td>";
                                                     echo " </tr>";
                                                 }
 
@@ -206,6 +210,10 @@ $mail_log = $_SESSION['session_email'];
 
     <!-- Page specific script -->
     <script>
+        function logout() {
+            window.location = "./logout.php";
+
+        };
         $(function() {
             $("#example1").DataTable({
 
@@ -216,8 +224,40 @@ $mail_log = $_SESSION['session_email'];
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         });
-    </script>
 
+        function successinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Cancellato',
+                subtitle: '',
+                body: 'Cancellato con successo'
+            })
+        };
+
+
+        function notsuccessinserimento() {
+            $(document).Toasts('create', {
+                class: 'bg-danger', //bg-info bg-warning
+                title: 'NON Cancellato',
+                subtitle: '',
+                body: 'Non andato a buon fine'
+            })
+        };
+    </script>
+    <?php
+
+    if (isset($_GET['cancellato'])) {
+
+        $cancellato = htmlspecialchars($_GET['cancellato']);
+        if ($cancellato == 1) {
+            echo "<script>successinserimento();</script>";
+        } else {
+            echo "<script>notsuccessinserimento();</script>";
+        }
+    }
+
+
+    ?>
 </body>
 
 </html>
