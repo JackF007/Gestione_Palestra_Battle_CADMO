@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+        
 
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
     $_SESSION = array();
@@ -59,29 +60,6 @@ if (isset($_POST['modificay'])) {
     
 
 }
-
-// fare passw hash da passare
-/* if ($con->query($sql) === TRUE) {
-
-        if ($password != "") { //mod mail e pass
-            $sql = $con->query("update login set email='$email', password='$password' where login_id='$id_login'"); //
-        } else { //mod mail
-            $sql = $con->query("update login set email='$email' where login_id='$id_login'"); //
-        }
-        if ($con->query($sql) === TRUE) { //
-            $con->close();
-            $url = "Location: schedautente.php?id=$id&inserito=1";
-            header($url);
-        } else {
-            $con->close();
-            $url = "Location: schedautente.php?id=$id&inserito=0";
-            header($url);
-        }
-    } */
-
-
-
-///////////////////
 if (isset($_POST['register'])) {
     $nome = $_POST['nome'] ?? '';
     $cognome = $_POST['cognome'] ?? '';
@@ -140,5 +118,26 @@ if (isset($_POST['register'])) {
                 }
             }
         }
+    }
+}
+//disattivare
+if (!(isset($_GET['id']))) {
+    header("location:utenti.php");
+}
+else {
+    require_once('config.php');
+    $id_canc_utente = intval($_GET['id']);#per trasformare in numero il parametro dall'url
+
+    $sql = "UPDATE login SET stato = 0 WHERE login_id = '$id_canc_utente'";
+
+    if ($con->query($sql) === TRUE) {
+        $con->close();
+        $data = $_POST['data_prenotazione'];
+        $url = "Location: prenotazioni.php?day=$data&cancellato=1";
+        $url2 = "Location: prenotazioni.php?day=$data&cancellato=0";
+        header($url);
+    } else {
+        $con->close();
+        header($url2);
     }
 }
