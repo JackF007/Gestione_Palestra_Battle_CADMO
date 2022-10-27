@@ -100,7 +100,7 @@
                           </li>
                           <li class="nav-item">
                               <div class="comandoN2">
-                                  <input class="radio__input" type="radio" value="option1" name="radio" id="radio1">
+                                  <input class="radio__input" onclick="setCommand()" type="radio" value="option1" name="radio" id="radio1">
                                   <label class="radio__label" for="radio1">X</label>
                                   <input class="radio__input" type="radio" value="option2" name="radio" id="radio2">
                                   <label class="radio__label" for="radio2">Y</label>
@@ -127,7 +127,13 @@
       </div>
       <!-- /.sidebar -->
 
-
+          <script> 
+        
+        function setCommand () {
+            
+}
+        
+        </script>                  
 
 
   </aside>
