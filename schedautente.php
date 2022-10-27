@@ -380,6 +380,12 @@ $email = $risultato_bello["email"];
 
 
     ?>
+    <script>
+        function logout() {
+            window.location = "./logout.php";
+
+        };
+    </script>
 </body>
 
 </html>

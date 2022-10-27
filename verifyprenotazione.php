@@ -9,8 +9,6 @@ $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8
 
 if (!(isset($_SESSION['session_id']))) {
     header("location:login.php");
-} else if ("amministrazione" != $session_ruolo) {
-    header("location:profiloutente.php");
 }
 
 
@@ -62,9 +60,12 @@ if (isset($_POST['mod-prenotazione'])) { //vengo da controllo
 }
 
 
-if (isset($_POST['invia-prenotazione'])) { //vengo da controllo
+if (isset($_POST)) { //vengo da controllo
+echo " <pre>";
+var_dump($_POST);
+    echo " </pre>";
 
-    require_once('config.php');
+  /*  require_once('config.php');
 
     $idutente = $_POST['id_cliente'] ?? '';
     $str_data = $_POST['str_data'] ?? '';
@@ -103,5 +104,5 @@ if (isset($_POST['invia-prenotazione'])) { //vengo da controllo
             header($url4);
         }
     }
-    $con->close();
+    $con->close();*/
 }

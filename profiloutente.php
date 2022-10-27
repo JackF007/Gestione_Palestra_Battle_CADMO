@@ -138,15 +138,8 @@ $email = $mail_log;
                             </p>
                             </a>
                         </li>
-
-
-
-
-
-
                     </ul>
-
-
+                   
                 </nav>
 
                 <!-- /.sidebar-menu -->
