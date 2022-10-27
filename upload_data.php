@@ -32,21 +32,34 @@ if (isset($_POST['modificay'])) {
     $email = $_POST['email'] ?? '';
     $numero = $_POST['numero'] ?? '';
     $password = $_POST['password'] ?? '';
-
-    $sql = "UPDATE utenti SET nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' WHERE id_utente ='$id'"; //
-
+    $vecchiaPassword = $_POST['vecchia_password'] ?? '';
+    
+    $sql = "UPDATE utenti SET nome='$nome', cognome='$cognome', numero_telefono='$numero', data_nascita='$dataNasciata', CF='$cf' WHERE id_utente ='$id'"; 
+    
+    if ($password != "") {
+        //cambiano password ed email
+            $con->query($sql) ;
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "UPDATE login SET email='$email', password='$password_hash' where login_id='$id_login'"; 
+    }
+    else{
+        //cambia solo email
+        $con->query($sql) ;
+        $sql = "UPDATE login SET email='$email' where login_id='$id_login'"; 
+    }
 
     /// da cancellare
-   if ($con->query($sql) === TRUE) {
+    if ($con->query($sql) === TRUE) {
         $url = "Location: schedautente.php?id=$id&inserito=1";
         header($url);
-       
     } else {
-       
         $url = "Location: schedautente.php?id=$id&inserito=0";
         header($url);
     } 
+    
+
 }
+
 // fare passw hash da passare
 /* if ($con->query($sql) === TRUE) {
 
