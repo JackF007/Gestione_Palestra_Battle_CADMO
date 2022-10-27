@@ -200,7 +200,7 @@ $mail_log = $_SESSION['session_email'];
                                                             echo "<td> $row[3]</td>";
                                                             echo "<td> $row[4]</td>";
                                                             echo "<td> $row[5]</td>";
-                                                            echo "<td><button id=\"$row[0]_button\" onclick =\"setform()\" value = \"$row[0]\" type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#modal-primary\">
+                                                            echo "<td><button id=\"$row[1] $row[2]\" onclick =\"setform()\" value = \"$row[0]\" type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#modal-primary\">
                                                                     Modifica
                                                                 </button></td></tr>";
                                                         }
@@ -218,19 +218,25 @@ $mail_log = $_SESSION['session_email'];
                                         <div class="modal fade" id="modal-primary">
                                             <div class="modal-dialog">
                                                 <div class="modal-content bg-primary">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Conferma Modifica</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
                                                     <form action="/verifyprenotazione.php" method="post">
 
-                                                        <input type="hidden" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="">
-                                                        <input type="hidden" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="">
+                                                        <label for="fascia_prenotazioneForm">Fascia prenotata:</label>
+                                                        <input type="text" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="" readonly>
+                                                        <label for="fascia_prenotazioneForm">Attività prenotata:</label>
+                                                        <input type="text" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="" readonly>
                                                         <input type="hidden" id="id_clienteForm" name="id_cliente" value="">
+                                                        <label for="fascia_prenotazioneForm">Utente prenotato:</label>
+                                                        <input type="text" id="id_nominativo" name="id_nominativo" value="" readonly>
                                                         <input type="hidden" id="str_data" name="str_data" value="<?php echo $str_data ?>">
                                                         <input type="hidden" id="id_prenotazioneForm" name="id_prenotazioneForm" value="<?php echo $id_prenotazione ?>">
-                                                        <div class="modal-header">
-                                                            <h4 class="modal-title">Conferma Modifica</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
+
 
                                                         <div class="modal-footer justify-content-between">
 
@@ -317,13 +323,13 @@ $mail_log = $_SESSION['session_email'];
 
             var target = window.event.target;
             let id_cli = target.value || target.value;
-
+            let nominativo = target.id
             document.getElementById('fascia_prenotazioneForm').value = inSelectedFascia;
 
             document.getElementById('attivita_prenotazioneForm').value = inSelectedattivita;
             document.getElementById('id_clienteForm').value = id_cli;
-            let t=document.getElementById('example1_filter')[0];
-            console.log(t);
+            document.getElementById('id_nominativo').value = nominativo;
+
 
         }
     </script>

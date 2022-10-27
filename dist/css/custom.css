@@ -1,4 +1,4 @@
-span.linkmax a, span.span_red {
+span.linkmax a, #switchCalendar > table > tbody > tr:nth-child(7) > td:nth-child(2) > span.linkmax , span.span_red {
     color: red;
 }
 

@@ -22,7 +22,7 @@
                   <img src="./dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <a href="#" class="d-block"><?php echo $mail_log?></a>
+                  <span style="color:white"><?php echo $mail_log ?></span>
               </div>
           </div>
 
@@ -45,7 +45,7 @@
                       </p>
                       </a>
                   </li>
-                  <?php if ($tmp == "clienti.php" || $tmp == "register.php" || $tmp == "utenti.php" ) {
+                  <?php if ($tmp == "clienti.php" || $tmp == "register.php" || $tmp == "utenti.php") {
                         echo " <li class=\"nav-item  menu-is-opening menu-open\">";
                     } else echo " <li class=\"nav-item\">";
                     ?>
