@@ -109,7 +109,7 @@ $mail_log = $_SESSION['session_email'];
                                             <tbody>
                                                 <?php
                                                 include 'config.php';
-                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo FROM utenti as u join login as l on l.login_id = u.login_id and l.stato = 1");
+                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo , l.login_id FROM utenti as u join login as l on l.login_id = u.login_id where l.stato = 1");
 
                                                 while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
 
@@ -121,15 +121,16 @@ $mail_log = $_SESSION['session_email'];
                                                     echo "<td> $row[6]</td>";
                                                     echo "<td> $row[7]</td>";
                                                     echo "<td class=\"project-actions text-right\">
-                                                
+                                                <ul class=\"list-inline\">
+                                                <li>
                                                             <a class=\"btn btn-info btn-sm\" href=\"./schedautente.php?id=$row[0]\">
                                                              <i class=\"fas fa-folder\"> </i> Apri Scheda</a>
-                                                            
-                                                             <form id=\"delete_$row[0]\" action=\"./upload_data.php\" method=\"post\">
-                                                    <input type=\"hidden\" id=\"id_delete\" name=\"id_delete\" value=\"$row[0]\">
-                                                    <button  class=\"btn btn-danger btn-sm\" type=\"submit\" value=\"Delete\" name=\"Delete\"><i class=\" fas fa-trash\"></i> Delete </button>
-                                                             
-                                                </form>
+                                                            </li>                                                          
+                                                            <li>                                                          
+                                                            <a id=\"$row[1] $row[2]\"  onclick =\"setform()\" data-login=\"$row[8]\" type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\"#modal-primary\">
+                                                             <i class=\"fas fa-trash\"> </i> Delete</a>
+                                                </li>
+                                                </ul>
                                                              </td>";
                                                     echo " </tr>";
                                                 }
@@ -139,6 +140,7 @@ $mail_log = $_SESSION['session_email'];
                                             </tbody>
 
                                         </table>
+
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -147,12 +149,18 @@ $mail_log = $_SESSION['session_email'];
                                     <div class="modal-dialog">
                                         <div class="modal-content bg-primary">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Cerca Utenti</h4>
+                                                <h4 class="modal-title">Cancella Utenti</h4>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-
+                                            <form id="delete_utente" action="./upload_data.php" method="post">
+                                                <p id="id_nominativo" class="p-3"></p>
+                                                <input type="hidden" id="id_deletelogin" name="id_delete" value="">
+                                                <div class="modal-footer justify-content-between">
+                                                    <input class="btn btn-outline-light  w-100" type="submit" value="Conferma Cancellazione" name="Delete">
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- /.modal-content -->
                                     </div>
@@ -182,7 +190,6 @@ $mail_log = $_SESSION['session_email'];
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
-
     <!-- jQuery -->
     <script src="./plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -193,18 +200,13 @@ $mail_log = $_SESSION['session_email'];
     <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="./plugins/jszip/jszip.min.js"></script>
-    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="./dist/js/demo.js"></script>
-    <!-- Page specific script -->
+    <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+
 
 
 
@@ -243,6 +245,19 @@ $mail_log = $_SESSION['session_email'];
                 body: 'Non andato a buon fine'
             })
         };
+
+
+
+        function setform() {
+            var target = window.event.target;
+            let id_cli = target.getAttribute('data-login') || target.getAttribute('data-login');
+
+            console.log(id_cli)
+            let nominativo = target.id
+            let Inominiativo = "Utente da Cancellare: " + nominativo
+            document.getElementById('id_deletelogin').value = id_cli;
+            document.getElementById('id_nominativo').innerHTML = Inominiativo;
+        }
     </script>
     <?php
 

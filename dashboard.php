@@ -284,7 +284,7 @@ $con->close();
                                             </div>
                                             <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
                                                 <div class="card">
-                                                  
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -380,7 +380,7 @@ $con->close();
                                             </div>
                                             <div id="collapsetwo" class="collapse" data-parent="#accordion2" style="">
                                                 <div class="card">
-                                                   
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -474,7 +474,7 @@ $con->close();
                                             </div>
                                             <div id="collapsetree" class="collapse" data-parent="#accordion3" style="">
                                                 <div class="card">
-                                                   
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -570,7 +570,7 @@ $con->close();
                                             </div>
                                             <div id="collapsequattro" class="collapse" data-parent="#accordion4" style="">
                                                 <div class="card">
-                                                    
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -916,19 +916,21 @@ $con->close();
 
     <!-- jQuery -->
     <script src="./plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
+    <!-- Bootstrap 4 -->
+    <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="./plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="./plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="./dist/js/adminlte.min.js"></script>
     <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
 
-    <script src="./plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
-    <script src="./dist/js/adminlte.min.js"></script>
 
     <script>
         function logout() {

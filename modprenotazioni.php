@@ -38,8 +38,6 @@ $mail_log = $_SESSION['session_email'];
     <!-- DataTables -->
     <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="./dist/css/custom.css">
@@ -225,7 +223,7 @@ $mail_log = $_SESSION['session_email'];
                                                         </button>
                                                     </div>
 
-                                                    <form action="/verifyprenotazione.php" method="post">
+                                                    <form action="./verifyprenotazione.php" method="post">
 
                                                         <label for="fascia_prenotazioneForm">Fascia prenotata:</label>
                                                         <input type="text" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="" readonly>
@@ -283,18 +281,12 @@ $mail_log = $_SESSION['session_email'];
     <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="./plugins/jszip/jszip.min.js"></script>
-    <script src="./plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="./plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="./dist/js/demo.js"></script>
-    <!-- Page specific script -->
+    <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
 
 
     <script>

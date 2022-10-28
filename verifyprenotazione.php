@@ -15,7 +15,7 @@ if (!(isset($_SESSION['session_id']))) {
 
 
 if (isset($_POST['mod-prenotazione'])) { //vengo da controllo
-   
+
 
     require_once('config.php');
     $str_data = $_POST['str_data'] ?? '';
@@ -60,12 +60,9 @@ if (isset($_POST['mod-prenotazione'])) { //vengo da controllo
 }
 
 
-if (isset($_POST)) { //vengo da controllo
-echo " <pre>";
-var_dump($_POST);
-    echo " </pre>";
+if (isset($_POST['invia-prenotazione'])) {  
 
-  /*  require_once('config.php');
+ require_once('config.php');
 
     $idutente = $_POST['id_cliente'] ?? '';
     $str_data = $_POST['str_data'] ?? '';
@@ -104,5 +101,5 @@ var_dump($_POST);
             header($url4);
         }
     }
-    $con->close();*/
+    $con->close();
 }
