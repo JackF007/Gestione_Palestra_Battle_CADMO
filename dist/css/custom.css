@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  font-size: medium;
+  font-size:medium;
 }
 
 span.linkmax a, #switchCalendar > table > tbody > tr:nth-child(7) > td:nth-child(2) > span.linkmax , span.span_red {
@@ -161,7 +161,7 @@ span.span_blue{
   content: '';
   height: 100%;
   width: 100%;
-  background: #4a2bf5;
+  background: #2b39f5;
   border: 3px solid #fff;
   z-index: -1;
   left: 50%;
@@ -181,7 +181,7 @@ span.span_blue{
 .field .value{
   position: absolute;
   font-size: 18px;
-  color: #4a2bf5;
+  color: #2b39f5;
   font-weight: 600;
 }
 .field .value.left{
@@ -194,7 +194,7 @@ span.span_blue{
   -webkit-appearance: none;
   width: 100%;
   height: 3px;
-  background: #ddd;
+  background: linear-gradient(#FFED00,#FF0000);
   border-radius: 5px;
   outline: none;
   border: none;
@@ -206,8 +206,8 @@ span.span_blue{
   height: 20px;
   background: red;
   border-radius: 50%;
-  background: #4a2bf5;
-  border: 1px solid #4a2bf5;
+  background: #2b39f5;
+  border: 1px solid #2b39f5;
   cursor: pointer;
 }
 .range input::-moz-range-thumb{
@@ -216,10 +216,10 @@ span.span_blue{
   height: 20px;
   background: red;
   border-radius: 50%;
-  background: #4a2bf5;
-  border: 1px solid #4a2bf5;
+  background: #2b39f5;
+  border: 1px solid #2b39f5;
   cursor: pointer;
 }
 .range input::-moz-range-progress{
-  background: #4a2bf5; 
+  background: #2b39f5; 
 }
