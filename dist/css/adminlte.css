@@ -13156,6 +13156,8 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 .sidebar::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;
+  
+
 }
 
 .sidebar::-webkit-scrollbar-thumb {

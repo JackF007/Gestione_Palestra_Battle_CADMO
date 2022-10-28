@@ -208,7 +208,7 @@ $con->close();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sportgym | Dashboard</title>
+    <title class="title-inverted">Sportgym | Dashboard</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -233,7 +233,7 @@ $con->close();
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+            <div class="content-header" id="headerBlock">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">

@@ -93,14 +93,14 @@
                           <li class="nav-item">
                               <div id="comandoN1">
                                   <label class="toggle" for="myToggle">
-                                      <input class="toggle__input" type="checkbox" id="myToggle">
+                                      <input class="toggle__input" type="checkbox" onclick="toggleDarkMode()" id="myToggle">
                                       <div class="toggle__fill"></div>
                                   </label>
                               </div>
                           </li>
                           <li class="nav-item">
                               <div class="comandoN2">
-                                  <input class="radio__input" onclick="setCommand()" type="radio" value="option1" name="radio" id="radio1">
+                                  <input class="radio__input"  type="radio" value="option1" name="radio" id="radio1">
                                   <label class="radio__label" for="radio1">X</label>
                                   <input class="radio__input" type="radio" value="option2" name="radio" id="radio2">
                                   <label class="radio__label" for="radio2">Y</label>
@@ -108,8 +108,24 @@
                                   <label class="radio__label" for="radio3">Z</label>
                               </div>
                           </li>
-                      </ul>
-                  </li>
+                          <li class="nav-item">
+                          <div class="range">
+                              <div class="sliderValue">
+                                 <span>100</span>
+                                       </div>
+                        <div class="field">
+                            <div class="value left">
+                                0</div>
+                        <input type="range" min="10" max="200" value="100" steps="1">
+                            <div class="value right">
+                                        200</div>
+                             </div>
+                        </div>
+                                
+                                            </li>
+                              
+                                      </ul>
+                         </li>
 
 
 
@@ -129,11 +145,36 @@
 
           <script> 
         
-        function setCommand () {
-            
-}
-        
-        </script>                  
+       
+            let isDarkModeActive = false;
 
+
+function toggleDarkMode() {
+  if (isDarkModeActive) {
+    document.querySelectorAll('.image').forEach((result) => {
+        result.classList.toggle('invert')
+    })
+    document.documentElement.classList.toggle('dark-mode')
+  } else {
+    document.documentElement.classList.remove('dark-mode')
+    isDarkModeActive = true;
+  }
+}
+          
+    const slideValue = document.querySelector("span");
+      const inputSlider = document.querySelector("input");
+      inputSlider.oninput = (()=>{
+        let value = inputSlider.value;
+        slideValue.textContent = value;
+        slideValue.style.left = (value/2) + "%";
+        slideValue.classList.add("show");
+      });
+      inputSlider.onblur = (()=>{
+        slideValue.classList.remove("show");
+      });
+
+
+        </script>                  
+        
 
   </aside>
