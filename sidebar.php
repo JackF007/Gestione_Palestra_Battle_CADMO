@@ -111,14 +111,14 @@
                           <li class="nav-item">
                           <div class="range">
                               <div class="sliderValue">
-                                 <span>100</span>
+                                 <span>0°</span>
                                        </div>
                         <div class="field">
                             <div class="value left">
                                 0</div>
-                        <input type="range" min="10" max="200" value="100" steps="1">
+                        <input type="range" min="0" max="50" value="100" steps="1">
                             <div class="value right">
-                                        200</div>
+                                        50°</div>
                              </div>
                         </div>
                                 
@@ -146,17 +146,22 @@
           <script> 
         
        
-            let isDarkModeActive = false;
+            let isDarkModeActive = true;
 
 
 function toggleDarkMode() {
-  if (isDarkModeActive) {
+    
+    if (isDarkModeActive) {
+
+    document.documentElement.classList.toggle('dark-mode')
     document.querySelectorAll('.image').forEach((result) => {
         result.classList.toggle('invert')
     })
-    document.documentElement.classList.toggle('dark-mode')
+    
   } else {
     document.documentElement.classList.remove('dark-mode')
+    
+    
     isDarkModeActive = true;
   }
 }
