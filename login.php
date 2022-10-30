@@ -13,6 +13,21 @@
     <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./dist/css/custom.css">
     <style>
         .policy_privacy {
             background-color: powderblue;
@@ -87,16 +102,32 @@
     <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
     <!-- Pop up della privacy dela policy -->
-    <div id="myFrame"></div>  
+    <div class="modal fade" id="modal-primary">
+        <div class="modal-dialog">
+            <div class="modal-content bg-primary">
+                <div class="modal-header">
+                    <h4 class="modal-title">Policy della privacy</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <p id="testo" class="p-3"></p>
+            </div>
+        <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal-dialog" id="modal-dialog"></div>  
     <div class="policy_privacy">
-    <h1 >Per consultare la privacy dela policy del sito,clicca il bottone sottostante</h1>
-    <button  onclick="myFunction()">Policy della privacy</button>
+    <h1 >Per consultare la policy della privacy del sito, clicca il bottone sottostante</h1>
+    <button  onclick="setform()" class="modal-message" data-toggle="modal" data-target="#modal-primary" >Leggi documento</button>
     </div>
     <script>
-    function myFunction() {
-        document.getElementById("myFrame").innerHTML = '<iframe id="myFrame" src="./privacy-policy.html" width="1920" height="500"></iframe>';
-    }
-</script>
+        function setform() {
+            let contenuto = 'Non so fare niente';
+            document.getElementById('testo').innerHTML = '<iframe id="myFrame" src="./privacy-policy.html" width="450" height="500"></iframe>';
+        }
+    </script>
 </body>
 
 </html>
