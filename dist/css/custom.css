@@ -223,3 +223,9 @@ span.span_blue{
 .range input::-moz-range-progress{
   background: #2b39f5; 
 } 
+#pageLogin #modal-default > div{
+max-width:100%;}
+
+iframe#myFrame{
+height: 70vh;
+}

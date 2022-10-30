@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="./plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -28,35 +27,25 @@
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="./dist/css/custom.css">
-    <style>
-        .policy_privacy {
-            background-color: powderblue;
-            height: 100px; 
-            position: absolute;
-            border: solid;
-            bottom: 0; 
-            right: 0;  
-            left: 0; 
-        }
-    </style>
+
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" id="pageLogin">
     <div class="login-box">
         <div class="login-logo">
-            <a href="./index2.html"><b>Sport</b>gym</a>
+            <a href="#"><b>Sport</b>gym</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Accedi per avviare la tua sessione</p>
                 <form action="./accedi.php" method="post">
-                <?php
-                    if(isset($_REQUEST["errpass"])|| isset($_REQUEST["errmail"]))
-                    echo('<p style="color:red;">Email o password errata</p>');
+                    <?php
+                    if (isset($_REQUEST["errpass"]) || isset($_REQUEST["errmail"]))
+                        echo ('<p style="color:red;">Email o password errata</p>');
 
-                    if(isset($_REQUEST["timeout"]))
-                echo ('<p style="color:red;">Sessione scaduta</p>');
+                    if (isset($_REQUEST["timeout"]))
+                        echo ('<p style="color:red;">Sessione scaduta</p>');
 
                     ?>
                     <div class="input-group mb-3">
@@ -68,7 +57,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password">
+                        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" autocomplete="on">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -102,30 +91,30 @@
     <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
     <!-- Pop up della privacy dela policy -->
-    <div class="modal fade" id="modal-primary">
+    <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
-            <div class="modal-content bg-primary">
+            <div class="modal-content bg-default">
                 <div class="modal-header">
                     <h4 class="modal-title">Policy della privacy</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <p id="testo" class="p-3"></p>
             </div>
-        <!-- /.modal-content -->
+            <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <div class="modal-dialog" id="modal-dialog"></div>  
-    <div class="policy_privacy">
-    <h1 >Per consultare la policy della privacy del sito, clicca il bottone sottostante</h1>
-    <button  onclick="setform()" class="modal-message" data-toggle="modal" data-target="#modal-primary" >Leggi documento</button>
+ 
+    <div class="policy_privacy m-auto text-center">
+        <h3>Per consultare la policy della privacy del sito, clicca il bottone sottostante</h3>
+        <button onclick="setform()" class="modal-message btn btn-default" data-toggle="modal" data-target="#modal-default">Leggi documento</button>
     </div>
     <script>
         function setform() {
-            let contenuto = 'Non so fare niente';
-            document.getElementById('testo').innerHTML = '<iframe id="myFrame" src="./privacy-policy.html" width="450" height="500"></iframe>';
+           
+            document.getElementById('testo').innerHTML = '<iframe id="myFrame" src="./privacy-policy.html" width="100%" height="auto"></iframe>';
         }
     </script>
 </body>
