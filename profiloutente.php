@@ -138,6 +138,47 @@ $email = $mail_log;
                             </p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <?php if ($tmp == "dashboard.php") {
+                                echo "<a href=\"dashboard.php\" class=\"nav-link active\">";
+                            } else echo "<a href=\"dashboard.php\" class=\"nav-link\">";
+                            ?>
+                            <i class="nav-icon far fa-calendar-alt"></i>
+                            <p>
+                                Check-In
+                            </p>
+                            </a>
+                             <input hidden type="text" id="qr-data" onchange="generateQR()">
+                             <div id="qrcode"></div>
+                            
+
+                            <script src="qrcode.min.js"></script>
+                        <script>
+                            var qrData = document.getElementById('qr-data');
+
+                            
+
+                          /*$connection = mysql_connect("localhost", "root", "");
+                            $db = mysql_select_db("company", $connection);
+                            ?>
+                 */           
+                            var qrCode = new QRCode(document.getElementById("qrcode"));
+                            
+                            function generateQR(){
+
+                                var data =qrData.value 
+
+                                qrCode.makeCode(data);
+
+                            }
+
+                        </script>
+
+
+
+                        </li>
+
                     </ul>
 
                 </nav>
