@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<?php
-session_start();
-$_SESSION = array();
-session_destroy();
-
-?>
 <html lang="en">
 
 <head>
@@ -19,6 +13,17 @@ session_destroy();
     <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <style>
+        .policy_privacy {
+            background-color: powderblue;
+            height: 100px; 
+            position: absolute;
+            border: solid;
+            bottom: 0; 
+            right: 0;  
+            left: 0; 
+        }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -31,15 +36,14 @@ session_destroy();
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Accedi per avviare la tua sessione</p>
                 <form action="./accedi.php" method="post">
-                    <?php
-                    if (isset($_REQUEST["errpass"]) || isset($_REQUEST["errmail"]))
-                        echo ('<p style="color:red;">Email o password errata</p>');
+                <?php
+                    if(isset($_REQUEST["errpass"])|| isset($_REQUEST["errmail"]))
+                    echo('<p style="color:red;">Email o password errata</p>');
 
-                    if (isset($_REQUEST["timeout"]))
-                        echo ('<p style="color:red;">Sessione scaduta</p>');
+                    if(isset($_REQUEST["timeout"]))
+                echo ('<p style="color:red;">Sessione scaduta</p>');
 
                     ?>
-
                     <div class="input-group mb-3">
                         <input type="email" id="mail" name="mail" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -82,6 +86,17 @@ session_destroy();
     <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
+    <!-- Pop up della privacy dela policy -->
+    <div id="myFrame"></div>  
+    <div class="policy_privacy">
+    <h1 >Per consultare la privacy dela policy del sito,clicca il bottone sottostante</h1>
+    <button  onclick="myFunction()">Policy della privacy</button>
+    </div>
+    <script>
+    function myFunction() {
+        document.getElementById("myFrame").innerHTML = '<iframe id="myFrame" src="./privacy-policy.html" width="1920" height="500"></iframe>';
+    }
+</script>
 </body>
 
 </html>
