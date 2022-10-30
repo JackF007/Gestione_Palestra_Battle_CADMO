@@ -139,25 +139,21 @@ $email = $mail_log;
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <?php if ($tmp == "dashboard.php") {
-                                echo "<a href=\"dashboard.php\" class=\"nav-link active\">";
-                            } else echo "<a href=\"dashboard.php\" class=\"nav-link\">";
-                            ?>
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>
-                                Check-In
-                            </p>
+                        <div class="nav-itemCheckIn">
+                        
+                        
+                            <span class="nav-itemCheckIn_icon">
+                            <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                          </span>
+                          <span class="nav-itemCheckIn__text">Check-In</span>
                             </a>
-                             <input hidden type="text" id="qr-data" onchange="generateQR()">
+                             <input hidden type="text" class="qrCode" id="qr-data" onchange="generateQR()">
                              <div id="qrcode"></div>
                             
 
                             <script src="qrcode.min.js"></script>
                         <script>
-                            var qrData = document.getElementById('qr-data');
-
-                            
+                            var qrData = document.getElementById('qr-data');                            
 
                           /*$connection = mysql_connect("localhost", "root", "");
                             $db = mysql_select_db("company", $connection);
@@ -167,9 +163,12 @@ $email = $mail_log;
                             
                             function generateQR(){
 
+                                $conn = new mysqli($servername, $username, $password);
+
                                 var data =qrData.value 
 
                                 qrCode.makeCode(data);
+                                
 
                             }
 
@@ -177,7 +176,7 @@ $email = $mail_log;
 
 
 
-                        </li>
+                        </div>
 
                     </ul>
 
@@ -601,6 +600,9 @@ $email = $mail_log;
 
 
     ?>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

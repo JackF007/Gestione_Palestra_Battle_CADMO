@@ -12,7 +12,7 @@
       <a href="dashboard.php" class="brand-link">
           <img src="./dist/img/logo.png" alt="Logo" class="brand-image " style="opacity: .8;margin-top: 6px;">
 
-          <span class="brand-text font-weight-light">Sportgym</span>
+          <em class="brand-text font-weight-light">Sportgym</em>
 
       </a>
       <div class="sidebar">
@@ -22,7 +22,7 @@
                   <img src="./dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
               </div>
               <div class="info">
-                  <span style="color:white"><?php echo $mail_log ?></span>
+                  <em style="color:white"><?php echo $mail_log ?></em>
               </div>
           </div>
 
@@ -116,9 +116,9 @@
                         <div class="field">
                             <div class="value left">
                                 0</div>
-                        <input type="range" min="0" max="50" value="100" steps="1">
+                        <input type="range" min="0" max="50" value="25" steps="1">
                             <div class="value right">
-                                        50°</div>
+                                        50° </div>
                              </div>
                         </div>
                                 
@@ -166,18 +166,7 @@ function toggleDarkMode() {
   }
 }
           
-    const slideValue = document.querySelector("span");
-      const inputSlider = document.querySelector("input");
-      inputSlider.oninput = (()=>{
-        let value = inputSlider.value;
-        slideValue.textContent = value;
-        slideValue.style.left = (value/2) + "%";
-        slideValue.classList.add("show");
-      });
-      inputSlider.onblur = (()=>{
-        slideValue.classList.remove("show");
-      });
-
+ 
 
         </script>                  
         
