@@ -109,7 +109,7 @@ $mail_log = $_SESSION['session_email'];
                                             <tbody>
                                                 <?php
                                                 include 'config.php';
-                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, u.data_nascita, u.CF, l.email , l.ruolo , l.login_id FROM utenti as u join login as l on l.login_id = u.login_id where l.stato = 1");
+                                                $risultato = $con->query("SELECT u.id_utente, u.nome, u.cognome, u.numero_telefono, DATE_FORMAT(u.data_nascita,\"%d-%m-%Y\"), u.CF, l.email , l.ruolo , l.login_id FROM utenti as u join login as l on l.login_id = u.login_id where l.stato = 1");
 
                                                 while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
 

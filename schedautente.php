@@ -169,7 +169,7 @@ $email = $risultato_bello["email"];
                                                 <tbody>
                                                     <?php
                                                     include 'config.php';
-                                                    $risultato = $con->query("SELECT * FROM prenotazioni where id_utente_prenotazione = '$id_utente'");
+                                                    $risultato = $con->query("SELECT id_prenotazione, DATE_FORMAT(data_effettuazione,\"%d-%m-%Y\"), str_data,DATE_FORMAT(data_appuntamento,\"%d-%m-%Y\"), fascia_oraria, id_utente_prenotazione, tipo_attivita, stato_prenotazione, presenza FROM prenotazioni where id_utente_prenotazione = '$id_utente'");
 
                                                     while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
 
