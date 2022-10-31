@@ -28,7 +28,10 @@
            </small>
        </td>
        <td class="project-state">
-           <span class="badge badge-success">prenotato</span>
+           <?php 
+           if($check=="True"){ echo "<span class=\"badge badge-success\">Checked</span>";} 
+           else echo "<span class=\"badge badge-warning\">UnChecked </span>"; ?>
+         
        </td>
 
        <?php

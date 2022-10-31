@@ -126,7 +126,7 @@ $mail_log = $_SESSION['session_email'];
                                         Fascia oraria
                                     </th>
                                     <th style="width: 5%" class="text-center">
-                                        Status
+                                        Check in
                                     </th>
                                     <th style="width: 30%">
                                     </th>
@@ -141,7 +141,7 @@ $mail_log = $_SESSION['session_email'];
                                     $day = $_GET['day'];
 
                                     include 'config.php';
-                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and (stato_prenotazione='intatta'or stato_prenotazione='modificata') order by fascia_oraria ";
+                                    $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome, p.presenza FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$day and (stato_prenotazione='intatta'or stato_prenotazione='modificata') order by fascia_oraria ";
 
                                     $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                     if (mysqli_num_rows($result) > 0) {
@@ -155,7 +155,7 @@ $mail_log = $_SESSION['session_email'];
                                             $utenteid = stripslashes($fetch['id_utente_prenotazione']);
                                             $utenteN = stripslashes($fetch['nome']);
                                             $utenteC = stripslashes($fetch['cognome']);
-
+                                            $check = stripslashes($fetch['presenza']);
                                             $k++;
 
                                             array_push($orari,  $fascia);

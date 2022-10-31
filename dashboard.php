@@ -864,7 +864,7 @@ $con->close();
                                                     Fascia oraria
                                                 </th>
                                                 <th style="width: 10%" class="text-center">
-                                                    Status
+                                                    Check in
                                                 </th>
 
                                             </tr>
@@ -873,7 +873,7 @@ $con->close();
                                             <?php
                                             $oggi = strtotime(date("Y-m-d"));
                                             include 'config.php';
-                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$oggi and ( stato_prenotazione='intatta'or stato_prenotazione='modificata') order by p.fascia_oraria ";
+                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome ,p.presenza FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$oggi and ( stato_prenotazione='intatta'or stato_prenotazione='modificata') order by p.fascia_oraria ";
                                             $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($fetch = mysqli_fetch_array($result)) {
@@ -884,7 +884,7 @@ $con->close();
                                                     $utenteid = stripslashes($fetch['id_utente_prenotazione']);
                                                     $utenteN = stripslashes($fetch['nome']);
                                                     $utenteC = stripslashes($fetch['cognome']);
-
+                                                    $check= stripslashes($fetch['presenza']);
                                                     include 'element.php';
                                                 }
                                             }
