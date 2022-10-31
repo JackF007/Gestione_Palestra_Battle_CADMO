@@ -103,3 +103,58 @@ if (isset($_POST['invia-prenotazione'])) {
     }
     $con->close();
 }
+
+if (isset($_POST['invia-prenotazioneClient'])) {
+
+    require_once('config.php');
+
+    $idlogin = $_POST['id_login'] ?? '';
+    $str_data = $_POST['str_data'] ?? '';
+    $dataprenotazione = $_POST['data_prenotazione'] ?? '';
+    $fascia = $_POST['fascia_prenotazione'] ?? '';
+    $attivita = $_POST['attivita_prenotazioneForm'] ?? '';
+
+    $idlogin =  intval($idlogin);
+    $dataprenotazione = "'" . $dataprenotazione . "'";
+    $str_data = intval($str_data);
+    $fascia = "'" . $fascia . "'";
+    $attivita = 1;
+    $url = "Location: prenotazioni.php?day=$str_data&prenotato=1";
+    $url2 = "Location: profiloutente.php?day=$str_data&prenotato=1";
+    $url3 = "Location: prenotazioni.php?day=$str_data&prenotato=0";
+    $url4 = "Location: profiloutente.php?day=$str_data&prenotato=0";
+
+    $query = "SELECT id_utente FROM utenti where login_id ='$idlogin'";
+
+    $result = $con->query($query);
+
+   
+    while ($row = $result->fetch_assoc()) {
+        $idutente= $row["id_utente"];
+    }
+    
+    $sql = "INSERT INTO prenotazioni (id_prenotazione, data_effettuazione, str_data, data_appuntamento, fascia_oraria, id_utente_prenotazione, tipo_attivita, stato_prenotazione, presenza) VALUES (null,CURRENT_TIMESTAMP(),$str_data,$dataprenotazione,$fascia,$idutente,1,1,1)";
+
+
+    if (
+        $con->query($sql) === TRUE
+    ) {
+        if ($session_ruolo == "amministrazione") {
+            $con->close();
+            header($url);
+        } else {
+            $con->close();
+            header($url2);
+        }
+    } else {
+        if ($session_ruolo == "amministrazione") {
+            $con->close();
+            header($url3);
+        } else {
+            $con->close();
+            header($url4);
+        }
+    }
+    $con->close(); 
+}
+

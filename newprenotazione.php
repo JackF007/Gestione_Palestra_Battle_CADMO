@@ -82,20 +82,19 @@ $mail_log = $_SESSION['session_email'];
 
             if ((isset($_GET['day']))) { // passaggio valori automatici
                 $day = $_GET['day'];
-                
+
                 $m = (date("m", (int)$_GET['day']));
                 $y = (date("Y", (int)$_GET['day']));
                 $d  = (date("d", (int)$_GET['day']));
-                
-                $fascia = [];    
-                $k=0;
+
+                $fascia = [];
+                $k = 0;
                 include 'config.php';
                 $sql = "SELECT fascia_oraria FROM prenotazioni WHERE str_data=$day and stato_prenotazione='intatta' OR stato_prenotazione='modificata'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                   array_push( $fascia,$row[0]); 
-                   $k++;
-                  
+                    array_push($fascia, $row[0]);
+                    $k++;
                 }
             }
             ?>
@@ -113,7 +112,7 @@ $mail_log = $_SESSION['session_email'];
                             <div class="card-body">
                                 <div class="form-group">
                                     <form action="./verifyprenotazione.php" method="post">
-                                     <input type="hidden" id="id_clienteForm" value="">
+                                        <input type="hidden" id="id_clienteForm" value="">
                                         <label>Data Selezionata</label>
                                         <!-- Date mm/dd/yyyy -->
                                         <div class="form-group">
@@ -148,17 +147,41 @@ $mail_log = $_SESSION['session_email'];
                                             <label>Seleziona Attività</label>
                                             <select id="selectattivita" class="form-control select2" name"attivita" style="width: 100%;">
                                                 <option>Sauna</option>
-
-
                                             </select>
                                         </div>
-
-                                        <input  type="submit" value="Invio">
-                                       
-
-        
-                                                
+                                        <div class="form-group">
+                                            <button id="<?php echo $session_idLogin?>_id" onclick="setform()" value="<?php echo $session_idLogin?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                                                Prenota
+                                            </button>
+                                        </div>
                                     </form>
+                                    <div class="modal fade" id="modal-primary">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-primary">
+                                                <form action="./verifyprenotazione.php" method="post">
+                                                    <input type="hidden" id="data_prenotazioneForm" name="data_prenotazione" value="">
+                                                    <input type="hidden" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="">
+                                                    <input type="hidden" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="">
+                                                    <input type="hidden" id="str_data" name="str_data" value="<?php echo $day ?>">
+                                                    <input type="hidden" id="id_loginForm" name="id_login" value="<?php echo $session_idLogin?>">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Conferma Prenotazione</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-footer justify-content-between">
+                                                        <button name="invia-prenotazioneClient" type="submit" class="btn btn-outline-light  w-100" value="invia-prenotazioneClient">Registra Prenotazione</button>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -193,13 +216,13 @@ $mail_log = $_SESSION['session_email'];
     <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="./plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-  
+
     <script src="./plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="./plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="./plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="./dist/js/adminlte.min.js"></script>
-    
+
 
 
     <script>
@@ -230,39 +253,17 @@ $mail_log = $_SESSION['session_email'];
         let selectattivita = document.getElementById("selectattivita");
 
         function setform() {
-           
+            var inSelectedFascia = formSelect.options[formSelect.selectedIndex].text;
+            var inSelectedattivita = selectattivita.options[selectattivita.selectedIndex].text;
 
-            var target = window.event.target;
-            let id_cli = target.value || target.value;
 
-            document.getElementById('id_clienteForm').value = id_cli;
+            document.getElementById('data_prenotazioneForm').value = dataPrenotazione;
+            document.getElementById('attivita_prenotazioneForm').value = inSelectedattivita;
+            document.getElementById('fascia_prenotazioneForm').value = inSelectedFascia;
+
 
 
         }
-
-     /*   <div class="modal fade" id="modal-primary">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content bg-primary">
-                                                    <form action="/pippo.php" method="post">
-                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Conferma Prenotazione</h4>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-footer justify-content-between">
-
-                                                            <button name="invia-prenotazione_utente" type="submit" class="btn btn-outline-light  w-100" value="invia-prenotazione_utente">Registra Prenotazione</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
-                                        </div>
-
-*/
     </script>
 
 </body>

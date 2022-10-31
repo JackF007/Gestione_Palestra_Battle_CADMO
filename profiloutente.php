@@ -18,11 +18,6 @@ $t = $_SERVER['REQUEST_URI'];
 $tmp = str_replace($radice, '', $t); // pagina
 
 
-
-/* if ($tmp == "profiloutente.php") {
-    header("location:login.php");
-}
- */
 require_once('config.php');
 $oggi = strtotime(date("Y-m-d"));
 
@@ -128,51 +123,47 @@ $email = $mail_log;
 
 
                         <li class="nav-item">
-                            <?php if ($tmp == "dashboard.php") {
-                                echo "<a href=\"dashboard.php\" class=\"nav-link active\">";
-                            } else echo "<a href=\"dashboard.php\" class=\"nav-link\">";
-                            ?>
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>
-                                Profilo
-                            </p>
+                            <a href="profiloutente.php" class="nav-link active">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Profilo
+                                </p>
                             </a>
                         </li>
 
                         <div class="nav-itemCheckIn">
-                        
-                        
+
+
                             <span class="nav-itemCheckIn_icon">
-                            <ion-icon name="checkmark-done-circle-outline"></ion-icon>
-                          </span>
-                          <span class="nav-itemCheckIn__text">Check-In</span>
+                                <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                            </span>
+                            <span class="nav-itemCheckIn__text">Check-In</span>
                             </a>
-                             <input hidden type="text" class="qrCode" id="qr-data" onchange="generateQR()">
-                             <div id="qrcode"></div>
-                            
+                            <input hidden type="text" class="qrCode" id="qr-data" onchange="generateQR()">
+                            <div id="qrcode"></div>
+
 
                             <script src="qrcode.min.js"></script>
-                        <script>
-                            var qrData = document.getElementById('qr-data');                            
+                            <script>
+                                var qrData = document.getElementById('qr-data');
 
-                          /*$connection = mysql_connect("localhost", "root", "");
+                                /*$connection = mysql_connect("localhost", "root", "");
                             $db = mysql_select_db("company", $connection);
                             ?>
-                 */           
-                            var qrCode = new QRCode(document.getElementById("qrcode"));
-                            
-                            function generateQR(){
+                 */
+                                var qrCode = new QRCode(document.getElementById("qrcode"));
 
-                                $conn = new mysqli($servername, $username, $password);
+                                function generateQR() {
 
-                                var data =qrData.value 
+                                    $conn = new mysqli($servername, $username, $password);
 
-                                qrCode.makeCode(data);
-                                
+                                    var data = qrData.value
 
-                            }
+                                    qrCode.makeCode(data);
 
-                        </script>
+
+                                }
+                            </script>
 
 
 
@@ -233,8 +224,6 @@ $email = $mail_log;
                                     </div>
 
                                     <h3 class="profile-username text-center"><?php echo $nome . " " . $cognome ?></h3>
-
-
 
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
@@ -469,9 +458,9 @@ $email = $mail_log;
                                         <?php
 
                                         include 'config.php';
-                                        $risultato = $con->query("SELECT * FROM prenotazioni where id_utente_prenotazione = '$id_utente' and str_data >= '$oggi'");
+                                        $risultato = $con->query("SELECT id_prenotazione, DATE_FORMAT(data_effettuazione,\"%d-%m-%Y\"), str_data,DATE_FORMAT(data_appuntamento,\"%d-%m-%Y\"), fascia_oraria, id_utente_prenotazione, tipo_attivita, stato_prenotazione, presenza FROM prenotazioni  where id_utente_prenotazione = '$id_utente' and str_data >= '$oggi'");
 
-                                        while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
+    while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
 
                                             echo "<tr>";
 
@@ -570,9 +559,9 @@ $email = $mail_log;
         function successinserimento() {
             $(document).Toasts('create', {
                 class: 'bg-success',
-                title: 'Modificato',
+                title: 'Prenotato',
                 subtitle: '',
-                body: 'Inserimento effettuato con successo'
+                body: 'Prenotazione effettuata con successo'
             })
         };
 
@@ -580,18 +569,18 @@ $email = $mail_log;
         function notsuccessinserimento() {
             $(document).Toasts('create', {
                 class: 'bg-danger', //bg-info bg-warning
-                title: 'NON Modificato',
+                title: 'NON Prenotato',
                 subtitle: '',
-                body: 'Inserimento non andato a buon fine'
+                body: 'Prenotazione non andata a buon fine'
             })
         };
     </script>
     <?php
 
-    if (isset($_GET['inserito'])) {
+    if (isset($_GET['prenotato'])) {
 
-        $inserito = htmlspecialchars($_GET['inserito']);
-        if ($inserito == 1) {
+        $prenotato = htmlspecialchars($_GET['prenotato']);
+        if ($prenotato == 1) {
             echo "<script>successinserimento();</script>";
         } else {
             echo "<script>notsuccessinserimento();</script>";
@@ -601,8 +590,8 @@ $email = $mail_log;
 
     ?>
 
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
