@@ -78,10 +78,10 @@
                       </li>
                   </ul>
                   </li>
-
+                  <hr>
                   <li class="nav-item">
 
-                      <a href="#" class="nav-link">
+                      <a href="#" class="nav-link" style="background: none; color: #007bff;">
                           <i class="nav-icon fas fa-laptop-house"></i>
 
                           <p>
@@ -100,7 +100,7 @@
                           </li>
                           <li class="nav-item">
                               <div class="comandoN2">
-                                  <input class="radio__input"  type="radio" value="option1" name="radio" id="radio1">
+                                  <input class="radio__input" type="radio" value="option1" name="radio" id="radio1">
                                   <label class="radio__label" for="radio1">X</label>
                                   <input class="radio__input" type="radio" value="option2" name="radio" id="radio2">
                                   <label class="radio__label" for="radio2">Y</label>
@@ -109,23 +109,23 @@
                               </div>
                           </li>
                           <li class="nav-item">
-                          <div class="range">
-                              <div class="sliderValue">
-                                 <span>0°</span>
-                                       </div>
-                        <div class="field">
-                            <div class="value left">
-                                0</div>
-                        <input type="range" min="0" max="50" value="25" steps="1">
-                            <div class="value right">
-                                        50° </div>
-                             </div>
-                        </div>
-                                
-                                            </li>
-                              
-                                      </ul>
-                         </li>
+                              <div class="range">
+                                  <div class="sliderValue">
+                                      <span>0°</span>
+                                  </div>
+                                  <div class="field">
+                                      <div class="value left">
+                                          0</div>
+                                      <input type="range" min="0" max="50" value="25" steps="1">
+                                      <div class="value right">
+                                          50° </div>
+                                  </div>
+                              </div>
+
+                          </li>
+
+                      </ul>
+                  </li>
 
 
 
@@ -143,32 +143,27 @@
       </div>
       <!-- /.sidebar -->
 
-          <script> 
-        
-       
-            let isDarkModeActive = true;
+      <script>
+          let isDarkModeActive = true;
 
 
-function toggleDarkMode() {
-    
-    if (isDarkModeActive) {
+          function toggleDarkMode() {
 
-    document.documentElement.classList.toggle('dark-mode')
-    document.querySelectorAll('.image').forEach((result) => {
-        result.classList.toggle('invert')
-    })
-    
-  } else {
-    document.documentElement.classList.remove('dark-mode')
-    
-    
-    isDarkModeActive = true;
-  }
-}
-          
- 
+              if (isDarkModeActive) {
 
-        </script>                  
-        
+                  document.documentElement.classList.toggle('dark-mode')
+                  document.querySelectorAll('.image').forEach((result) => {
+                      result.classList.toggle('invert')
+                  })
+
+              } else {
+                  document.documentElement.classList.remove('dark-mode')
+
+
+                  isDarkModeActive = true;
+              }
+          }
+      </script>
+
 
   </aside>
