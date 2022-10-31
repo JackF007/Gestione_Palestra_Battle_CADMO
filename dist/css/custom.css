@@ -8,7 +8,7 @@
   font-size:medium;
 }
 
-span.linkmax a, #switchCalendar > table > tbody > tr:nth-child(7) > td:nth-child(2) > span.linkmax , span.span_red {
+span.linkmax a, #switchCalendar > table > tbody > tr:nth-child(7) > td:nth-child(2) > span.linkmax , span.span_red , #switchCalendar > table > tbody > tr:nth-child(8) > td > b > span{
     color: red;
 }
 
