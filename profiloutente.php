@@ -150,13 +150,16 @@ $email = $mail_log;
                                 /*$connection = mysql_connect("localhost", "root", "");
                             $db = mysql_select_db("company", $connection);
                             ?>
-                 */
+                                    */
+                
                                 var qrCode = new QRCode(document.getElementById("qrcode"));
 
                                 function generateQR() {
 
-                                    $conn = new mysqli($servername, $username, $password);
-
+                                    
+                                    let datiUtente =  <?php
+                                          include 'datiUtenteCheckin.php';
+                                                        ?>
                                     var data = qrData.value
 
                                     qrCode.makeCode(data);

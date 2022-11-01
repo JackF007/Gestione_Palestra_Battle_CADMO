@@ -116,7 +116,7 @@
                                   <div class="field">
                                       <div class="value left">
                                           0</div>
-                                      <input type="range" min="0" max="50" value="25" steps="1">
+                                      <input type="range"  min="0" max="50" value="25" steps="1">
                                       <div class="value right">
                                           50° </div>
                                   </div>
@@ -145,24 +145,27 @@
 
       <script>
           let isDarkModeActive = true;
-
-
+          
           function toggleDarkMode() {
 
               if (isDarkModeActive) {
-
+                    
+                //UPDATE COLONNA STATO CAMPO LUCI = TRUE;
+    
                   document.documentElement.classList.toggle('dark-mode')
                   document.querySelectorAll('.image').forEach((result) => {
                       result.classList.toggle('invert')
                   })
 
               } else {
+                  //UPDATE COLONNA STATO CAMPO LUCI = FALSE;
                   document.documentElement.classList.remove('dark-mode')
-
-
                   isDarkModeActive = true;
+                  
               }
           }
+
+     
       </script>
 
 
