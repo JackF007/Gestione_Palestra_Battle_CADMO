@@ -59,8 +59,8 @@ while ($row = mysqli_fetch_array($mysqli, MYSQLI_NUM)) {
     $trovato = true;
     $idPrenotazione = $row[0];
 }
-
-$pathCheckin = 'http://www.checkinsportgym.php?id_prenotazione='.$id_utente;
+$idx =1;
+$pathCheckin = 'http://www.chs.php?id='.strval($idx);
 ?>
 
 
@@ -169,23 +169,12 @@ $pathCheckin = 'http://www.checkinsportgym.php?id_prenotazione='.$id_utente;
                             <span class="nav-itemCheckIn__text">Check-In</span>
                             </a>
                             <input type="text" class="qrCode" id="qr-data" onchange="generateQR()">
+                          
                             <div id="qrcode"></div>
 
 
                             <script src="qrcode.min.js"></script>
-                            <script>
-                                var qrData = document.getElementById('qr-data');
-
-           
-                                var qrCode = new QRCode(document.getElementById("qrcode"));
-
-                                function generateQR(data) {
-                                    //var data = qrData.value
-                                    qrCode.makeCode(data);
-
-
-                                }
-                            </script>
+                            
 
        
 
@@ -580,7 +569,16 @@ $pathCheckin = 'http://www.checkinsportgym.php?id_prenotazione='.$id_utente;
             window.location = "./logout.php";
 
         };
+          
 
+           
+          var qrCode = new QRCode(document.getElementById("qrcode"));
+        
+              function generateQR(data) {
+                 //var data = qrData.value
+                  qrCode.makeCode(data);
+               }
+                           
         $(function() {
             $("#example1").DataTable({
 
@@ -627,10 +625,15 @@ $pathCheckin = 'http://www.checkinsportgym.php?id_prenotazione='.$id_utente;
     if ($trovato==true){
 
             echo "<script>generateQR($pathCheckin);</script>";
+    }else {
+        echo "<script>generateQR(<?php echo $pathCheckin );</script>";
     }
 
 
     ?>
+
+
+
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
