@@ -1,10 +1,10 @@
 <?php
 
 
-$conn = mysqli_connect("localhost","root","","palestra");
+$conn = new mysqli("localhost","root","","palestra");
 
 if($conn === false) {
-    die("Errore di connessione: " .$con->connect_error);
+    die("Errore di connessione: " . $conn->connect_error);
 } else {
 
 echo "Connessione effettuata con successo:" .$conn->host_info;
@@ -14,12 +14,19 @@ $getTimeStamp = '2013-09-26 13:06:00';
 $date = new \DateTime($getTimeStamp);
 
 /// MI RICAVO LA DATA ED ORA ATTUALE, CONNETTO AL DB E SELEZIONO LE COLONNE CHE MI SERVONO
+$dateString = date('m-d-Y H:i:s');
+//echo $dateString;
 
-$dateString = $date->format('Y-m-d');
 $inizioFascia = (int)$date->format('H');
 $fineFascia = $inizioFascia ++;
 $hourString = $fineFascia . '-' . $inizioFascia;
 //echo $hourString;
+$dateOra = date('H');
+echo $dateOra;
+
+$fineFascia = $dateOra +1;
+$hourString = $dateOra. '-' .$fineFascia;
+echo $hourString;
 
 $minuteString = $date->format('i');
 
@@ -54,7 +61,7 @@ if($result = $conn->query($sql)){
          
             $firstHour =  substr($row[2], 0, 2);
            array_push($arrDate,$firstHour);
-           echo ($arrDate[$i]);
+  //         echo ($arrDate[$i]);
             $i++;
         if ($row[2] == $hourString && $row[1] == $dateString) {
                 echo "Checkin effettuabile";

@@ -20,6 +20,23 @@ $tmp = str_replace($radice, '', $t); // pagina
 
 require_once('config.php');
 $oggi = strtotime(date("Y-m-d"));
+//DATA ED ORA ATTUALE CALCOLATA PER CONFRONTI
+$getTimeStamp = '2013-09-26 13:06:00';
+
+$date = new \DateTime($getTimeStamp);
+
+/// MI RICAVO LA DATA ED ORA ATTUALE, CONNETTO AL DB E SELEZIONO LE COLONNE CHE MI SERVONO
+
+$dateString = date('m-d-Y');
+$dateOra = date('H');
+echo $dateOra;
+
+$fineFascia = $dateOra +1;
+$hourString = $dateOra. '-' .$fineFascia;
+//echo $hourString;
+
+$minuteString = $date->format('i');
+
 
 
 $mysqli = $con->query("SELECT *  FROM utenti where login_id='$id_login'"); //cerca soltanto il email utente per poi controllare la password
@@ -34,7 +51,19 @@ $telefono = $result["numero_telefono"];
 $data = $result["data_nascita"];
 $email = $mail_log;
 
+$trovato = false;
+$mysqli = $con->query("SELECT id_prenotazione FROM prenotazioni WHERE id_utente_prenotazione=$id_utente AND fascia_oraria='$hourString'"); 
+
+
+while ($row = mysqli_fetch_array($mysqli, MYSQLI_NUM)) {
+    $trovato = true;
+    $idPrenotazione = $row[0];
+}
+
+$pathCheckin = 'http://www.checkinsportgym.php?id_prenotazione='.$id_utente;
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -139,7 +168,7 @@ $email = $mail_log;
                             </span>
                             <span class="nav-itemCheckIn__text">Check-In</span>
                             </a>
-                            <input hidden type="text" class="qrCode" id="qr-data" onchange="generateQR()">
+                            <input type="text" class="qrCode" id="qr-data" onchange="generateQR()">
                             <div id="qrcode"></div>
 
 
@@ -150,18 +179,15 @@ $email = $mail_log;
            
                                 var qrCode = new QRCode(document.getElementById("qrcode"));
 
-                                function generateQR() {
-
-                                    $conn = new mysqli($servername, $username, $password);
-
-                                    var data = qrData.value
-
+                                function generateQR(data) {
+                                    //var data = qrData.value
                                     qrCode.makeCode(data);
 
 
                                 }
                             </script>
 
+       
 
 
                         </div>
@@ -181,6 +207,20 @@ $email = $mail_log;
 
 
         </aside>
+      
+      <?php
+               
+               if (isset($_GET['cancellato'])) {
+
+        $cancellato = htmlspecialchars($_GET['cancellato']);
+            if ($cancellato == 1) {
+            echo "<script>successinserimento();</script>";
+            } else {
+            echo "<script>notsuccessinserimento();</script>";
+            }
+        }   
+
+        ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -582,6 +622,11 @@ $email = $mail_log;
         } else {
             echo "<script>notsuccessinserimento();</script>";
         }
+    }
+
+    if ($trovato==true){
+
+            echo "<script>generateQR($pathCheckin);</script>";
     }
 
 

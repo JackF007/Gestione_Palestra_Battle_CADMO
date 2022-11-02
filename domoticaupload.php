@@ -6,7 +6,7 @@ $vartemp= intval($_POST['temperatura']);
 if($varluce=="on") $varluce=1;
 else $varluce=0;
     include 'config.php';
-    $sql = "UPDATE domotica SET luci = '$varluce' , temperatura = $vartemp WHERE iddom= 1";
+    $sql = "UPDATE domotica SET luci = $varluce , temperatura = $vartemp WHERE iddom= 1";
     $result = mysqli_query($con, $sql);
     $data = []; // Save the data into an arbitrary array.
     while ($row = mysqli_fetch_assoc($result)) {
