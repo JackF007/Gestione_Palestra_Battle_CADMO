@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ./login.php?timeout=1");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

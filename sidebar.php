@@ -90,24 +90,44 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <div id="comandoN1">
-                                  <label class="toggle" for="myToggle">
-                                      <input class="toggle__input" type="checkbox" onclick="toggleDarkMode()" id="myToggle">
-                                      <div class="toggle__fill"></div>
-                                  </label>
-                              </div>
-                          </li>
-                          <li class="nav-item">
-                              <div class="comandoN2">
-                                  <input class="radio__input" type="radio" value="option1" name="radio" id="radio1">
-                                  <label class="radio__label" for="radio1">X</label>
-                                  <input class="radio__input" type="radio" value="option2" name="radio" id="radio2">
-                                  <label class="radio__label" for="radio2">Y</label>
-                                  <input class="radio__input" type="radio" value="option3" name="radio" id="radio3">
-                                  <label class="radio__label" for="radio3">Z</label>
-                              </div>
-                          </li>
+                          <ul>
+                              <li class="nav-item" style="display: flex; align-items: baseline;">
+                                  <div id="comandoLuce" style="width: 50%;">
+                                      <?php
+                                        include 'config.php';
+
+                                        $sql = "SELECT * FROM domotica";
+                                        $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+
+                                        while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
+                                            if ($row[1] == 0) {
+
+                                                echo  "<label class=\"toggle\" for=\"myToggleLuce\" style=\"max-width: 40px;margin: 32px auto 20px auto;\">
+                                          <input class=\"toggle__input\" type=\"checkbox\" onclick=\"ToggleLuce()\" id=\"myToggleLuce\" value=\"off\" >";
+                                            } else {
+                                                echo  "<label class=\"toggle\" for=\"myToggleLuce\" style=\"max-width: 40px;margin: 32px auto 20px auto;\">
+                                          <input class=\"toggle__input\" type=\"checkbox\" onclick=\"ToggleLuce()\" id=\"myToggleLuce\" value=\"on\" checked>";
+                                            }
+                                            $rowtemp = $row[2];
+                                            $rowluce = $row[1];
+                                        }
+                                        ?>
+                                      <div class="toggle__fill "></div>
+                                      </label>
+                                  </div>
+                                  <div class="">
+                                      <?php
+                                        if ($rowluce == 0) {
+                                            echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbminimono_105785.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>\"";
+                                        } else echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbflat_106023.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>\"";
+                                        ?>
+
+
+                                  </div>
+                              </li>
+
+                          </ul>
                           <li class="nav-item">
                               <div class="range">
                                   <div class="sliderValue">
@@ -116,7 +136,7 @@
                                   <div class="field">
                                       <div class="value left">
                                           0</div>
-                                      <input type="range"  min="0" max="50" value="25" steps="1">
+                                      <input id="temper" type="range" min="0" max="50" value="<?php echo $rowtemp ?>" steps="1">
                                       <div class="value right">
                                           50° </div>
                                   </div>
@@ -126,46 +146,60 @@
 
                       </ul>
                   </li>
-
-
-
-
-
               </ul>
-
-
           </nav>
-
-          <!-- /.sidebar-menu -->
-
-
-
       </div>
       <!-- /.sidebar -->
-
       <script>
-          let isDarkModeActive = true;
-          
-          function toggleDarkMode() {
+          function ToggleLuce() {
+              let img = document.getElementById("imgluce")
+              let stato = document.getElementById("myToggleLuce").value
+              console.log(stato)
+              if (stato == "off") {
+                  document.getElementById("myToggleLuce").value = "on"
+                  img.src = "./dist/img/lightbulbflat_106023.png";
 
-              if (isDarkModeActive) {
-                    
-                //UPDATE COLONNA STATO CAMPO LUCI = TRUE;
-    
-                  document.documentElement.classList.toggle('dark-mode')
-                  document.querySelectorAll('.image').forEach((result) => {
-                      result.classList.toggle('invert')
-                  })
+              }
+              if (stato == "on") {
 
-              } else {
-                  //UPDATE COLONNA STATO CAMPO LUCI = FALSE;
-                  document.documentElement.classList.remove('dark-mode')
-                  isDarkModeActive = true;
-                  
+                  document.getElementById("myToggleLuce").value = "off"
+                  img.src = "./dist/img/lightbulbminimono_105785.png";
+
               }
           }
 
-     
+
+
+          $("#myToggleLuce").change(function() {
+              send()
+          });
+          $("#temper").change(function() {
+              send()
+          });
+
+          function send() {
+              var val = document.getElementById("myToggleLuce").value;
+              var temp = document.getElementById("temper").value
+
+
+              $.ajax({
+                  url: "domoticaupload.php",
+                  type: "post",
+                  data: {
+                      temperatura: temp,
+                      luce: val
+                  },
+                  success: function(response) {
+
+                      alert("ok")
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                      console.log(textStatus, errorThrown);
+                  }
+
+              });
+
+          }
       </script>
 
 
