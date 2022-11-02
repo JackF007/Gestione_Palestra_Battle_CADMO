@@ -190,8 +190,12 @@
                       luce: val
                   },
                   success: function(response) {
-
-                      alert("ok")
+                      $(document).Toasts('create', {
+                          class: 'bg-success', //bg-info bg-warning
+                          title: 'Domotica',
+                          subtitle: '',
+                          body: "Luci:=" + val + "</br>Temperatura:="+temp
+                      })
                   },
                   error: function(jqXHR, textStatus, errorThrown) {
                       console.log(textStatus, errorThrown);
