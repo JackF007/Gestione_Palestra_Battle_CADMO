@@ -5,9 +5,10 @@ $conn = mysqli_connect("localhost","root","","palestra");
 
 if($conn === false) {
     die("Errore di connessione: " .$con->connect_error);
-} 
+} else {
 
-echo "Connessione avvenuta con successo:" .$conn->host_info;
+echo "Connessione effettuata con successo:" .$conn->host_info;
+}
 
 $getTimeStamp = '2013-09-26 13:06:00';
 $date = new \DateTime($getTimeStamp);
@@ -15,7 +16,11 @@ $date = new \DateTime($getTimeStamp);
 /// MI RICAVO LA DATA ED ORA ATTUALE, CONNETTO AL DB E SELEZIONO LE COLONNE CHE MI SERVONO
 
 $dateString = $date->format('Y-m-d');
-$hourString = $date->format('H');
+$inizioFascia = (int)$date->format('H');
+$fineFascia = $inizioFascia ++;
+$hourString = $fineFascia . '-' . $inizioFascia;
+//echo $hourString;
+
 $minuteString = $date->format('i');
 
 
@@ -29,7 +34,10 @@ if($result = $conn->query($sql)){
         <th>fascia_oraria</th>
         <th>id_utente_prenotazione</th> 
         </tr>';
+
         
+        $arrDate = array();
+        $i = 0;
         while($row=$result->fetch_array()){
             echo '<tr>
             <td>' . $row['id_prenotazione']. '</td>
@@ -38,11 +46,36 @@ if($result = $conn->query($sql)){
             <td>' . $row['id_utente_prenotazione'] . '</td>
             </tr>
             ';
+           
+         
+         
+         
+         
+         
+            $firstHour =  substr($row[2], 0, 2);
+           array_push($arrDate,$firstHour);
+           echo ($arrDate[$i]);
+            $i++;
+        if ($row[2] == $hourString && $row[1] == $dateString) {
+                echo "Checkin effettuabile";
+                    //QRCODE VALIDO E GENERABILE 
+
+            }else if (($row[1] == $dateString && $row[2]!=$hourString) && ($arrDate[$i]>$hourString)) {
+               echo "Passare al qrCode Successivo";
+
+               //GENERARE NUOVO QRCODE 
+                
+            } else if (($row[1] == $dateString && $row[2]!=$hourString) && ($arrDate[$i]<$hourString)){
+                echo "Checkin non effettuabile perchè in ritardo";
+            };
+
+
         }
+        
  
         /*check: VERIFICARE ORA E DATA APPUNTAMENTO RISPETTO AD ADESSO 
         if((in_array($hourString,$row['fascia_oraria'])) && $dateString=$row['data_appuntamento']){
-
+          
 
         };*/
 
