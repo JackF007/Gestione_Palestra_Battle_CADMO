@@ -10,9 +10,9 @@
 
 
       <a href="dashboard.php" class="brand-link">
-          <img src="./dist/img/logo.png" alt="Logo" class="brand-image " style="opacity: .8;margin-top: 6px;">
+          <img src="./dist/img/logo.png" alt="Logo" class="brand-image " style="margin-top: 6px;">
 
-          <em class="brand-text font-weight-light">Sportgym</em>
+          <span class="brand-text font-weight-bold "><strong style="font-size: larger;">Sportgym</strong></span>
 
       </a>
       <div class="sidebar">
