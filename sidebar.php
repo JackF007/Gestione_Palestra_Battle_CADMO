@@ -90,7 +90,7 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
-                          <ul>
+                          <ul style="border-radius: 10px; background: white;">
                               <li class="nav-item" style="display: flex; align-items: baseline;">
                                   <div id="comandoLuce" style="width: 50%;">
                                       <?php
@@ -116,11 +116,11 @@
                                       <div class="toggle__fill "></div>
                                       </label>
                                   </div>
-                                  <div class="">
+                                  <div class="" style="margin: auto;">
                                       <?php
                                         if ($rowluce == 0) {
-                                            echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbminimono_105785.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>\"";
-                                        } else echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbflat_106023.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>\"";
+                                            echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbminimono_105785.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>";
+                                        } else echo "  <img id=\"imgluce\" src=\"./dist/img/lightbulbflat_106023.png\" alt=\"OFF\" width=\"40\" height=\"40\" style=\"border: 5px solid white;background: white;border-radius: 50%;    margin: auto;\"></span>";
                                         ?>
 
 
@@ -129,7 +129,7 @@
 
                           </ul>
                           <li class="nav-item">
-                              <div class="range">
+                              <div class="range" style=" margin-left: auto; margin-right: auto;">
                                   <div class="sliderValue">
                                       <span>0°</span>
                                   </div>
@@ -194,7 +194,7 @@
                           class: 'bg-success', //bg-info bg-warning
                           title: 'Domotica',
                           subtitle: '',
-                          body: "Luci:=" + val + "</br>Temperatura:="+temp
+                          body: "Luci:=" + val + "</br>Temperatura:=" + temp
                       })
                   },
                   error: function(jqXHR, textStatus, errorThrown) {
