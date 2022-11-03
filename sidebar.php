@@ -106,12 +106,14 @@
                                                 echo  "<label class=\"toggle\" for=\"myToggleLuce\" style=\"max-width: 40px;margin: 32px auto 20px auto;\">
                                           <input class=\"toggle__input\" type=\"checkbox\" onclick=\"ToggleLuce()\" id=\"myToggleLuce\" value=\"off\" >";
                                             } else {
+
                                                 echo  "<label class=\"toggle\" for=\"myToggleLuce\" style=\"max-width: 40px;margin: 32px auto 20px auto;\">
                                           <input class=\"toggle__input\" type=\"checkbox\" onclick=\"ToggleLuce()\" id=\"myToggleLuce\" value=\"on\" checked>";
                                             }
                                             $rowtemp = $row[2];
                                             $rowluce = $row[1];
                                         }
+
                                         ?>
                                       <div class="toggle__fill "></div>
                                       </label>
@@ -154,7 +156,7 @@
           function ToggleLuce() {
               let img = document.getElementById("imgluce")
               let stato = document.getElementById("myToggleLuce").value
-              console.log(stato)
+
               if (stato == "off") {
                   document.getElementById("myToggleLuce").value = "on"
                   img.src = "./dist/img/lightbulbflat_106023.png";
@@ -171,39 +173,61 @@
 
 
           $("#myToggleLuce").change(function() {
-              send()
+              sendval()
           });
           $("#temper").change(function() {
-              send()
+              sendtemp()
           });
 
-          function send() {
+          function succes() {
               var val = document.getElementById("myToggleLuce").value;
               var temp = document.getElementById("temper").value
+              $(document).Toasts('create', {
+                  class: 'bg-success', //bg-info bg-warning
+                  title: 'Domotica',
+                  subtitle: '',
+                  body: "Luci:=" + val + "</br>Temperatura:=" + temp
+              })
+          }
 
-
+          function sendval() {
+              var val = document.getElementById("myToggleLuce").value;
               $.ajax({
                   url: "domoticaupload.php",
                   type: "post",
                   data: {
-                      temperatura: temp,
-                      luce: val
+                      luce: val,
+                     
                   },
+
+
                   success: function(response) {
-                      $(document).Toasts('create', {
-                          class: 'bg-success', //bg-info bg-warning
-                          title: 'Domotica',
-                          subtitle: '',
-                          body: "Luci:=" + val + "</br>Temperatura:=" + temp
-                      })
+                      succes()
                   },
                   error: function(jqXHR, textStatus, errorThrown) {
                       console.log(textStatus, errorThrown);
                   }
 
               });
-
           }
+
+          function sendtemp() {
+              var temp = document.getElementById("temper").value
+              $.ajax({
+                  url: "domoticaupload.php",
+                  type: "post",
+                  data: {
+                      temperatura: temp,
+                  },
+                  success: function(response) {
+                      succes()
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                      console.log(textStatus, errorThrown);
+                  }
+              });
+          }
+          
       </script>
 
 
