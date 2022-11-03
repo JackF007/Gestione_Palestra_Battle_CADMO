@@ -227,7 +227,7 @@ $mail_log = $_SESSION['session_email'];
         $(function() {
             $("#example1").DataTable({
 
-                "zeroRecords": "No records to display",
+                "zeroRecords": "Nessun risultato",
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,

@@ -252,12 +252,7 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
                                         <li class="list-group-item">
                                             <b>Codice Fiscale</b> <a class="float-right"><?php echo $cf ?></a>
                                         </li>
-
-
-
                                     </ul>
-
-                                    <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

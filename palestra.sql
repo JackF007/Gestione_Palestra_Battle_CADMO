@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Ott 20, 2022 alle 15:28
--- Versione del server: 8.0.29
--- Versione PHP: 7.4.29
+-- Creato il: Nov 03, 2022 alle 22:46
+-- Versione del server: 8.0.30
+-- Versione PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,6 +42,25 @@ INSERT INTO `attivita` (`id_attivita`, `nome_attivita`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `domotica`
+--
+
+CREATE TABLE `domotica` (
+  `iddom` int NOT NULL,
+  `luci` int DEFAULT NULL,
+  `temperatura` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dump dei dati per la tabella `domotica`
+--
+
+INSERT INTO `domotica` (`iddom`, `luci`, `temperatura`) VALUES
+(1, 0, 50);
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `login`
 --
 
@@ -59,7 +78,7 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`login_id`, `email`, `password`, `ruolo`, `stato`) VALUES
 (1, 'danilocaruso87@gmail.com', '$2y$10$6lVGpu1rxKQnGzqjBL7hOuvLGysulf4t0TT4I5.K9Xdg7m3LUEra2', 'amministrazione', 1),
-(2, 'menninti@gmail.com', '$2y$10$aQ.1Vc8e1INWtmAqHnPzYOq2Swa6CiBAiUCBALPcH6JgQ3/pAbACu', 'cliente', 1),
+(2, 'menniti@gmail.com', '$2y$10$aQ.1Vc8e1INWtmAqHnPzYOq2Swa6CiBAiUCBALPcH6JgQ3/pAbACu', 'cliente', 1),
 (3, 'admin@admin.com', '$2y$10$GZdH.QbYpUVCgYKrQyWbiupCpZ1zMABr4ayguPsETFE.ACnIXXidW', 'amministrazione', 1);
 
 -- --------------------------------------------------------
@@ -86,7 +105,9 @@ CREATE TABLE `prenotazioni` (
 
 INSERT INTO `prenotazioni` (`id_prenotazione`, `data_effettuazione`, `str_data`, `data_appuntamento`, `fascia_oraria`, `id_utente_prenotazione`, `tipo_attivita`, `stato_prenotazione`, `presenza`) VALUES
 (1, '2022-11-10', 1665439200, '2022-10-11', '08-09', 3, 1, 'intatta', ''),
-(2, '2022-10-19', 1666130400, '2022-10-19', '09-10', 3, 1, 'intatta', '');
+(2, '2022-10-19', 1666130400, '2022-10-19', '09-10', 3, 1, 'intatta', ''),
+(3, '2022-11-03', 1667430000, '2022-11-03', '09-10', 4, 1, 'modificata', 'False'),
+(4, '2022-11-03', 1667430000, '2022-11-03', '08-09', 4, 1, 'intatta', 'False');
 
 -- --------------------------------------------------------
 
@@ -122,6 +143,13 @@ INSERT INTO `utenti` (`id_utente`, `nome`, `cognome`, `login_id`, `numero_telefo
 --
 ALTER TABLE `attivita`
   ADD PRIMARY KEY (`id_attivita`);
+
+--
+-- Indici per le tabelle `domotica`
+--
+ALTER TABLE `domotica`
+  ADD PRIMARY KEY (`iddom`),
+  ADD UNIQUE KEY `iddom_UNIQUE` (`iddom`);
 
 --
 -- Indici per le tabelle `login`
@@ -167,7 +195,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT per la tabella `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  MODIFY `id_prenotazione` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prenotazione` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`

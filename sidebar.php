@@ -172,12 +172,7 @@
 
 
 
-          $("#myToggleLuce").change(function() {
-              sendval()
-          });
-          $("#temper").change(function() {
-              sendtemp()
-          });
+
 
           function succes() {
               var val = document.getElementById("myToggleLuce").value;
@@ -228,6 +223,12 @@
               });
           }
           
+          $("#myToggleLuce").change(function() {
+              sendval();
+          });
+          $("#temper").change(function() {
+              sendtemp();
+          });
       </script>
 
 
