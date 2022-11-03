@@ -257,3 +257,29 @@ img {
   max-width:200px;
   max-height:200px;
 }
+
+a.cal_blue{
+    display: block;
+    text-align: center;
+    background: aliceblue;
+     padding: 0.75rem;
+    color: #007bff;
+
+}
+
+a.cal_red{
+    display: block;
+    text-align: center;
+    background: indianred;
+    padding: 0.75rem;
+    color: white;
+
+}
+a.cal_green{
+    display: block;
+    text-align: center;
+    background: darkseagreen;
+    padding: 0.75rem;
+    color: white;
+
+}

@@ -1,5 +1,23 @@
 <?php
 
+session_start();
+
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+    $_SESSION = array();
+    session_destroy();
+    header("Location: ./login.php?timeout=1");
+}
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+
+
+if (!(isset($_SESSION['session_id']))) {
+    header("location:login.php");
+}
+
+$mail_log = $_SESSION['session_email'];
+
+
+
 if ($_POST['temperatura']) {
 
 $vartemp= ($_POST['temperatura']);
@@ -25,10 +43,24 @@ if ($_POST['luce']) {
     $sql = "UPDATE domotica SET luci = $varluce  WHERE iddom= 1";
     $result = mysqli_query($con, $sql);
 
-    $data = []; // Save the data into an arbitrary array.
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+      // header location profilo.php?check=1
+    }
+  
+
+
+if ($_GET['id']) {
+
+    $idcheck = intval($_GET['id']);
+  
+    include 'config.php';
+    $sql = "UPDATE prenotazioni SET presenza = 'True'  WHERE id_prenotazione= $idcheck";
+    $result = mysqli_query($con, $sql);
+
     while ($row = mysqli_fetch_assoc($result)) {
         $data[] = $row;
     }
-    echo json_encode($data); // This will encode the data into a variable that JavaScript can decode. 
+   // echo json_encode($data); // This will encode the data into a variable that JavaScript can decode. 
 }
 ?>

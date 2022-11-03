@@ -742,7 +742,7 @@ $con->close();
                                                 echo "<tr>\n"; //apro una riga calendario
                                             }
                                             if ($j < $lunedi) {
-                                                echo "<td> </td>\n"; //righe vuote
+                                                echo "<td style=\"padding: 0;\"> </td>\n"; //righe vuote
 
                                             } else {
 
@@ -783,22 +783,22 @@ $con->close();
 
                                                     if ($kont == 8) {
 
-                                                        $day = "<span class=\"linkmax\"><a href=\"prenotazioni.php?day=$data\">$day</a></span>";
+                                                        $day = "<a class=\"cal_red\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     } else {
 
-                                                        $day = "<a style=\"color:green\" href=\"prenotazioni.php?day=$data\">$day</a></span>";
+                                                        $day = "<a class=\"cal_green\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     }
                                                 } else {
-                                                    $day = "<a href=\"prenotazioni.php?day=$data\">$day</a>";
+                                                    $day = "<a class=\"cal_blue\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                 }
 
 
 
 
                                                 if ($data != $oggi) {
-                                                    echo "<td>" . $day . "</td>";
+                                                    echo "<td style=\"padding: 0;\">" . $day . "</td>";
                                                 } else {
-                                                    echo "<td><b>" . $day . "</b></td>";
+                                                    echo "<td style=\"padding: 0;\"><b>" . $day . "</b></td>";
                                                 }
 
 
