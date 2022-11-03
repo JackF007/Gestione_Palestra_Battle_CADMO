@@ -43,11 +43,13 @@ if ($_POST['luce']) {
     $sql = "UPDATE domotica SET luci = $varluce  WHERE iddom= 1";
     $result = mysqli_query($con, $sql);
 
-    
+    $data = []; // Save the data into an arbitrary array.
     while ($row = mysqli_fetch_assoc($result)) {
-      // header location profilo.php?check=1
+        $data[] = $row;
     }
-  
+    echo json_encode($data); // This will encode the data into a variable that JavaScript can decode. 
+}
+
 
 
 if ($_GET['id']) {
