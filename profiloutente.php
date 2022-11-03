@@ -58,8 +58,9 @@ while ($row = mysqli_fetch_array($mysqli, MYSQLI_NUM)) {
     $trovato = true;
     $idPrenotazione = $row[0];
 }
+if($trovato==true){
 $idx = $idPrenotazione;
-$pathCheckin = 'http://www.domoticaupload.php?id='. $idx;
+$pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
 ?>
 
 
