@@ -196,19 +196,7 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;
 
         </aside>
 
-        <?php
-
-        if (isset($_GET['cancellato'])) {
-
-            $cancellato = htmlspecialchars($_GET['cancellato']);
-            if ($cancellato == 1) {
-                echo "<script>successinserimento();</script>";
-            } else {
-                echo "<script>notsuccessinserimento();</script>";
-            }
-        }
-
-        ?>
+    
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -562,6 +550,8 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;
     <script src="qrcode.min.js"></script>
 
     <script>
+    
+    
         function logout() {
             window.location = "./logout.php";
 
@@ -630,7 +620,19 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;
 
     ?>
 
+    <?php
 
+        if (isset($_GET['cancellato'])) {
+
+            $cancellato = htmlspecialchars($_GET['cancellato']);
+            if ($cancellato == 1) {
+                echo "<script>successinserimento();</script>";
+            } else {
+                echo "<script>notsuccessinserimento();</script>";
+            }
+        }
+
+        ?>
 
 
 

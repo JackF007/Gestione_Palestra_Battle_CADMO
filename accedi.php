@@ -22,7 +22,7 @@ if (isset($_POST['login'])) { // login è il nome del bottone
 
     if (empty($email) || empty($password)) {
 
-        echo "mail o pass vuoti";
+        header('Location:./login.php'); 
     } else {
         $e = "'" . $email . "'";
         $risultato = $con->query("SELECT password , ruolo , login_id FROM login where email=$e and stato=1"); //cerca soltanto il email utente per poi controllare la password
