@@ -163,27 +163,19 @@ $pathCheckin = 'http://www.domoticaupload.php?id=' . $idx;
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item" style=" background: white;border-radius: 0.25rem;"">
+                            <a href=" profiloutente.php" class="nav-link active" style="background: white; color: #343a40;">
+                            <i class="nav-icon fa fa-solid fa-check-double"></i>
+                            <p>
+                                Checkin
+                            </p>
+                            </a>
+                            <div class="nav-itemCheckIn" style=" width: 100%; ">
+                                <div id="qrcode"></div>
 
-                        <div class="nav-itemCheckIn">
+                            </div>
 
-
-                            <span class="nav-itemCheckIn_icon">
-                                <ion-icon name="checkmark-done-circle-outline"></ion-icon>
-                            </span>
-                            <span class="nav-itemCheckIn__text">Check-In</span>
-
-                            <!--           <input type="text" class="qrCode" id="qr-data" onchange="generateQR()"> -->
-
-                            <div id="qrcode"></div>
-
-
-
-
-
-
-
-
-                        </div>
+                        </li>
 
                     </ul>
 

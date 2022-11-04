@@ -233,7 +233,7 @@ height: 70vh;
 .nav-itemCheckIn {
   color:#c2c7d0;
   padding: 1em;
-border-radius: 1em;
+border-radius: 0.25rem;;
 background: white;
 
 }
@@ -283,3 +283,4 @@ a.cal_green{
 #qrcode > img{
 width: 100%;
 }
+

@@ -33,7 +33,7 @@ $fineFascia = $dateOra + 1;
 
 
 //$hourString = $dateOra . '-' . $fineFascia;//togliere commento in produzione
-$hourString = ("08-09");// fascia di test cancellare in produzione
+$hourString = ("08-09"); // fascia di test cancellare in produzione
 
 
 
@@ -58,9 +58,10 @@ while ($row = mysqli_fetch_array($mysqli, MYSQLI_NUM)) {
     $trovato = true;
     $idPrenotazione = $row[0];
 }
-if($trovato==true){
-$idx = $idPrenotazione;
-$pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
+if ($trovato == true) {
+    $idx = $idPrenotazione;
+    $pathCheckin = 'http://www.domoticaupload.php?id=' . $idx;
+}
 ?>
 
 
@@ -159,27 +160,21 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item" style=" background: white;border-radius: 0.25rem;"">
+                            <a href=" profiloutente.php" class="nav-link active" style="background: white; color: #343a40;">
+                            <i class="nav-icon fa fa-solid fa-check-double"></i>
+                            <p>
+                                Checkin
+                            </p>
+                            </a>
+                            <div class="nav-itemCheckIn" style=" width: 100%; ">
+                                <div id="qrcode"></div>
 
-                        <div class="nav-itemCheckIn">
+                            </div>
 
-
-                            <span class="nav-itemCheckIn_icon">
-                                <ion-icon name="checkmark-done-circle-outline"></ion-icon>
-                            </span>
-                            <span class="nav-itemCheckIn__text">Check-In</span>
-
-                            <!--           <input type="text" class="qrCode" id="qr-data" onchange="generateQR()"> -->
-
-                            <div id="qrcode"></div>
-
-
-
+                        </li>
 
 
-
-
-
-                        </div>
 
                     </ul>
 
@@ -197,7 +192,7 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
 
         </aside>
 
-    
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -241,16 +236,20 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
 
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
-                                            <b>Email</b> <a class="float-right"><?php echo $email ?></a>
+                                            <b>Email</b>
+                                            <p class="float-right"><?php echo $email ?></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Numero telefono</b> <a class="float-right"><?php echo $telefono ?></a>
+                                            <b>Numero telefono</b>
+                                            <p class="float-right"><?php echo $telefono ?></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Data Nascita</b> <a class="float-right"><?php echo $data ?></a>
+                                            <b>Data Nascita</b>
+                                            <p class="float-right"><?php echo $data ?></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Codice Fiscale</b> <a class="float-right"><?php echo $cf ?></a>
+                                            <b>Codice Fiscale</b>
+                                            <p class="float-right"><?php echo $cf ?></p>
                                         </li>
                                     </ul>
                                 </div>
@@ -546,8 +545,6 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
     <script src="qrcode.min.js"></script>
 
     <script>
-    
-    
         function logout() {
             window.location = "./logout.php";
 
@@ -593,8 +590,7 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
             })
         };
     </script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
     <?php
 
     if (isset($_GET['prenotato'])) {
@@ -618,17 +614,17 @@ $pathCheckin = 'http://www.domoticaupload.php?id='. $idx;}
 
     <?php
 
-        if (isset($_GET['cancellato'])) {
+    if (isset($_GET['cancellato'])) {
 
-            $cancellato = htmlspecialchars($_GET['cancellato']);
-            if ($cancellato == 1) {
-                echo "<script>successinserimento();</script>";
-            } else {
-                echo "<script>notsuccessinserimento();</script>";
-            }
+        $cancellato = htmlspecialchars($_GET['cancellato']);
+        if ($cancellato == 1) {
+            echo "<script>successinserimento();</script>";
+        } else {
+            echo "<script>notsuccessinserimento();</script>";
         }
+    }
 
-        ?>
+    ?>
 
 
 
