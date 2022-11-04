@@ -1,3 +1,12 @@
+
+<script>
+    //per poter scegliere quale data ti interessa sapere le statistiche sugli appuntamenti
+    function scegli_data(){
+            let data_scelta = document.getElementById("scegli_data").value;
+            document.getElementById("demo").innerHTML = data_scelta;
+        }
+</script>
+
 <?php
 session_start();
 
@@ -14,7 +23,7 @@ if (!(isset($_SESSION['session_id']))) {
 } else if ("amministrazione" != $session_ruolo) {
     header("location:profiloutente.php");
 }
-
+//dati delle prenotazioni odierne
 $mail_log = $_SESSION['session_email'];
 $k8_9 = 0;
 $k9_10 = 0;
@@ -51,7 +60,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 }
 mysqli_free_result($result);
 
-///////////////////
+//dati delle prenotazioni settimanali
 
 $S8_9 = 0;
 $S9_10 = 0;
@@ -110,7 +119,7 @@ mysqli_free_result($result);
 
 
 
-/////////////////////////
+//Dati delle prenotazioni mensili
 $M8_9 = 0;
 $M9_10 = 0;
 $M10_11 = 0;
@@ -153,7 +162,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 mysqli_free_result($result);
 
 
-/////////////////////////
+//dati delle prenotazioni annue
 $A8_9 = 0;
 $A9_10 = 0;
 $A10_11 = 0;
@@ -196,11 +205,6 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 mysqli_free_result($result);
 
 $con->close();
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -238,6 +242,15 @@ $con->close();
                         <div class="col-sm-6">
                             <h1 class="m-0">Dashboard</h1>
                         </div>
+                        <div class="input-group mb-3">
+                            <form action="./upload_data.php" method="post">
+                                <input type="date" class="form-control" id="scegli_data">
+                                <button class="form-control" type="submit" name="scegli_data" onclick="scegli_data()">scegli la data</button>
+                                <p id="demo">La data che hai scelto è:</p>
+                            </form>
+                        <div class="input-group-append">
+                        </div>
+                        </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -267,11 +280,9 @@ $con->close();
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-
                             </div>
                             <div class="w-100">
                                 <div class="card">
-
                                     <div id="accordion">
                                         <div class="card card-info">
                                             <div class="card-header">
@@ -283,7 +294,6 @@ $con->close();
                                             </div>
                                             <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
                                                 <div class="card">
-
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -340,11 +350,8 @@ $con->close();
                                                     </div>
                                                     <!-- /.card-body -->
                                                 </div>
-
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -361,13 +368,10 @@ $con->close();
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
-
                                 </div>
-
                             </div>
                             <div class="w-100">
                                 <div class="card">
-
                                     <div id="accordion2">
                                         <div class="card card-success">
                                             <div class="card-header">
@@ -379,7 +383,6 @@ $con->close();
                                             </div>
                                             <div id="collapsetwo" class="collapse" data-parent="#accordion2" style="">
                                                 <div class="card">
-
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -747,20 +750,13 @@ $con->close();
                                             } else {
 
                                                 $day = $j - ($lunedi - 1); // cicla ogni gg
-
-
                                                 $data = strtotime(date($y . "-" . $m . "-" . $day)); // cicla ogni data numerica
                                                 $oggi = strtotime(date("Y-m-d"));
                                                 $kont = 0;
-
                                                 $trov = False;
-
                                                 include 'config.php';
-
                                                 $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and ( stato_prenotazione='intatta'or stato_prenotazione='modificata')";
                                                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-
-
                                                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                                                     if ($row[0] == (string)$data) {
 
@@ -780,29 +776,19 @@ $con->close();
                                                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                                                         if ($row[0] == $data) $kont++;
                                                     }
-
                                                     if ($kont == 8) {
-
                                                         $day = "<a class=\"cal_red\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     } else {
-
                                                         $day = "<a class=\"cal_green\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     }
                                                 } else {
                                                     $day = "<a class=\"cal_blue\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                 }
-
-
-
-
                                                 if ($data != $oggi) {
                                                     echo "<td style=\"padding: 0;\">" . $day . "</td>";
                                                 } else {
                                                     echo "<td style=\"padding: 0;\"><b>" . $day . "</b></td>";
                                                 }
-
-
-
                                                 /* fine ciclo mese */
                                             }
                                             if ($j % $cols == 0) {
@@ -812,11 +798,9 @@ $con->close();
                                         echo "<tr></tr>";
                                         echo "</table>";
                                     }
-
                                     ShowCalendar(date("m"), date("Y"));
                                     ?>
                                     <!-- Main content -->
-
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -843,8 +827,6 @@ $con->close();
                                     </div>
                                     <!-- /. tools -->
                                 </div>
-
-
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table class="table table-striped projects">

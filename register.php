@@ -115,7 +115,6 @@ $mail_log = $_SESSION['session_email'];
                             <div class="input-group mb-3">
                                 <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
                                 <div class="input-group-append">
-
                                 </div>
                             </div>
                             <label for="CF">Codice Fiscale</label>

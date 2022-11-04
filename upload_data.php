@@ -112,6 +112,7 @@ if (isset($_POST['register'])) {
                 } else {
 
                     $con->close();
+                    
                     $url = "Location: register.php?inserito=0";
                     header($url);
                 }
@@ -140,3 +141,9 @@ if (isset($_POST['Delete'])) {
 }
  if (!(isset($_POST))) {
     header("location:utenti.php"); }
+
+// per scegliere la data if (isset($_POST['register'])) {
+if (isset($_POST['scegli_data'])) {
+    $scegli_data = $_POST['scegli_data'] ?? '';
+    header("Location: dashboard.php?datacambiata='$scegli_data'");
+}
