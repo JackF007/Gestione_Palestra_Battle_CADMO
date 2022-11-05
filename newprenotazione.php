@@ -31,14 +31,7 @@ $tmp = str_replace($radice, '', $t); // pagina
 
 require_once('config.php');
 $oggi = strtotime(date("Y-m-d"));
-//DATA ED ORA ATTUALE CALCOLATA PER CONFRONTI
-$getTimeStamp = '2013-09-26 13:06:00';
 
-$date = new \DateTime($getTimeStamp);
-
-/// MI RICAVO LA DATA ED ORA ATTUALE, CONNETTO AL DB E SELEZIONO LE COLONNE CHE MI SERVONO
-
-$dateString = date('m-d-Y');
 $dateOra = date('H');
 $fineFascia = $dateOra + 1;
 
@@ -62,16 +55,17 @@ $data = $result["data_nascita"];
 $email = $mail_log;
 
 $trovato = false;
-$mysqli = $con->query("SELECT id_prenotazione FROM prenotazioni WHERE id_utente_prenotazione=$id_utente AND fascia_oraria='$hourString'");
+$mysqli = $con->query("SELECT id_prenotazione FROM prenotazioni WHERE id_utente_prenotazione=$id_utente AND fascia_oraria='$hourString' AND str_data='$oggi' AND stato_prenotazione='intatta'");
 
 
 while ($row = mysqli_fetch_array($mysqli, MYSQLI_NUM)) {
     $trovato = true;
     $idPrenotazione = $row[0];
 }
-$idx = $idPrenotazione;
-$pathCheckin = 'http://www.domoticaupload.php?id=' . $idx;
-
+if ($trovato == true) {
+    $idx = $idPrenotazione;
+    $pathCheckin = 'http://www.domoticaupload.php?id='.$idx;
+}
 ?>
 <html lang="en">
 
@@ -163,7 +157,7 @@ $pathCheckin = 'http://www.domoticaupload.php?id=' . $idx;
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item" style=" background: white;border-radius: 0.25rem;"">
+                        <li class="nav-item" style=" background: white;border-radius: 0.25rem; width:100%"">
                             <a href=" profiloutente.php" class="nav-link active" style="background: white; color: #343a40;">
                             <i class="nav-icon fa fa-solid fa-check-double"></i>
                             <p>
