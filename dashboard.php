@@ -1,12 +1,3 @@
-
-<script>
-    //per poter scegliere quale data ti interessa sapere le statistiche sugli appuntamenti
-    function scegli_data(){
-            let data_scelta = document.getElementById("scegli_data").value;
-            document.getElementById("demo").innerHTML = data_scelta;
-        }
-</script>
-
 <?php
 session_start();
 
@@ -23,7 +14,7 @@ if (!(isset($_SESSION['session_id']))) {
 } else if ("amministrazione" != $session_ruolo) {
     header("location:profiloutente.php");
 }
-//dati delle prenotazioni odierne
+
 $mail_log = $_SESSION['session_email'];
 $k8_9 = 0;
 $k9_10 = 0;
@@ -60,7 +51,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 }
 mysqli_free_result($result);
 
-//dati delle prenotazioni settimanali
+///////////////////
 
 $S8_9 = 0;
 $S9_10 = 0;
@@ -119,7 +110,7 @@ mysqli_free_result($result);
 
 
 
-//Dati delle prenotazioni mensili
+/////////////////////////
 $M8_9 = 0;
 $M9_10 = 0;
 $M10_11 = 0;
@@ -162,7 +153,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 mysqli_free_result($result);
 
 
-//dati delle prenotazioni annue
+/////////////////////////
 $A8_9 = 0;
 $A9_10 = 0;
 $A10_11 = 0;
@@ -205,6 +196,11 @@ while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
 mysqli_free_result($result);
 
 $con->close();
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -223,7 +219,7 @@ $con->close();
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="./dist/css/custom.css">
- 
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -241,15 +237,6 @@ $con->close();
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">Dashboard</h1>
-                        </div>
-                        <div class="input-group mb-3">
-                            <form action="./upload_data.php" method="post">
-                                <input type="date" class="form-control" id="scegli_data">
-                                <button class="form-control" type="submit" name="scegli_data" onclick="scegli_data()">scegli la data</button>
-                                <p id="demo">La data che hai scelto è:</p>
-                            </form>
-                        <div class="input-group-append">
-                        </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -280,9 +267,11 @@ $con->close();
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
+
                             </div>
                             <div class="w-100">
                                 <div class="card">
+
                                     <div id="accordion">
                                         <div class="card card-info">
                                             <div class="card-header">
@@ -294,6 +283,7 @@ $con->close();
                                             </div>
                                             <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
                                                 <div class="card">
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -350,8 +340,11 @@ $con->close();
                                                     </div>
                                                     <!-- /.card-body -->
                                                 </div>
+
                                             </div>
                                         </div>
+
+
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
@@ -368,10 +361,13 @@ $con->close();
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
+
                                 </div>
+
                             </div>
                             <div class="w-100">
                                 <div class="card">
+
                                     <div id="accordion2">
                                         <div class="card card-success">
                                             <div class="card-header">
@@ -383,6 +379,7 @@ $con->close();
                                             </div>
                                             <div id="collapsetwo" class="collapse" data-parent="#accordion2" style="">
                                                 <div class="card">
+
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -750,13 +747,20 @@ $con->close();
                                             } else {
 
                                                 $day = $j - ($lunedi - 1); // cicla ogni gg
+
+
                                                 $data = strtotime(date($y . "-" . $m . "-" . $day)); // cicla ogni data numerica
                                                 $oggi = strtotime(date("Y-m-d"));
                                                 $kont = 0;
+
                                                 $trov = False;
+
                                                 include 'config.php';
+
                                                 $sql = "SELECT str_data FROM prenotazioni where month(data_appuntamento)=$m and year(data_appuntamento)=$y and ( stato_prenotazione='intatta'or stato_prenotazione='modificata')";
                                                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+
                                                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                                                     if ($row[0] == (string)$data) {
 
@@ -776,19 +780,29 @@ $con->close();
                                                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                                                         if ($row[0] == $data) $kont++;
                                                     }
+
                                                     if ($kont == 8) {
+
                                                         $day = "<a class=\"cal_red\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     } else {
+
                                                         $day = "<a class=\"cal_green\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                     }
                                                 } else {
                                                     $day = "<a class=\"cal_blue\" href=\"prenotazioni.php?day=$data\">$day</a>";
                                                 }
+
+
+
+
                                                 if ($data != $oggi) {
                                                     echo "<td style=\"padding: 0;\">" . $day . "</td>";
                                                 } else {
                                                     echo "<td style=\"padding: 0;\"><b>" . $day . "</b></td>";
                                                 }
+
+
+
                                                 /* fine ciclo mese */
                                             }
                                             if ($j % $cols == 0) {
@@ -798,9 +812,11 @@ $con->close();
                                         echo "<tr></tr>";
                                         echo "</table>";
                                     }
+
                                     ShowCalendar(date("m"), date("Y"));
                                     ?>
                                     <!-- Main content -->
+
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -827,6 +843,8 @@ $con->close();
                                     </div>
                                     <!-- /. tools -->
                                 </div>
+
+
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table class="table table-striped projects">
@@ -854,7 +872,7 @@ $con->close();
                                             <?php
                                             $oggi = strtotime(date("Y-m-d"));
                                             include 'config.php';
-                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome ,p.presenza FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE str_data=$oggi and ( stato_prenotazione='intatta'or stato_prenotazione='modificata') order by p.fascia_oraria ";
+                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome ,p.presenza FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE p.str_data=$oggi and ( p.stato_prenotazione='intatta'or p.stato_prenotazione='modificata') order by p.fascia_oraria ";
                                             $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                                             if (mysqli_num_rows($result) > 0) {
                                                 while ($fetch = mysqli_fetch_array($result)) {
@@ -865,7 +883,7 @@ $con->close();
                                                     $utenteid = stripslashes($fetch['id_utente_prenotazione']);
                                                     $utenteN = stripslashes($fetch['nome']);
                                                     $utenteC = stripslashes($fetch['cognome']);
-                                                    $check= stripslashes($fetch['presenza']);
+                                                    $check = stripslashes($fetch['presenza']);
                                                     include 'element.php';
                                                 }
                                             }
@@ -878,11 +896,138 @@ $con->close();
                             </div>
                         </section>
                     </div>
+                    <div class="row">
+                        <section class="col-lg-12 connectedSortable" style="background: #007bff;
+    border-radius: 0.25rem;
+    color: white;
+">
+                            <div class="card-header border-0">
+                                <h3 class="card-title">
+                                    <i class="far fa-calendar-alt"></i> Cerca prenotazioni
+                                </h3>
+
+                                <!-- /. tools -->
+                            </div>
+                            <div class="card-body background: rgb(0 123 255);display: block;color: white;">
+
+                                <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true" style="
+    border: 1px solid white;
+   
+">Tutte le prenotazioni</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false" style="
+    border: 1px solid white;
+   
+">Ricerca per data</a>
+                                    </li>
+
+                                </ul>
+                                <div class="tab-content" id="custom-content-below-tabContent">
+                                    <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
+                                        <form action="./upload_data.php" method="post">
+                                            <div class="input-group mb-3">
+                                                <input type="hidden" id="tutte" name="ruolo" value="tutte" required>
+                                            </div>
+                                            <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
+                                                <button type="submit" class="btn btn-primary btn-block w-100" name="register">Tutte le prenotazioni</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
+                                        <form action="./upload_data.php" method="post">
+                                            <div class="row">
+                                                <label for="data_dal">Dal</label>
+                                                <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
+                                                <label for="data_dal">Al</label>
+                                                <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
+                                            </div>
+                                            <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
+                                                <button type="submit" class="btn btn-primary btn-block w-100" name="register">Cerca per data</button>
+                                                <!-- /.col -->
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+
+
+                                <hr>
+
+                            </div>
+                        </section>
+                    </div>
+                    <!-- /.cadird-header -->
+                    <!-- Left col -->
+                    <section class="col-lg-12 connectedSortable">
+                        <div class="card">
+                            <div class="card-header border-0">
+
+                                <div class="card-tools">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+
+                                    <thead>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>data prenotazione</th>
+                                            <th>data appuntamento</th>
+                                            <th>fascia_oraria</th>
+                                            <th>tipo attivita</th>
+                                            <th>stato prenotazione</th>
+                                            <th>check in</th>
+                                            <th>Utente</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                        include 'config.php';
+                                        $risultato = $con->query("SELECT p.id_prenotazione,  p.data_effettuazione, p.data_appuntamento, p.fascia_oraria, a.nome_attivita  , p.stato_prenotazione,p.presenza, p.id_utente_prenotazione,  u.nome , u.cognome , p.str_data FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join login as l on l.login_id = u.login_id  join attivita as a on p.tipo_attivita = a.id_attivita WHERE p.str_data>1 and l.stato>0 order by p.data_appuntamento desc ");
+
+                                        while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
+
+                                            echo "<tr>";
+
+                                            echo "<td> $row[0]</td>";
+                                            echo "<td> $row[1]</td>";
+                                            echo "<td> $row[2]</td>";
+                                            echo "<td> $row[3]</td>";
+                                            echo "<td> $row[4]</td>";
+
+                                            echo "<td> $row[5]</td>";
+                                            echo "<td> $row[6]</td>";
+
+
+                                            echo "<td> $row[8] $row[9]</td>";
+                                            echo " </tr>";
+                                        }
+                                        $con->close();
+
+                                        ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </section>
                 </div>
-            </section>
-
-
         </div>
+        </section>
+
+
+    </div>
 
     </div>
     <!-- /.content-wrapper -->
@@ -918,6 +1063,17 @@ $con->close();
             window.location = "./logout.php";
 
         };
+        $(function() {
+            $("#example1").DataTable({
+
+                "zeroRecords": "No records to display",
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": true,
+
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+        });
     </script>
 
 </body>

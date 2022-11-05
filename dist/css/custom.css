@@ -284,3 +284,7 @@ a.cal_green{
 width: 100%;
 }
 
+#custom-content-below-profile-tab, #custom-content-below-home-tab {
+ 
+    color: #495057;
+}
