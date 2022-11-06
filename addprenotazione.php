@@ -77,23 +77,20 @@ $mail_log = $_SESSION['session_email'];
 
             if ((isset($_POST['day']) && isset($_POST['fascia']))) { // passaggio valori automatici
                 $day = $_POST['day'];
-
+                $m = (date("m", (int)$_POST['day']));
+                $y = (date("Y", (int)$_POST['day']));
+                $d  = (date("d", (int)$_POST['day']));
                 $fascia = $_POST['fascia'];
                 $fascia = unserialize(urldecode($fascia));
                 include 'config.php';
-                $sql = "SELECT COUNT(*) FROM prenotazioni WHERE str_data=$day and stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata'"; //count su
+                $sql = "SELECT  COUNT('id_prenotazione') AS idp  FROM prenotazioni WHERE str_data='$day' and stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-
-                    if ($row[0] < 8) {
-
-                        $m = (date("m", (int)$_POST['day']));
-                        $y = (date("Y", (int)$_POST['day']));
-                        $d  = (date("d", (int)$_POST['day']));
-                    } else {
-                        header("location:dashboard.php");
-                    }
-                }
+                $row = mysqli_fetch_array($result, MYSQLI_NUM);
+                $numrow= $row[0]-1;
+                   
+                    if($numrow>=8) header("location:dashboard.php"); 
+                    
+                
             }
             ?>
 

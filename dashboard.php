@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
     $_SESSION = array();
     session_destroy();
     header("Location: ./login.php?timeout=1");
@@ -1017,9 +1017,9 @@ $con->close();
     <!-- ChartJS -->
     <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="plugins/chart.js/Chart.min.js"></script>
-    
+
     <script src="./dist/js/adminlte.min.js"></script>
-   
+
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)

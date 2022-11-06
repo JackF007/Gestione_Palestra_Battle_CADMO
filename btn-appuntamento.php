@@ -1,4 +1,3 @@
-
 <form action='addprenotazione.php' method='post'>
 
   <input name='day' type='hidden' value=<?php echo $day ?>>
