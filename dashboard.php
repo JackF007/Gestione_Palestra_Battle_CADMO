@@ -972,11 +972,17 @@ $con->close();
                                 <!-- /. tools -->
                             </div>
 
+
+
+
                             <div class="card-body" id="success">
 
 
 
                             </div>
+
+
+
 
                         </div>
                     </section>
@@ -1008,11 +1014,16 @@ $con->close();
     <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="./dist/js/adminlte.min.js"></script>
+    <!-- ChartJS -->
     <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="plugins/chart.js/Chart.min.js"></script>
+    
+    <script src="./dist/js/adminlte.min.js"></script>
+   
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
+        // Sales graph chart
     </script>
 
 
@@ -1036,6 +1047,7 @@ $con->close();
             window.location = "./logout.php";
 
         };
+
         $(function() {
             $("#example1").DataTable({
 
