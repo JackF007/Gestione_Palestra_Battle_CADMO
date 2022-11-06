@@ -126,7 +126,7 @@ $email = $risultato_bello["email"];
 
                                     </ul>
 
-                                    <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
+                                   
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -215,7 +215,7 @@ $email = $risultato_bello["email"];
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <label for="data_nascita">data_nascita</label>
+                                                <label for="data_nascita">Data nascita</label>
                                                 <div class="input-group mb-3">
                                                     <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required value=<?php echo ("$data"); ?>>
                                                     <div class="input-group-append">
@@ -304,7 +304,7 @@ $email = $risultato_bello["email"];
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2022 SportGym .</strong> All rights reserved.
+        <strong>Copyright &copy; 2022 SportGym .</strong> built together with html.it.
     </footer>
     <!-- Control Sidebar -->
 

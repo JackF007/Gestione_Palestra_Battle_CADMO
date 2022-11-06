@@ -35,6 +35,17 @@
 
 
                 echo "<td> $row[8] $row[9]</td>";
+                echo "<td class=\"project-actions text-right\">
+                                                <ul class=\"list-inline\">
+                                                <li style=\"margin-bottom:5px;\">
+                                                            <a class=\"btn btn-info btn-sm\" href=\"./schedautente.php?id=$row[7]\">
+                                                             <i class=\"fas fa-folder\"> </i> Scheda Cliente</a>
+                                                            </li>                                                          
+                                                            <li>                                                          
+                                                         <a class=\"btn btn-info btn-sm\" href=\"./prenotazioni.php?day=$row[10]\"><i class=\"fas fa-pencil-alt\"> </i> Scheda Prenotzaioni</a>
+                                                </li>
+                                                </ul>
+                        </td>";
                 echo " </tr>";
 
                 array_push($listgraph, $listaggData);
