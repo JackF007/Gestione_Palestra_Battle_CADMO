@@ -1,10 +1,6 @@
 <?php
 
-
-
 if(isset($_POST["tutte"]) ) {
-
-
 
     include 'inAll.php';
 

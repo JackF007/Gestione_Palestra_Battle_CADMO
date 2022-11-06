@@ -25,8 +25,8 @@ $dateOra = date('H');
 $fineFascia = $dateOra + 1;
 
 
-//$hourString = $dateOra . '-' . $fineFascia;//togliere commento in produzione
-$hourString = ("08-09"); // fascia di test cancellare in produzione
+$hourString = $dateOra . '-' . $fineFascia;//togliere commento in produzione
+//$hourString = ("08-09"); // fascia di test cancellare in produzione
 
 
 

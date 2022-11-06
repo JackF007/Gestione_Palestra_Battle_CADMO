@@ -971,19 +971,11 @@ $con->close();
                                 </div>
                                 <!-- /. tools -->
                             </div>
-
-
-
-
                             <div class="card-body" id="success">
 
 
 
                             </div>
-
-
-
-
                         </div>
                     </section>
                 </div>
@@ -1016,7 +1008,7 @@ $con->close();
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <!-- ChartJS -->
     <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
-    <script src="plugins/chart.js/Chart.min.js"></script>
+    <script src="./plugins/chart.js/Chart.min.js"></script>
 
     <script src="./dist/js/adminlte.min.js"></script>
 
