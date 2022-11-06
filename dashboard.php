@@ -897,10 +897,7 @@ $con->close();
                         </section>
                     </div>
                     <div class="row">
-                        <section class="col-lg-12 connectedSortable" style="background: #007bff;
-    border-radius: 0.25rem;
-    color: white;
-">
+                        <section class="col-lg-12 connectedSortable" style="background: #007bff;border-radius: 0.25rem;color: white;">
                             <div class="card-header border-0">
                                 <h3 class="card-title">
                                     <i class="far fa-calendar-alt"></i> Cerca prenotazioni
@@ -912,40 +909,40 @@ $con->close();
 
                                 <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true" style="
-    border: 1px solid white;
-   
-">Tutte le prenotazioni</a>
+                                        <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true" style="border: 1px solid white;">Tutte le prenotazioni</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false" style="
-    border: 1px solid white;
-   
-">Ricerca per data</a>
+                                        <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false" style="border: 1px solid white;">Ricerca per data</a>
                                     </li>
 
                                 </ul>
                                 <div class="tab-content" id="custom-content-below-tabContent">
                                     <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
-                                        <form action="./upload_data.php" method="post">
+                                        <form id="formAll" action="./ricerca.php" method="post">
                                             <div class="input-group mb-3">
-                                                <input type="hidden" id="tutte" name="ruolo" value="tutte" required>
+                                                <input type="hidden" id="tutte" name="tutte" value="tutte" required>
                                             </div>
                                             <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
-                                                <button type="submit" class="btn btn-primary btn-block w-100" name="register">Tutte le prenotazioni</button>
+                                                <button type="submitAll" class="btn btn-primary btn-block w-100" name="register">Tutte le prenotazioni</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-                                        <form action="./upload_data.php" method="post">
-                                            <div class="row">
-                                                <label for="data_dal">Dal</label>
-                                                <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
-                                                <label for="data_dal">Al</label>
-                                                <input type="date" class="form-control" placeholder="data_nascita" name="data_nascita" required>
+                                        <form action="./ricerca.php" method="post">
+                                            <div class="row " style="margin: auto;justify-content: center;">
+                                                <div class=" col-6">
+                                                    <label for=" dataDal">Dal</label>
+                                                    <input type="date" class="form-control" placeholder="dataDal" name="dataDal" required>
+
+                                                </div>
+                                                <div class=" col-6" style="margin-bottom: 1rem;">
+                                                    <label for="dataAl">Al</label>
+                                                    <input type="date" class="form-control" placeholder="dataAl" name="dataAl" required>
+                                                </div>
                                             </div>
+
                                             <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
-                                                <button type="submit" class="btn btn-primary btn-block w-100" name="register">Cerca per data</button>
+                                                <button type="submitData" class="btn btn-primary btn-block w-100" name="register">Ricerca per data</button>
                                                 <!-- /.col -->
                                             </div>
                                         </form>
@@ -974,50 +971,11 @@ $con->close();
                                 </div>
                                 <!-- /. tools -->
                             </div>
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
 
-                                    <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>data prenotazione</th>
-                                            <th>data appuntamento</th>
-                                            <th>fascia_oraria</th>
-                                            <th>tipo attivita</th>
-                                            <th>stato prenotazione</th>
-                                            <th>check in</th>
-                                            <th>Utente</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-
-                                        include 'config.php';
-                                        $risultato = $con->query("SELECT p.id_prenotazione,  p.data_effettuazione, p.data_appuntamento, p.fascia_oraria, a.nome_attivita  , p.stato_prenotazione,p.presenza, p.id_utente_prenotazione,  u.nome , u.cognome , p.str_data FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join login as l on l.login_id = u.login_id  join attivita as a on p.tipo_attivita = a.id_attivita WHERE p.str_data>1 and l.stato>0 order by p.data_appuntamento desc ");
-
-                                        while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
-
-                                            echo "<tr>";
-
-                                            echo "<td> $row[0]</td>";
-                                            echo "<td> $row[1]</td>";
-                                            echo "<td> $row[2]</td>";
-                                            echo "<td> $row[3]</td>";
-                                            echo "<td> $row[4]</td>";
-
-                                            echo "<td> $row[5]</td>";
-                                            echo "<td> $row[6]</td>";
+                            <div class="card-body" id="success">
 
 
-                                            echo "<td> $row[8] $row[9]</td>";
-                                            echo " </tr>";
-                                        }
-                                        $con->close();
 
-                                        ?>
-
-                                    </tbody>
-                                </table>
                             </div>
 
                         </div>
@@ -1059,6 +1017,21 @@ $con->close();
 
 
     <script>
+        $("form").submit(function(event) {
+            event.preventDefault(); //prevent default action 
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function(response) { //
+                $("#success").html(response);
+            });
+        });
+
         function logout() {
             window.location = "./logout.php";
 
