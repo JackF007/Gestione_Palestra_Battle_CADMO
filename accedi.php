@@ -22,7 +22,7 @@ if (isset($_POST['login'])) { // login è il nome del bottone
 
     if (empty($email) || empty($password)) {
 
-        header('Location:./login.php');
+        header('Location:./index.php');
     } else {
         $e = "'" . $email . "'";
         $risultato = $con->query("SELECT password , ruolo , login_id FROM login where email=$e and stato=1"); //cerca soltanto il email utente per poi controllare la password
@@ -38,7 +38,7 @@ if (isset($_POST['login'])) { // login è il nome del bottone
                 if (password_verify($password,  $result["password"])) { //"password" è la colonna che c'è sul database
                     $verify = "verificato";
                 } else {
-                    header('Location: ./login.php?errpass=1'); //REINDIRIZZA COME SE FOSSE UN LINK
+                    header('Location: ./index.php?errpass=1'); //REINDIRIZZA COME SE FOSSE UN LINK
                 }
             }
 
@@ -62,9 +62,9 @@ if (isset($_POST['login'])) { // login è il nome del bottone
                 exit;
             }
         } else {
-            header('Location: ./login.php?errmail=1'); //REINDIRIZZA COME SE FOSSE UN LINK
+            header('Location: ./index.php?errmail=1'); //REINDIRIZZA COME SE FOSSE UN LINK
         }
     }
 } else {
-    header('Location: login.php');
+    header('Location: index.php');
 }

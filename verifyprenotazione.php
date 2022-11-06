@@ -1,14 +1,14 @@
 <?php
 session_start();
-if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 500)) {
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
     $_SESSION = array();
     session_destroy();
-    header("Location: ./login.php?timeout=1");
+    header("Location: ./index.php?timeout=1");
 }
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
 
 if (!(isset($_SESSION['session_id']))) {
-    header("location:login.php");
+    header("location:index.php");
 }
 
 
