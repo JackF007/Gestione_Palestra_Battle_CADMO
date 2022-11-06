@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Nov 06, 2022 alle 15:51
+-- Creato il: Nov 06, 2022 alle 19:28
 -- Versione del server: 8.0.30
 -- Versione PHP: 8.1.6
 
@@ -110,9 +110,6 @@ INSERT INTO `prenotazioni` (`id_prenotazione`, `data_effettuazione`, `str_data`,
 (2, '2022-10-19', 1666130400, '2022-10-19', '09-10', 3, 1, 'intatta', ''),
 (3, '2022-11-03', 1667430000, '2022-11-03', '09-10', 4, 1, 'modificata', 'False'),
 (4, '2022-11-03', 1667430000, '2022-11-03', '08-09', 4, 1, 'intatta', 'False'),
-(5, '2022-11-06', 1667257200, '2022-11-01', '08-09', 3, 1, 'intatta', 'False'),
-(6, '2022-11-06', 1667257200, '2022-11-01', '09-10', 3, 1, 'intatta', 'False'),
-(7, '2022-11-06', 1667257200, '2022-11-01', '10-11', 3, 1, 'intatta', 'False'),
 (8, '2022-11-06', 1667257200, '2022-11-01', '11-12', 3, 1, 'intatta', 'False'),
 (9, '2022-11-06', 1667257200, '2022-11-01', '12-13', 3, 1, 'intatta', 'False'),
 (10, '2022-11-06', 1667257200, '2022-11-01', '15-16', 3, 1, 'intatta', 'False'),
@@ -166,7 +163,11 @@ INSERT INTO `prenotazioni` (`id_prenotazione`, `data_effettuazione`, `str_data`,
 (58, '2022-11-06', 1667689200, '2022-11-06', '12-13', 3, 1, 'intatta', 'False'),
 (59, '2022-11-06', 1667689200, '2022-11-06', '15-16', 3, 1, 'intatta', 'False'),
 (60, '2022-11-06', 1668898800, '2022-11-20', '09-10', 3, 1, 'intatta', 'False'),
-(61, '2022-11-06', 1668553200, '2022-11-16', '09-10', 3, 1, 'intatta', 'False');
+(61, '2022-11-06', 1668553200, '2022-11-16', '09-10', 3, 1, 'intatta', 'False'),
+(62, '2022-11-06', 1667257200, '2022-11-01', '17-18', 3, 1, 'intatta', 'False'),
+(66, '2022-11-06', 1667257200, '2022-11-01', '08-09', 3, 1, 'intatta', 'False'),
+(68, '2022-11-06', 1667257200, '2022-11-01', '09-10', 3, 1, 'intatta', 'False'),
+(69, '2022-11-06', 1667257200, '2022-11-01', '10-11', 3, 1, 'intatta', 'False');
 
 -- --------------------------------------------------------
 
@@ -255,7 +256,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT per la tabella `prenotazioni`
 --
 ALTER TABLE `prenotazioni`
-  MODIFY `id_prenotazione` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_prenotazione` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT per la tabella `utenti`
