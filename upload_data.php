@@ -2,7 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 10000)) {
     $_SESSION = array();
     session_destroy();
     header("Location: ./index.php?timeout=1");
@@ -122,22 +122,29 @@ if (isset($_POST['register'])) {
 }
 //disattivare
 if (isset($_POST['Delete'])) {
-  
- 
     require_once('config.php');
     $idcanclogin = intval($_POST['id_delete']);
+
+    $ultimo= "SELECT COUNT(*) from login WHERE ruolo = 'amministrazione' AND stato = 1";
 
     $sql2 = "UPDATE login SET stato = 0 WHERE login_id = '$idcanclogin'";
     $url = "Location: utenti.php?cancellato=1";
     $url2 = "Location: utenti.php?cancellato=0";
-    if ($con->query($sql2) === TRUE) {
-        $con->close();
-       
-        header($url);
-    } else {
-        $con->close();
-        header($url2);
-    }  
+    $result = mysqli_query($con, $ultimo);
+    $row = mysqli_fetch_assoc($result);
+    if (current($row)>1) {
+        if ($con->query($sql2) === TRUE) {
+            $con->close();
+        
+           header($url);
+        }
+    }
+    else {
+            $con->close();
+            header($url2);
+        }  
+    
+        
 }
  if (!(isset($_POST))) {
     header("location:utenti.php"); }
