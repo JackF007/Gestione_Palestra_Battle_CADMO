@@ -553,7 +553,6 @@ $con->close();
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-
                             </div>
                             <div class="w-100">
                                 <div class="card">
@@ -569,7 +568,6 @@ $con->close();
                                             </div>
                                             <div id="collapsequattro" class="collapse" data-parent="#accordion4" style="">
                                                 <div class="card">
-
                                                     <!-- /.card-header -->
                                                     <div class="card-body p-0">
                                                         <table class="table table-sm">
@@ -825,77 +823,7 @@ $con->close();
                         <!-- right col -->
                     </div>
                     <!--  row -->
-                    <div class="row">
-                        <!-- Left col -->
-                        <section class="col-lg-12 connectedSortable">
-                            <div class="card">
-                                <div class="card-header border-0">
-                                    <h3 class="card-title">
-                                        <i class="far fa-calendar-alt"></i> Prenotazioni Odierne
-                                    </h3>
-                                    <!-- tools card -->
-                                    <div class="card-tools">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- /. tools -->
-                                </div>
 
-
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table class="table table-striped projects">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 30%">
-                                                    Prenotazione
-                                                </th>
-                                                <th style="width: 10%">
-                                                    #ID
-                                                </th>
-                                                <th style="width: 25%">
-                                                    Cliente
-                                                </th>
-                                                <th style="width: 25%">
-                                                    Fascia oraria
-                                                </th>
-                                                <th style="width: 10%" class="text-center">
-                                                    Check in
-                                                </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $oggi = strtotime(date("Y-m-d"));
-                                            include 'config.php';
-                                            $sql = "SELECT p.id_prenotazione, p.str_data, p.fascia_oraria, a.nome_attivita , p.id_utente_prenotazione , u.nome , u.cognome ,p.presenza FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join attivita as a on p.tipo_attivita = a.id_attivita WHERE p.str_data=$oggi and ( p.stato_prenotazione='intatta'or p.stato_prenotazione='modificata') order by p.fascia_oraria ";
-                                            $result = mysqli_query($con, $sql) or die(mysqli_error($con));
-                                            if (mysqli_num_rows($result) > 0) {
-                                                while ($fetch = mysqli_fetch_array($result)) {
-                                                    $idprenot = stripslashes($fetch['id_prenotazione']);
-                                                    $data = date("d-m-Y", $fetch['str_data']);
-                                                    $fascia = stripslashes($fetch['fascia_oraria']);
-                                                    $attivita = stripslashes($fetch['nome_attivita']);
-                                                    $utenteid = stripslashes($fetch['id_utente_prenotazione']);
-                                                    $utenteN = stripslashes($fetch['nome']);
-                                                    $utenteC = stripslashes($fetch['cognome']);
-                                                    $check = stripslashes($fetch['presenza']);
-                                                    include 'element.php';
-                                                }
-                                            }
-                                            ?>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </section>
-                    </div>
                     <div class="row">
                         <section class="col-lg-12 connectedSortable" style="background: #007bff;border-radius: 0.25rem;color: white;">
                             <div class="card-header border-0">
@@ -923,67 +851,52 @@ $con->close();
                                                 <input type="hidden" id="tutte" name="tutte" value="tutte" required>
                                             </div>
                                             <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
-                                                <button type="submitAll" class="btn btn-primary btn-block w-100" name="register">Tutte le prenotazioni</button>
+                                                <button id="submitAll" type="submitAll" class="btn btn-primary btn-block w-100" name="register">Tutte le prenotazioni</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-                                        <form action="./ricerca.php" method="post">
+                                        <form id="formData" action="./ricerca.php" method="post">
                                             <div class="row " style="margin: auto;justify-content: center;">
                                                 <div class=" col-6">
-                                                    <label for=" dataDal">Dal</label>
+                                                    <label for="dataDal">Dal</label>
                                                     <input type="date" class="form-control" placeholder="dataDal" name="dataDal" required>
-
                                                 </div>
                                                 <div class=" col-6" style="margin-bottom: 1rem;">
                                                     <label for="dataAl">Al</label>
                                                     <input type="date" class="form-control" placeholder="dataAl" name="dataAl" required>
                                                 </div>
                                             </div>
-
                                             <div class="row" style="border: 1px solid #fff;border-radius: 0.25rem;">
-                                                <button type="submitData" class="btn btn-primary btn-block w-100" name="register">Ricerca per data</button>
+                                                <button id="submitData" type="submitData" class="btn btn-primary btn-block w-100" name="register">Ricerca per data</button>
                                                 <!-- /.col -->
                                             </div>
                                         </form>
                                     </div>
-
                                 </div>
-
-
                                 <hr>
-
                             </div>
                         </section>
                     </div>
                     <!-- /.cadird-header -->
                     <!-- Left col -->
-                    <section class="col-lg-12 connectedSortable">
-                        <div class="card">
-                            <div class="card-header border-0">
 
-                                <div class="card-tools">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /. tools -->
-                            </div>
-                            <div class="card-body" id="success">
-
-
-
-                            </div>
-                        </div>
-                    </section>
                 </div>
+
+            </section>
+
+            <div class="card-body" id="success2">
+
+
+
+            </div>
+            <div class="card-body" id="success">
+
+
+
+            </div>
+
         </div>
-        </section>
-
-
-    </div>
 
     </div>
     <!-- /.content-wrapper -->
@@ -1020,12 +933,15 @@ $con->close();
 
 
     <script>
-        $("form").submit(function(event) {
+     
+
+        $("#formAll").submit(function(event) {
             event.preventDefault(); //prevent default action 
             var post_url = $(this).attr("action"); //get form action url
             var request_method = $(this).attr("method"); //get form GET/POST method
             var form_data = $(this).serialize(); //Encode form elements for submission
-
+            $("#success").empty();
+            $("#success2").empty();
             $.ajax({
                 url: post_url,
                 type: request_method,
@@ -1033,24 +949,32 @@ $con->close();
             }).done(function(response) { //
                 $("#success").html(response);
             });
+
+
+        });
+        
+        $("#formData").submit(function(event) {
+            event.preventDefault(); //prevent default action 
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            $("#success").empty();
+            $("#success2").empty();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function(response) { //
+                $("#success2").html(response);
+            });
+
+
         });
 
         function logout() {
             window.location = "./logout.php";
 
         };
-
-        $(function() {
-            $("#example1").DataTable({
-
-                "zeroRecords": "No records to display",
-                "responsive": true,
-                "lengthChange": true,
-                "autoWidth": true,
-
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-
-        });
     </script>
 
 </body>
