@@ -124,6 +124,20 @@ if (isset($_POST['invia-prenotazioneClient'])) {
     $url3 = "Location: prenotazioni.php?day=$str_data&prenotato=0";
     $url4 = "Location: profiloutente.php?day=$str_data&prenotato=0";
 
+    
+    $sql = "SELECT  COUNT('id_prenotazione')  FROM prenotazioni WHERE str_data='$str_data' and stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata'"; //count su
+    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+    $row = mysqli_fetch_array($result, MYSQLI_NUM);
+    $numrow = $row[0] - 1;
+    $siquery = 1;
+    if ($numrow >= 8) {
+        $siquery = 0;
+    }
+if ( $siquery == 0) {
+$con->close();
+    header($url4);}
+
+
     $query = "SELECT id_utente FROM utenti where login_id ='$idlogin'";
 
     $result = $con->query($query);

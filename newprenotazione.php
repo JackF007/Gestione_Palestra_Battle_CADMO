@@ -8,7 +8,7 @@ session_start();
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
     $_SESSION = array();
     session_destroy();
-    header("Location: ./index.php?timeout=1");
+    header("Location:index.php?timeout=1");
 }
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
 $session_idLogin = htmlspecialchars($_SESSION['session_login_id'], ENT_QUOTES, 'UTF-8');
@@ -225,13 +225,14 @@ if ($trovato == true) {
                 $fascia = [];
                 $k = 0;
                 include 'config.php';
-                $sql = "SELECT fascia_oraria FROM prenotazioni WHERE str_data=$day and stato_prenotazione='intatta' OR stato_prenotazione='modificata'"; //count su
+                $sql = "SELECT fascia_oraria FROM prenotazioni WHERE str_data='$day' and stato_prenotazione='intatta' OR stato_prenotazione='modificata'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                 while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                     array_push($fascia, $row[0]);
                     $k++;
                 }
             }
+          
             ?>
 
             <!-- Main content -->

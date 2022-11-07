@@ -1,5 +1,38 @@
+<div class="card-body " style="background: #f2f2f2;">
+    <div class=" card-header border-0">
+        <h3 class="card-title">
+            <i class="fas fa-th mr-1"></i>
+            Grafico Prenotazioni
+        </h3>
+
+
+    </div>
+    <div class="card-body">
+        <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer bg-transparent">
+
+        <!-- /.row -->
+    </div>
+    <!-- /.card-footer -->
+</div>
+
 <?php
 
+
+
+$listaggData = [];
+$listgraph = [];
+include 'config.php';
+$risultato = $con->query("SELECT p.id_prenotazione, DATE_FORMAT(p.data_effettuazione,\"%d-%m-%Y\") , DATE_FORMAT(p.data_appuntamento,\"%d-%m-%Y\"), p.fascia_oraria, a.nome_attivita  , p.stato_prenotazione,p.presenza, p.id_utente_prenotazione,  u.nome , u.cognome , p.str_data FROM prenotazioni as p join utenti as u on u.id_utente = p.id_utente_prenotazione join login as l on l.login_id = u.login_id  join attivita as a on p.tipo_attivita = a.id_attivita WHERE l.stato=1 order by p.data_appuntamento desc ");
+
+while ($row = mysqli_fetch_array($risultato, MYSQLI_NUM)) {
+    $listaggData = [$row[2], $row[3]];
+    array_push($listgraph, $listaggData);
+    $listaggData = [];
+}
+$con->close();
 
 $listalabel = [];
 $listavalue = [];
@@ -30,6 +63,9 @@ $listavalueOcc = (json_encode($listavalueOcc));
 
 
 ?>
+
+
+
 <script src="./plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>

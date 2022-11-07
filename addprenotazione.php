@@ -232,13 +232,10 @@ $mail_log = $_SESSION['session_email'];
                 $sql = "SELECT  COUNT('id_prenotazione')  FROM prenotazioni WHERE str_data='$day' and stato_prenotazione= 'intatta' or stato_prenotazione= 'modificata'"; //count su
                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                 $row = mysqli_fetch_array($result, MYSQLI_NUM);
-                $numrow = $row[0] - 1;
-                $siquery = 1;
-                if ($numrow >= 8) {
-                    $siquery = 0;
-                }
+                $numrow = $row[0];
+              
             }
-
+         
             ?>
             <section class="content">
 
@@ -277,9 +274,7 @@ $mail_log = $_SESSION['session_email'];
                                                         echo "<option>$f</option>";
                                                     }
                                                 }
-
                                                 ?>
-
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -340,7 +335,7 @@ $mail_log = $_SESSION['session_email'];
                                         <div class="modal fade" id="modal-primary">
                                             <div class="modal-dialog">
                                                 <div class="modal-content bg-primary">
-                                                    <form action="/verifyprenotazione.php" method="post">
+                                                    <form action="./verifyprenotazione.php" method="post">
                                                         <input type="hidden" id="data_prenotazioneForm" name="data_prenotazione" value="">
                                                         <input type="hidden" id="fascia_prenotazioneForm" name="fascia_prenotazione" value="">
                                                         <input type="hidden" id="attivita_prenotazioneForm" name="attivita_prenotazioneForm" value="">
@@ -353,15 +348,8 @@ $mail_log = $_SESSION['session_email'];
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-
                                                         <div class="modal-footer justify-content-between">
-                                                          <?php if  ($siquery==0){
-                                                            echo "<button name=\"invia-prenotazione\" type=\"submit\" class=\"btn btn-outline-light  w-100\" value=\"invia-prenotazione\">Registra Prenotazione</button>";
-                                                          }else  {
-                                                                echo "<button name=\"invia-prenotazione\" type=\"submit\" class=\"btn btn-outline-light  w-100\" value=\"invia-prenotazione\" disabled>Registra Prenotazione</button>";
-                                                            }
-                                                          ?>
-                                                          
+                                                            <?php include 'btn-addpopup.php'?>
                                                         </div>
                                                     </form>
                                                 </div>
