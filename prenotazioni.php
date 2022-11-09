@@ -1,27 +1,28 @@
 <?php
+@ob_start();
+session_start();
+?>
+<?php
+session_start();
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
+$_SESSION = array();
+session_destroy();
+header("Location:/index.php?timeout=1");
+}
+?>
+<!DOCTYPE html>
+<?php
+session_start();
+$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
+if (!(isset($_SESSION['session_id']))) {
+header("location:index.php");
+} else if ("amministrazione" != $session_ruolo) {
+header("location:profiloutente.php");
+}
 
 
 if (!(isset($_GET['day']) && is_numeric($_GET['day']))) {
     header("location:dashboard.php");
-}
-
-
-?>
-<?php
-session_start();
-
-if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
-    $_SESSION = array();
-    session_destroy();
-    header("Location: ./index.php?timeout=1");
-}
-$session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
-
-
-if (!(isset($_SESSION['session_id']))) {
-    header("location:index.php");
-} else if ("amministrazione" != $session_ruolo) {
-    header("location:profiloutente.php");
 }
 
 $mail_log = $_SESSION['session_email'];

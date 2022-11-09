@@ -1,17 +1,24 @@
+<?php
+@ob_start();
+session_start();
+?>
+<?php
+session_start();
+if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
+$_SESSION = array();
+session_destroy();
+header("Location:/index.php?timeout=1");
+}
+?>
 <!DOCTYPE html>
 <?php
-if (!(isset($_GET['day']))) {
-    header("location:profiloutente.php");
-}
 session_start();
-
-if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
-    $_SESSION = array();
-    session_destroy();
-    header("Location:index.php?timeout=1");
-}
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
 $session_idLogin = htmlspecialchars($_SESSION['session_login_id'], ENT_QUOTES, 'UTF-8');
+
+if (!(isset($_GET['day']))) {
+header("location:profiloutente.php");
+}
 
 
 if (!(isset($_SESSION['session_id']))) {

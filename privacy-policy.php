@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Policy della privacy</title>
-</head >
-<body>
+
     <strong>POLICY (GDPR E COOKIE)</strong> <br>
 <strong> – INFORMAZIONI RELATIVE ALLA PRIVACY POLICY DEL SITO SportGym.it</strong><br>
 <br>
@@ -242,5 +234,3 @@ costituisce la privacy policy di questo sito.<br>
 <a href="REGOLAMENTO UE http://www.garanteprivacy.it/web/guest/regolamentoue">REGOLAMENTO UE http://www.garanteprivacy.it/web/guest/regolamentoue</a><br>
 <a href="LE LINEE GUIDA CHE ABBIAMO SEGUITO: http://www.garanteprivacy.it/regolamentoue/guida-all-applicazione-del-regolamento-europeo-in-materia-di-protezione-dei-dati-personali">LE LINEE GUIDA CHE ABBIAMO SEGUITO: http://www.garanteprivacy.it/regolamentoue/guida-all-applicazione-del-regolamento-europeo-in-materia-di-protezione-dei-dati-personali</a><br>
 </strong>
-</body>
-</html>

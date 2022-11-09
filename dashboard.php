@@ -1,18 +1,23 @@
 <?php
+@ob_start();
 session_start();
-
+?>
+<?php
+session_start();
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
-    $_SESSION = array();
-    session_destroy();
-    header("Location: ./index.php?timeout=1");
+$_SESSION = array();
+session_destroy();
+header("Location:/index.php?timeout=1");
 }
+?>
+<!DOCTYPE html>
+<?php
+session_start();
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
-
-
 if (!(isset($_SESSION['session_id']))) {
-    header("location:index.php");
+header("location:index.php");
 } else if ("amministrazione" != $session_ruolo) {
-    header("location:profiloutente.php");
+header("location:profiloutente.php");
 }
 
 $mail_log = $_SESSION['session_email'];
@@ -217,8 +222,13 @@ $con->close();
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="./plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
     <!-- custom css -->
     <link rel="stylesheet" href="./dist/css/custom.css">
+
 
 </head>
 
@@ -919,6 +929,12 @@ $con->close();
     <script src="./plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="./plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="./plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+
+
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
     <!-- ChartJS -->
     <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="./plugins/chart.js/Chart.min.js"></script>
@@ -933,8 +949,6 @@ $con->close();
 
 
     <script>
-     
-
         $("#formAll").submit(function(event) {
             event.preventDefault(); //prevent default action 
             var post_url = $(this).attr("action"); //get form action url
@@ -952,7 +966,7 @@ $con->close();
 
 
         });
-        
+
         $("#formData").submit(function(event) {
             event.preventDefault(); //prevent default action 
             var post_url = $(this).attr("action"); //get form action url

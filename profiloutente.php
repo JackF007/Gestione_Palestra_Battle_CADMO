@@ -1,18 +1,25 @@
 <?php
+@ob_start();
 session_start();
-
+?>
+<?php
+session_start();
 if (isset($_SESSION['data']) && (time() - $_SESSION['data'] > 1000)) {
-    $_SESSION = array();
-    session_destroy();
-    header("Location: ./index.php?timeout=1");
+$_SESSION = array();
+session_destroy();
+header("Location:/index.php?timeout=1");
 }
+?>
+<!DOCTYPE html>
+<?php
+session_start();
 $session_ruolo = htmlspecialchars($_SESSION['session_ruolo'], ENT_QUOTES, 'UTF-8');
 $mail_log = htmlspecialchars($_SESSION['session_email'], ENT_QUOTES, 'UTF-8');
 $id_login = htmlspecialchars($_SESSION['session_login_id'], ENT_QUOTES, 'UTF-8');
-
 if (!(isset($_SESSION['session_id']))) {
-    header("location:index.php");
-}
+header("location:index.php");
+} 
+
 $radice = "/ProgettoFinale_Palestra_Battle_CADMO/";
 $t = $_SERVER['REQUEST_URI'];
 $tmp = str_replace($radice, '', $t); // pagina
