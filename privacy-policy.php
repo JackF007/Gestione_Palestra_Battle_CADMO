@@ -137,17 +137,7 @@ Di seguito le tipologie di cookies di cui il sito fa uso:<br>
 <br>
 2. Per ulteriori informazioni e supporto è possibile anche visitare la pagina di aiuto specifica del web browser che si sta utilizzando (sono indicati i browser più usati, si prega di ricercare presso il fornitore del browser ulteriori informazioni se necessari):<br>
 <br>
-<a href="http://windows.microsoft.com/en-us/windows-vista/block-or-allow-cookies">– Internet Explorer: http://windows.microsoft.com/en-us/windows-vista/block-or-allow-cookies<br></a>
-<br>
-<a href="https://privacy.microsoft.com/it-it/windows-10-microsoft-edge-and-privacy">– Microsoft Edge: https://privacy.microsoft.com/it-it/windows-10-microsoft-edge-and-privacy</a><br>
-<br>
-<a href="https://support.mozilla.org/en-us/kb/enable-and-disable-cookies-website-preferences">– Firefox: https://support.mozilla.org/en-us/kb/enable-and-disable-cookies-website-preferences</a><br>
-<br>
-<a href="http://www.apple.com/legal/privacy/it/">– Safari: http://www.apple.com/legal/privacy/it/</a><br>
-<br>
-<a href="https://support.google.com/accounts/answer/61416?hl=it">– Chrome: https://support.google.com/accounts/answer/61416?hl=it</a><br>
-<br>
-<a href="http://www.opera.com/help/tutorials/security/cookies/">– Opera: http://www.opera.com/help/tutorials/security/cookies/</a><br>
+
 <br>
 <br>
 5 – Plugin Social Network e piattaforme di condivisione<br>
@@ -219,8 +209,7 @@ Per la lista completa dei fornitori/partner tecnologici (e conoscere i servizi e
 <strong>VIII. MODIFICHE AL PRESENTE DOCUMENTO</strong><br>
 <br>
 1. Il presente documento, pubblicato all’indirizzo:<br>
-<br>
-http://www.sportgym.it/privacy-policy/<br>
+
 <br>
 costituisce la privacy policy di questo sito.<br>
 <br>
@@ -230,7 +219,4 @@ costituisce la privacy policy di questo sito.<br>
 <br>
 4. Il documento è stato aggiornato in data 18/05/2018 per essere conforme alle disposizioni normative in materia, ed in particolare in conformità al Regolamento UE 2016/679.<br>
 <br>
-<strong>Link utili per ulteriori informazioni sulla normativa a cui ci siamo attenuti e sui diritti degli utenti:<br>
-<a href="REGOLAMENTO UE http://www.garanteprivacy.it/web/guest/regolamentoue">REGOLAMENTO UE http://www.garanteprivacy.it/web/guest/regolamentoue</a><br>
-<a href="LE LINEE GUIDA CHE ABBIAMO SEGUITO: http://www.garanteprivacy.it/regolamentoue/guida-all-applicazione-del-regolamento-europeo-in-materia-di-protezione-dei-dati-personali">LE LINEE GUIDA CHE ABBIAMO SEGUITO: http://www.garanteprivacy.it/regolamentoue/guida-all-applicazione-del-regolamento-europeo-in-materia-di-protezione-dei-dati-personali</a><br>
-</strong>
+
